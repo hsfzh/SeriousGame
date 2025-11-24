@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance { get; private set; }
-    [SerializeField] private PlayerMovement movement;
+    private PlayerMovement movement;
 
     private void Awake()
     {
@@ -19,6 +19,7 @@ public class PlayerManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        movement = GetComponent<PlayerMovement>();
     }
     private void Update()
     {

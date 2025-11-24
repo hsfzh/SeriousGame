@@ -5,11 +5,16 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D rigid;
-    [SerializeField] private float speed;
-    private Vector2 direction;
     [SerializeField] private Vector2 playerHalfSize;
+    [SerializeField] private float speed;
+    private Rigidbody2D rigid;
+    private Vector2 direction;
     private Vector2 playerBound;
+
+    void Awake()
+    {
+        rigid = GetComponent<Rigidbody2D>();
+    }
     // Start is called before the first frame update
     void Start()
     {

@@ -1,0 +1,70 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class HpManager : MonoBehaviour
+{
+    [SerializeField] private float hitInvincibilityDuration = 0.5f;
+    [SerializeField] private float maxHp;
+    private float currentHp;
+    public event Action<float> OnHpChange;
+    public event Action OnDeath;
+    public event Action<bool> OnInvincibiltyChange; // true면 무적 진입, false면 무적 종료
+    private Coroutine invincibleCoroutine;
+    private bool isInvincible;
+    public bool IsDead => currentHp <= 0;
+    
+    void Start()
+    {
+        currentHp = maxHp;
+        isInvincible = false;
+        OnHpChange?.Invoke(1f);
+    }
+    public void TakeDamage(float dmg)
+    {
+        if (IsDead || isInvincible)
+            return;
+        currentHp -= dmg;
+        OnHpChange?.Invoke(currentHp/maxHp);
+        if (currentHp <= 0)
+        {
+            currentHp = 0;
+            OnDeath?.Invoke();
+        }
+        else
+        {
+            MakeInvincible(hitInvincibilityDuration);
+        }
+    }
+    public void Heal(float healAmount)
+    {
+        if (IsDead)
+            return;
+        currentHp += healAmount;
+        if (currentHp > maxHp)
+        {
+            currentHp = maxHp;
+        }
+        OnHpChange?.Invoke(currentHp/maxHp);
+    }
+    public void MakeInvincible(float duration)
+    {
+        if (invincibleCoroutine != null)
+        {
+            StopCoroutine(invincibleCoroutine);
+        }
+        invincibleCoroutine = StartCoroutine(InvincibleRoutine(duration));
+    }
+    private IEnumerator InvincibleRoutine(float duration)
+    {
+        isInvincible = true;
+        OnInvincibiltyChange?.Invoke(true);
+
+        yield return new WaitForSeconds(duration);
+
+        isInvincible = false;
+        OnInvincibiltyChange?.Invoke(false);
+        invincibleCoroutine = null;
+    }
+}

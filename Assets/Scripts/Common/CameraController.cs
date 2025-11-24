@@ -1,12 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private Camera mainCamera;
+    private Camera mainCamera;
     private Vector2 cameraBound;
-    // Start is called before the first frame update
+
+    private void Awake()
+    {
+        mainCamera = GetComponent<Camera>();
+    }
     void Start()
     {
         GameManager gameManager = GameManager.Instance;
