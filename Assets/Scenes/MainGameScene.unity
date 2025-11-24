@@ -4298,9 +4298,10 @@ GameObject:
   - component: {fileID: 1972647635}
   - component: {fileID: 1972647637}
   - component: {fileID: 1972647638}
+  - component: {fileID: 1972647641}
+  - component: {fileID: 1972647642}
   - component: {fileID: 1972647640}
   - component: {fileID: 1972647639}
-  - component: {fileID: 1972647641}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -4480,7 +4481,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 978e75a47fe226c4689316f98d332ab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitInvincibilityDuration: 0.5
   maxHp: 100
+--- !u!114 &1972647642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1972647634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bb8b4c4b4f006242b2d2b58649f3152, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  invincibleAlpha: 0.5
 --- !u!1 &1983962663
 GameObject:
   m_ObjectHideFlags: 0
