@@ -25,7 +25,10 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (GameManager.Instance.timeFlowing)
+        {
+            
+        }
     }
     public void Move(Vector2 direc)
     {

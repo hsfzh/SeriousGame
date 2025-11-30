@@ -7,6 +7,7 @@ public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance { get; private set; }
     private PlayerMovement movement;
+    private PlayerAttack attack;
 
     private void Awake()
     {
@@ -23,12 +24,19 @@ public class PlayerManager : MonoBehaviour
     }
     private void Update()
     {
-        float x = Input.GetAxisRaw("Horizontal");
-        float y = Input.GetAxisRaw("Vertical");
-        movement.Move(new Vector2(x, y));
+        if (GameManager.Instance.timeFlowing)
+        {
+            float x = Input.GetAxisRaw("Horizontal");
+            float y = Input.GetAxisRaw("Vertical");
+            movement.Move(new Vector2(x, y));
+        }
     }
     public PlayerMovement GetPlayerMovement()
     {
         return movement;
+    }
+    public PlayerAttack GetPlayerAttack()
+    {
+        return attack;
     }
 }
