@@ -7,7 +7,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance {get; private set;}
     [SerializeField] public Vector2 mapSize;
+    [SerializeField] public Vector2 playableMapSize;
     [SerializeField] public float targetAspectRatio;
+    private List<Transform> activeEnemyTransforms = new List<Transform>();
+    public IReadOnlyList<Transform> ActiveEnemies => activeEnemyTransforms;
     public bool timeFlowing { get; private set; }
     private void Awake()
     {
@@ -33,9 +36,19 @@ public class GameManager : MonoBehaviour
     {
         timeFlowing = false;
     }
-
     public void ResumeTime()
     {
         timeFlowing = true;
+    }
+    public void AddEnemyTransform(Transform enemy)
+    {
+        if (enemy != null && !activeEnemyTransforms.Contains(enemy)) 
+        {
+            activeEnemyTransforms.Add(enemy);
+        }
+    }
+    public void RemoveEnemyTransform(Transform enemy)
+    {
+        activeEnemyTransforms.Remove(enemy);
     }
 }

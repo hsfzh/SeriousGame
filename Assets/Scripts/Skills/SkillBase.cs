@@ -12,6 +12,8 @@ public abstract class SkillBase : MonoBehaviour
     private Camera mainCamera;
 
     protected Transform playerTransform;
+    [SerializeField] protected float power;
+    [SerializeField] protected float levelUpPower;
 
     public virtual void Initialize(Transform player)
     {
@@ -19,13 +21,13 @@ public abstract class SkillBase : MonoBehaviour
         currentCoolTime = 0f;
         mainCamera = Camera.main;
     }
-    public void OnUpdate()
+    public void OnUpdate(bool isActive)
     {
         if (currentCoolTime > 0f)
         {
             currentCoolTime -= Time.deltaTime;
         }
-        else
+        else if(isActive && CheckFireCondition())
         {
             Fire();
         }
@@ -55,5 +57,25 @@ public abstract class SkillBase : MonoBehaviour
             return worldPos;
         }
         return Vector3.zero;
+    }
+    protected Vector3 GetClosestEnemyPosition()
+    {
+        IReadOnlyList<Transform> enemyList = GameManager.Instance.ActiveEnemies;
+        Vector3 closestEnemy = enemyList[0].position;
+        float closestSqrtDist = (closestEnemy - playerTransform.position).sqrMagnitude;
+        foreach (var enemy in enemyList)
+        {
+            float sqrtDist = (enemy.position - playerTransform.position).sqrMagnitude;
+            if (sqrtDist < closestSqrtDist)
+            {
+                closestEnemy = enemy.position;
+                closestSqrtDist = sqrtDist;
+            }
+        }
+        return closestEnemy;
+    }
+    protected virtual bool CheckFireCondition()
+    {
+        return true;
     }
 }

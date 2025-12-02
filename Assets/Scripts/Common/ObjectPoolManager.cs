@@ -51,12 +51,6 @@ public class ObjectPoolManager : MonoBehaviour
     // 오브젝트 가져오기 (태그로 요청)
     public GameObject SpawnFromPool(string poolTag, Vector3 position, Quaternion rotation)
     {
-        if (!poolDictionary.ContainsKey(poolTag))
-        {
-            Debug.LogWarning($"Pool with tag {poolTag} doesn't exist.");
-            return null;
-        }
-        
         GameObject objectToSpawn = poolDictionary[poolTag].Dequeue();
         
         objectToSpawn.SetActive(true);

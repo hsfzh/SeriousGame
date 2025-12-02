@@ -3,39 +3,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletController : MonoBehaviour
+public class LaserController : MonoBehaviour
 {
-    private Vector3 direction;
-    private float speed;
-    private bool isEnemyBullet;
+    private bool isEnemyLaser;
     private float attackPower;
 
-    private void Start()
+    private float duration;
+    private float currentTime;
+
+    private void OnEnable()
     {
-        
+        currentTime = 0;
     }
-    private void Update()
+    private void OnDisable()
+    {
+        currentTime = 0;
+    }
+    // Update is called once per frame
+    void Update()
     {
         if (GameManager.Instance.timeFlowing)
         {
-            transform.position += direction * (speed * Time.deltaTime);
-            if (Mathf.Abs(transform.position.x) > GameManager.Instance.mapSize.x * 0.5f ||
-                Mathf.Abs(transform.position.y) > GameManager.Instance.mapSize.y * 0.5f)
+            currentTime += Time.deltaTime;
+            if (currentTime >= duration)
             {
                 gameObject.SetActive(false);
             }
         }
     }
-    public void InitializeBullet(Vector3 direc, float newSpeed, float power, bool isEnemy = false)
+    public void Initialize(float time, float power, bool isEnemy = false)
     {
-        direction = direc;
-        speed = newSpeed;
+        duration = time;
         attackPower = power;
-        isEnemyBullet = isEnemy;
+        isEnemyLaser = isEnemy;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (isEnemyBullet)
+        if (isEnemyLaser)
         {
             if (other.gameObject.CompareTag("Player"))
             {
@@ -52,7 +56,6 @@ public class BulletController : MonoBehaviour
             if (other.gameObject.CompareTag("Enemy"))
             {
                 other.gameObject.SetActive(false);
-                gameObject.SetActive(false);
             }
         }
     }

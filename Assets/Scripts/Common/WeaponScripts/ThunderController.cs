@@ -1,0 +1,50 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ThunderController : MonoBehaviour
+{
+    private float initialRadius;
+    private float stunTime;
+    private float radius;
+    private float attackPower;
+    private float duration;
+    private float currentTime;
+
+    private void Awake()
+    {
+        CircleCollider2D thunderCollider = GetComponent<CircleCollider2D>();
+        initialRadius = thunderCollider.radius;
+    }
+
+    private void Update()
+    {
+        if (GameManager.Instance.timeFlowing)
+        {
+            currentTime += Time.deltaTime;
+            if (currentTime >= duration)
+            {
+                currentTime = 0;
+                gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public void Initialize(float power, float time, float range, float dur)
+    {
+        attackPower = power;
+        stunTime = time;
+        radius = range;
+        duration = dur;
+        transform.localScale = new Vector3(1, 1, 1) * (radius / initialRadius);
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            other.gameObject.GetComponent<EnemyMovement>().Stun(stunTime);
+            //other.gameObject.SetActive(false);
+        }
+    }
+}

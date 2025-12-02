@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed;
     private Rigidbody2D rigid;
     private Vector2 direction;
-    private Vector2 playerBound;
+    public Vector2 playerBound { get; private set; }
 
     void Awake()
     {
@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         direction = Vector2.zero;
-        Vector2 mapSize = GameManager.Instance.mapSize;
+        Vector2 mapSize = GameManager.Instance.playableMapSize;
         playerBound = new Vector2(mapSize.x * 0.5f - playerHalfSize.x, mapSize.y * 0.5f - playerHalfSize.y);
     }
     // Update is called once per frame
@@ -62,5 +62,9 @@ public class PlayerMovement : MonoBehaviour
         float clampedY = Mathf.Clamp(rigid.position.y, -playerBound.y, playerBound.y);
     
         rigid.position = new Vector2(clampedX, clampedY);
+    }
+    public Vector2 GetPlayerSpeed()
+    {
+        return rigid.velocity;
     }
 }

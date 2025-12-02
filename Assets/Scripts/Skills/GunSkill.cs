@@ -5,18 +5,17 @@ using UnityEngine;
 public class GunSkill : SkillBase
 {
     [SerializeField] private float speed;
-    [SerializeField] private float power;
-    [SerializeField] private float levelUpPower;
     protected override void ExecuteSkill()
     {
         Vector3 mouse = GetMouseWorldPosition();
         Vector2 direction = (mouse - playerTransform.position).normalized;
 
         GameObject bullet =
-            ObjectPoolManager.Instance.SpawnFromPool("Bullet", playerTransform.position, playerTransform.localRotation);
+            ObjectPoolManager.Instance.SpawnFromPool("Bullet", playerTransform.position, Quaternion.identity);
 
         BulletController bulletScript = bullet.GetComponent<BulletController>();
-        bulletScript.InitializeBullet(direction, speed, power);
+        Vector2 fireVelocity = PlayerManager.Instance.GetPlayerMovement().GetPlayerSpeed();
+        bulletScript.Initialize(direction, speed, fireVelocity, power);
     }
     protected override void LevelUp()
     {

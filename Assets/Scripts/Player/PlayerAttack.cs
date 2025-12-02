@@ -6,25 +6,43 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     private List<SkillBase> skills = new List<SkillBase>();
+    [SerializeField] private float monsterSearchRadius;
     [SerializeField] private SkillBase gunSkillPrefab;
     [SerializeField] private SkillBase dashSkillPrefab;
     [SerializeField] private SkillBase rotateSkillPrefab;
-    [SerializeField] private SkillBase lazerSkillPrefab;
+    [SerializeField] private SkillBase laserSkillPrefab;
     [SerializeField] private SkillBase thunderSkillPrefab;
+    [SerializeField] private SkillBase slowWindSkillPrefab;
+    private bool isActive;
 
     private void Start()
     {
-        SkillBase skillInstance = Instantiate(gunSkillPrefab, transform);
-        AddSkill(skillInstance);
+        SkillBase gunSkillInstance = Instantiate(gunSkillPrefab, transform);
+        SkillBase laserSkillInstance = Instantiate(laserSkillPrefab, transform);
+        SkillBase rotatingSkillInstance = Instantiate(rotateSkillPrefab, transform);
+        SkillBase thunderSkillInstance = Instantiate(thunderSkillPrefab, transform);
+        SkillBase slowWindSkillInstance = Instantiate(slowWindSkillPrefab, transform);
+        SkillBase dashSkillInstance = Instantiate(dashSkillPrefab, transform);
+        //AddSkill(gunSkillInstance);
+        //AddSkill(laserSkillInstance);
+        //AddSkill(rotatingSkillInstance);
+        //AddSkill(thunderSkillInstance);
+        //AddSkill(slowWindSkillInstance);
+        AddSkill(dashSkillInstance);
+        isActive = true;
     }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            isActive = !isActive;
+        }
         if (GameManager.Instance.timeFlowing)
         {
             foreach (var skill in skills)
             {
-                skill.OnUpdate();
+                skill.OnUpdate(isActive);
             }
         }
     }

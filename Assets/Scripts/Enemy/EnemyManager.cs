@@ -8,6 +8,15 @@ public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private float attackPower;
 
+    private void OnEnable()
+    {
+        GameManager.Instance.AddEnemyTransform(transform);
+    }
+    private void OnDisable()
+    {
+        GameManager.Instance.RemoveEnemyTransform(transform);
+    }
+
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
