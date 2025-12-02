@@ -22,7 +22,7 @@ public class DashSkill : SkillBase
         
         dashScript.Initialize(power, range);
     }
-    protected override void LevelUp()
+    protected override void SkillLevelUp()
     {
         power += levelUpPower;
         range += levelUpRange;

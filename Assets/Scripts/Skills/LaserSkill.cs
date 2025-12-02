@@ -20,7 +20,7 @@ public class LaserSkill : SkillBase
         LaserController laserScript = laser.GetComponent<LaserController>();
         laserScript.Initialize(duration, power);
     }
-    protected override void LevelUp()
+    protected override void SkillLevelUp()
     {
         power += levelUpPower;
     }

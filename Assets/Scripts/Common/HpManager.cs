@@ -10,7 +10,7 @@ public class HpManager : MonoBehaviour
     private float currentHp;
     public event Action<float> OnHpChange;
     public event Action OnDeath;
-    public event Action<bool> OnInvincibiltyChange; // true면 무적 진입, false면 무적 종료
+    public event Action<bool> OnInvincibilityChange; // true면 무적 진입, false면 무적 종료
     private Coroutine invincibleCoroutine;
     private bool isInvincible;
     public bool IsDead => currentHp <= 0;
@@ -37,7 +37,7 @@ public class HpManager : MonoBehaviour
             MakeInvincible(hitInvincibilityDuration);
         }
     }
-    public void Heal(float healAmount)
+    public void Heal(int healAmount)
     {
         if (IsDead)
             return;
@@ -56,15 +56,22 @@ public class HpManager : MonoBehaviour
         }
         invincibleCoroutine = StartCoroutine(InvincibleRoutine(duration));
     }
+    public void Revive()
+    {
+        if (!IsDead)
+            return;
+        currentHp = maxHp;
+        OnHpChange?.Invoke(1f);
+    }
     private IEnumerator InvincibleRoutine(float duration)
     {
         isInvincible = true;
-        OnInvincibiltyChange?.Invoke(true);
+        OnInvincibilityChange?.Invoke(true);
 
         yield return new WaitForSeconds(duration);
 
         isInvincible = false;
-        OnInvincibiltyChange?.Invoke(false);
+        OnInvincibilityChange?.Invoke(false);
         invincibleCoroutine = null;
     }
 }

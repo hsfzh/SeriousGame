@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 371950790894298627}
   - component: {fileID: 6442990486176662893}
   - component: {fileID: 4455492754204991626}
+  - component: {fileID: -7435770114655244025}
+  - component: {fileID: -3955122812234547690}
   - component: {fileID: 5231263814200699307}
   m_Layer: 6
   m_Name: EnemyPrefab
@@ -141,6 +143,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPower: 5
+--- !u!114 &-7435770114655244025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3094528734937282189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 978e75a47fe226c4689316f98d332ab8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitInvincibilityDuration: 0.25
+  maxHp: 10
+--- !u!114 &-3955122812234547690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3094528734937282189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bb8b4c4b4f006242b2d2b58649f3152, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  invincibleAlpha: 0.5
 --- !u!58 &5231263814200699307
 CircleCollider2D:
   m_ObjectHideFlags: 0

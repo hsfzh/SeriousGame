@@ -17,7 +17,7 @@ public class GunSkill : SkillBase
         Vector2 fireVelocity = PlayerManager.Instance.GetPlayerMovement().GetPlayerSpeed();
         bulletScript.Initialize(direction, speed, fireVelocity, power);
     }
-    protected override void LevelUp()
+    protected override void SkillLevelUp()
     {
         power += levelUpPower;
     }

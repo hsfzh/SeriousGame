@@ -3,15 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Disk : MonoBehaviour
+public class DiskController : MonoBehaviour
 {
+    private float attackPower;
+
+    public void Initialize(float power)
+    {
+        attackPower = power;
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Disk Contact");
         if (other.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("Disk attack enemy");
-            other.gameObject.SetActive(false);
+            HpManager enemyHp = other.gameObject.GetComponent<HpManager>();
+            if (enemyHp)
+            {
+                enemyHp.TakeDamage(attackPower);
+            }
         }
     }
 }

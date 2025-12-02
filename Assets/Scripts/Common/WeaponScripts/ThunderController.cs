@@ -44,7 +44,11 @@ public class ThunderController : MonoBehaviour
         if (other.gameObject.CompareTag("Enemy"))
         {
             other.gameObject.GetComponent<EnemyMovement>().Stun(stunTime);
-            //other.gameObject.SetActive(false);
+            HpManager enemyHp = other.gameObject.GetComponent<HpManager>();
+            if (enemyHp)
+            {
+                enemyHp.TakeDamage(attackPower);
+            }
         }
     }
 }

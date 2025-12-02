@@ -6,17 +6,18 @@ public class RotatingSkill : SkillBase
 {
     [SerializeField] private float duration;
     [SerializeField] private float leveUpDuration;
+    [SerializeField] private int activeDiskNum;
     [SerializeField] private float rotatingSpeed; // rpm
-    private RotatingDiskController diskController;
     protected override void ExecuteSkill()
     {
         GameObject disk =
             ObjectPoolManager.Instance.SpawnFromPool("RotatingDisk", playerTransform.position, Quaternion.identity);
-        diskController = disk.GetComponent<RotatingDiskController>();
-        diskController.Initialize(playerTransform, duration, power, rotatingSpeed);
+        RotatingDiskController diskController = disk.GetComponent<RotatingDiskController>();
+        diskController.Initialize(playerTransform, duration, power, rotatingSpeed, activeDiskNum);
     }
-    protected override void LevelUp()
+    protected override void SkillLevelUp()
     {
-        diskController.IncreaseDuration(leveUpDuration);
+        duration += leveUpDuration;
+        activeDiskNum += 1;
     }
 }

@@ -51,4 +51,5 @@ MonoBehaviour:
   levelUpPower: 0
   duration: 4
   leveUpDuration: 0.5
+  activeDiskNum: 2
   rotatingSpeed: 10

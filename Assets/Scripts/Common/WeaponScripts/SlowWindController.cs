@@ -35,7 +35,11 @@ public class SlowWindController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            //other.gameObject.SetActive(false);
+            HpManager enemyHp = other.gameObject.GetComponent<HpManager>();
+            if (enemyHp)
+            {
+                enemyHp.TakeDamage(attackPower);
+            }
             other.gameObject.GetComponent<EnemyMovement>().Slow(slowRatio, slowDuration);
         }
     }

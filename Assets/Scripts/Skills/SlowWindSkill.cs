@@ -26,7 +26,7 @@ public class SlowWindSkill : SkillBase
         Vector2 fireVelocity = PlayerManager.Instance.GetPlayerMovement().GetPlayerSpeed();
         slowWindScript.Initialize(direction, speed, fireVelocity, power, slowRatio, slowDuration);
     }
-    protected override void LevelUp()
+    protected override void SkillLevelUp()
     {
         power += levelUpPower;
         slowDuration += levelUpDuration;

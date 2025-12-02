@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerVisual : MonoBehaviour
+public class VisualManager : MonoBehaviour
 {
     [SerializeField] private float invincibleAlpha;
     private SpriteRenderer sprite;
@@ -14,7 +14,7 @@ public class PlayerVisual : MonoBehaviour
         HpManager playerHp = GetComponent<HpManager>();
         if (playerHp)
         {
-            playerHp.OnInvincibiltyChange += HandleInvincibleState;
+            playerHp.OnInvincibilityChange += HandleInvincibleState;
         }
     }
     private void OnDestroy()
@@ -22,7 +22,7 @@ public class PlayerVisual : MonoBehaviour
         HpManager playerHp = GetComponent<HpManager>();
         if (playerHp)
         {
-            playerHp.OnInvincibiltyChange -= HandleInvincibleState;
+            playerHp.OnInvincibilityChange -= HandleInvincibleState;
         }
     }
     // Update is called once per frame

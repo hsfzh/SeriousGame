@@ -21,6 +21,20 @@ public class PlayerManager : MonoBehaviour
             Destroy(gameObject);
         }
         movement = GetComponent<PlayerMovement>();
+        attack = GetComponent<PlayerAttack>();
+        HpManager playerHp = GetComponent<HpManager>();
+        if (playerHp)
+        {
+            playerHp.OnDeath += OnDeath;
+        }
+    }
+    private void OnDestroy()
+    {
+        HpManager playerHp = GetComponent<HpManager>();
+        if (playerHp)
+        {
+            playerHp.OnDeath -= OnDeath;
+        }
     }
     private void Update()
     {
@@ -38,5 +52,9 @@ public class PlayerManager : MonoBehaviour
     public PlayerAttack GetPlayerAttack()
     {
         return attack;
+    }
+    private void OnDeath()
+    {
+        gameObject.SetActive(false);
     }
 }

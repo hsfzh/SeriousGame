@@ -43,7 +43,11 @@ public class DashAttackController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            other.gameObject.SetActive(false);
+            HpManager enemyHp = other.gameObject.GetComponent<HpManager>();
+            if (enemyHp)
+            {
+                enemyHp.TakeDamage(attackPower);
+            }
         }
     }
 }

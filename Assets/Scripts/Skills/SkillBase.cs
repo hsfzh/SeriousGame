@@ -18,7 +18,7 @@ public abstract class SkillBase : MonoBehaviour
     public virtual void Initialize(Transform player)
     {
         playerTransform = player;
-        currentCoolTime = 0f;
+        currentCoolTime = 0;
         mainCamera = Camera.main;
     }
     public void OnUpdate(bool isActive)
@@ -33,7 +33,12 @@ public abstract class SkillBase : MonoBehaviour
         }
     }
     protected abstract void ExecuteSkill();
-    protected abstract void LevelUp();
+    public void LevelUp()
+    {
+        level += 1;
+        SkillLevelUp();
+    }
+    protected abstract void SkillLevelUp();
     private void Fire()
     {
         if (currentCoolTime <= 0)

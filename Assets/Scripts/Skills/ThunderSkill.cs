@@ -23,7 +23,7 @@ public class ThunderSkill : SkillBase
         
         thunderScript.Initialize(power, stunTime, radius, duration);
     }
-    protected override void LevelUp()
+    protected override void SkillLevelUp()
     {
         power += levelUpPower;
         radius += levelUpRadius;
