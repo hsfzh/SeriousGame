@@ -29,6 +29,6 @@ public class DashSkill : SkillBase
     }
     protected override bool CheckFireCondition()
     {
-        return Input.GetMouseButtonDown(0);
+        return Input.GetMouseButtonDown(1);
     }
 }
