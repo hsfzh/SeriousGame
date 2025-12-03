@@ -49,4 +49,13 @@ public class GameManager : MonoBehaviour
     {
         activeEnemyTransforms.Remove(enemy);
     }
+    public void KillAll()
+    {
+        List<Transform> enemiesToKill = new List<Transform>(activeEnemyTransforms);
+        foreach (var enemy in enemiesToKill)
+        {
+            EnemyManager enemyManager = enemy.GetComponent<EnemyManager>();
+            enemyManager.Kill();
+        }
+    }
 }

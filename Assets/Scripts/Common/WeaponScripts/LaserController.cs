@@ -64,7 +64,7 @@ public class LaserController : MonoBehaviour
         {
             if (other.gameObject.CompareTag("Player"))
             {
-                HpManager playerHp = other.gameObject.GetComponent<HpManager>();
+                HpManager playerHp = PlayerManager.Instance.GetPlayerHpManager();
                 if (playerHp)
                 {
                     playerHp.TakeDamage(attackPower);

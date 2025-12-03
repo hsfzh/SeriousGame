@@ -8,6 +8,8 @@ public class PlayerManager : MonoBehaviour
     public static PlayerManager Instance { get; private set; }
     private PlayerMovement movement;
     private PlayerAttack attack;
+    private HpManager playerHp;
+    private PlayerLevelManager levelManager;
 
     private void Awake()
     {
@@ -22,7 +24,8 @@ public class PlayerManager : MonoBehaviour
         }
         movement = GetComponent<PlayerMovement>();
         attack = GetComponent<PlayerAttack>();
-        HpManager playerHp = GetComponent<HpManager>();
+        playerHp = GetComponent<HpManager>();
+        levelManager = GetComponentInChildren<PlayerLevelManager>();
         if (playerHp)
         {
             playerHp.OnDeath += OnDeath;
@@ -30,7 +33,6 @@ public class PlayerManager : MonoBehaviour
     }
     private void OnDestroy()
     {
-        HpManager playerHp = GetComponent<HpManager>();
         if (playerHp)
         {
             playerHp.OnDeath -= OnDeath;
@@ -52,6 +54,14 @@ public class PlayerManager : MonoBehaviour
     public PlayerAttack GetPlayerAttack()
     {
         return attack;
+    }
+    public HpManager GetPlayerHpManager()
+    {
+        return playerHp;
+    }
+    public PlayerLevelManager GetPlayerLevelManager()
+    {
+        return levelManager;
     }
     private void OnDeath()
     {

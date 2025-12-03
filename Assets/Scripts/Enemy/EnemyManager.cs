@@ -3,6 +3,7 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private float attackPower;
+    [SerializeField] private bool isElite;
     private HpManager myHp;
 
     private void Awake()
@@ -34,17 +35,28 @@ public class EnemyManager : MonoBehaviour
     }
     private void OnDeath()
     {
+        DropExp();
         gameObject.SetActive(false);
+    }
+    private void DropExp()
+    {
+        string expType = isElite ? "ShinyExp" : "NormalExp";
+        GameObject exp = ObjectPoolManager.Instance.SpawnFromPool(expType, transform.position);
     }
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            HpManager playerHp = other.gameObject.GetComponent<HpManager>();
+            HpManager playerHp = PlayerManager.Instance.GetPlayerHpManager();
             if (playerHp)
             {
                 playerHp.TakeDamage(attackPower);
             }
         }
+    }
+
+    public void Kill()
+    {
+        myHp.Kill();
     }
 }

@@ -33,7 +33,6 @@ public class BulletController : MonoBehaviour
     {
         direction = direc;
         float bonusSpeed = Vector2.Dot(fireVelocity, direction);
-        Debug.Log($"Bonus speed is {bonusSpeed}");
         speed = bonusSpeed > 0 ? newSpeed + bonusSpeed : newSpeed;
         attackPower = power;
         splashPower = splashP;
@@ -66,7 +65,7 @@ public class BulletController : MonoBehaviour
         {
             if (other.gameObject.CompareTag("Player"))
             {
-                HpManager playerHp = other.gameObject.GetComponent<HpManager>();
+                HpManager playerHp = PlayerManager.Instance.GetPlayerHpManager();
                 if (playerHp)
                 {
                     playerHp.TakeDamage(attackPower);

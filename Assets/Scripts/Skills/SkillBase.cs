@@ -66,7 +66,7 @@ public abstract class SkillBase : MonoBehaviour
     }
     protected Vector3 GetClosestEnemyPosition(Vector3 startPos)
     {
-        IReadOnlyList<Transform> enemyList = GameManager.Instance.ActiveEnemies;
+        IReadOnlyList<Transform> enemyList = new List<Transform>(GameManager.Instance.ActiveEnemies);
         Vector3 closestEnemy = enemyList[0].position;
         float closestSqrtDist = (closestEnemy - startPos).sqrMagnitude;
         foreach (var enemy in enemyList)

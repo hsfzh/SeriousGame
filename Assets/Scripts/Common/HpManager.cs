@@ -67,6 +67,12 @@ public class HpManager : MonoBehaviour
         currentHp = maxHp;
         OnHpChange?.Invoke(1f);
     }
+    public void Kill()
+    {
+        if (IsDead)
+            return;
+        TakeDamage(currentHp);
+    }
     private IEnumerator InvincibleRoutine(float duration)
     {
         isInvincible = true;
