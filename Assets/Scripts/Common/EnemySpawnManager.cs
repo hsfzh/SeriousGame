@@ -79,7 +79,7 @@ public class EnemySpawnManager : MonoBehaviour
         }
     
         GameObject basicEnemy =
-            ObjectPoolManager.Instance.SpawnFromPool("Enemy", new Vector3(x, y, 0), Quaternion.identity);
+            ObjectPoolManager.Instance.SpawnFromPool("Enemy", new Vector3(x, y, 0));
     }
     private IEnumerator EnemySpawnRoutine()
     {

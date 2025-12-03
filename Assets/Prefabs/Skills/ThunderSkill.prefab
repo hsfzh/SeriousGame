@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5264327310033273249
+--- !u!1 &1907832355558134288
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5411467113971278096}
-  - component: {fileID: 9037515093967668445}
+  - component: {fileID: 5129940676741393606}
+  - component: {fileID: 9081641079523405618}
   m_Layer: 0
-  m_Name: SlowWindSkill
+  m_Name: ThunderSkill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5411467113971278096
+--- !u!4 &5129940676741393606
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5264327310033273249}
+  m_GameObject: {fileID: 1907832355558134288}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9.806502, y: -1.7968395, z: -0.15855192}
@@ -32,25 +32,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9037515093967668445
+--- !u!114 &9081641079523405618
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5264327310033273249}
+  m_GameObject: {fileID: 1907832355558134288}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26c1f296734f6a94dba50350a8821438, type: 3}
+  m_Script: {fileID: 11500000, guid: e6ba7553359775f468394f879e5ad952, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: SlowWind
-  coolTime: 5
+  skillName: Thunder
+  coolTime: 4
   level: 1
-  power: 2
-  levelUpPower: 1
-  speed: 2
-  slowRatio: 0.7
-  slowDuration: 2
-  levelUpDuration: 0.5
-  levelUpSlowRatio: 0.05
+  levelPower:
+  - 100
+  - 100
+  - 100
+  - 100
+  - 100
+  stunTime: 1
+  radius: 1
+  levelUpRadius: 0.5
+  duration: 0.3

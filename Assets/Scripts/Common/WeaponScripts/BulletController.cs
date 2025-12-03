@@ -9,6 +9,8 @@ public class BulletController : MonoBehaviour
     private float speed;
     private bool isEnemyBullet;
     private float attackPower;
+    private float splashPower;
+    private float splashRange;
 
     private void Start()
     {
@@ -26,13 +28,37 @@ public class BulletController : MonoBehaviour
             }
         }
     }
-    public void Initialize(Vector3 direc, float newSpeed, Vector2 fireVelocity, float power, bool isEnemy = false)
+    public void Initialize(Vector3 direc, float newSpeed, Vector2 fireVelocity, float power,
+        float splashP, float splashR, bool isEnemy = false)
     {
         direction = direc;
         float bonusSpeed = Vector2.Dot(fireVelocity, direction);
+        Debug.Log($"Bonus speed is {bonusSpeed}");
         speed = bonusSpeed > 0 ? newSpeed + bonusSpeed : newSpeed;
-        attackPower = power; 
+        attackPower = power;
+        splashPower = splashP;
+        splashRange = splashR;
         isEnemyBullet = isEnemy;
+    }
+    private void ApplySplashDamage()
+    {
+        // TODO: 폭발 애니메이션 실행
+        float searchRange = splashRange * splashRange;
+        var targetList = new List<Transform>(GameManager.Instance.ActiveEnemies);
+        foreach (var enemy in targetList)
+        {
+            if(!enemy.gameObject.activeSelf)
+                continue;
+            float sqrtDist = (enemy.position - transform.position).sqrMagnitude;
+            if (sqrtDist <= searchRange)
+            {
+                HpManager enemyHp = enemy.gameObject.GetComponent<HpManager>();
+                if (enemyHp)
+                {
+                    enemyHp.TakeDamage(splashPower);
+                }
+            }
+        }
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -56,6 +82,7 @@ public class BulletController : MonoBehaviour
                 if (enemyHp)
                 {
                     enemyHp.TakeDamage(attackPower);
+                    ApplySplashDamage();
                     gameObject.SetActive(false);
                 }
             }

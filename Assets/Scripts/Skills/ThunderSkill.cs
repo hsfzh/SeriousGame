@@ -17,7 +17,7 @@ public class ThunderSkill : SkillBase
         mouse.y = Mathf.Clamp(mouse.y, -mapSize.y, mapSize.y);
         
         GameObject thunder =
-            ObjectPoolManager.Instance.SpawnFromPool("Thunder", mouse, Quaternion.identity);
+            ObjectPoolManager.Instance.SpawnFromPool("Thunder", mouse);
 
         ThunderController thunderScript = thunder.GetComponent<ThunderController>();
         
@@ -25,7 +25,7 @@ public class ThunderSkill : SkillBase
     }
     protected override void SkillLevelUp()
     {
-        power += levelUpPower;
+        power = levelPower[level - 1];
         radius += levelUpRadius;
     }
     protected override bool CheckFireCondition()

@@ -11,7 +11,7 @@ public class SlowWindSkill : SkillBase
     [SerializeField] private float levelUpSlowRatio;
     protected override void ExecuteSkill()
     {
-        Vector3 closestEnemy = GetClosestEnemyPosition();
+        Vector3 closestEnemy = GetClosestEnemyPosition(playerTransform.position);
         
         Vector2 direction = (closestEnemy - playerTransform.position).normalized;
 
@@ -20,7 +20,7 @@ public class SlowWindSkill : SkillBase
         Quaternion rotation = Quaternion.Euler(0, 0, angle);
 
         GameObject slowWind =
-            ObjectPoolManager.Instance.SpawnFromPool("SlowWind", playerTransform.position, rotation);
+            ObjectPoolManager.Instance.SpawnFromPool("SlowWind", playerTransform.position, rotation: rotation);
 
         SlowWindController slowWindScript = slowWind.GetComponent<SlowWindController>();
         Vector2 fireVelocity = PlayerManager.Instance.GetPlayerMovement().GetPlayerSpeed();
@@ -28,7 +28,7 @@ public class SlowWindSkill : SkillBase
     }
     protected override void SkillLevelUp()
     {
-        power += levelUpPower;
+        power = levelPower[level - 1];
         slowDuration += levelUpDuration;
         slowRatio -= levelUpSlowRatio;
     }

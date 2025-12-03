@@ -1,23 +1,32 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LaserController : MonoBehaviour
 {
+    private SpriteRenderer sprite;
+    private BoxCollider2D myCollider;
     private bool isEnemyLaser;
     private float attackPower;
 
     private float duration;
     private float currentTime;
 
+    private Coroutine laserCoroutine;
+
+    private void Awake()
+    {
+        sprite = GetComponent<SpriteRenderer>();
+        myCollider = GetComponent<BoxCollider2D>();
+    }
     private void OnEnable()
     {
         currentTime = 0;
-    }
-    private void OnDisable()
-    {
-        currentTime = 0;
+        myCollider.enabled = true;
+        if (laserCoroutine != null)
+        {
+            StopCoroutine(laserCoroutine);
+        }
+        laserCoroutine = StartCoroutine(LaserRoutine());
     }
     // Update is called once per frame
     void Update()
@@ -25,10 +34,6 @@ public class LaserController : MonoBehaviour
         if (GameManager.Instance.timeFlowing)
         {
             currentTime += Time.deltaTime;
-            if (currentTime >= duration)
-            {
-                gameObject.SetActive(false);
-            }
         }
     }
     public void Initialize(float time, float power, bool isEnemy = false)
@@ -36,6 +41,22 @@ public class LaserController : MonoBehaviour
         duration = time;
         attackPower = power;
         isEnemyLaser = isEnemy;
+    }
+    private IEnumerator LaserRoutine()
+    {
+        yield return new WaitForSeconds(0.1f);
+        myCollider.enabled = false;
+        Color color = sprite.color; 
+        while (currentTime < duration)
+        {
+            color.a = Mathf.Lerp(1f, 0f, currentTime / duration);
+            sprite.color = color;
+            yield return null;
+        }
+        color.a = 1;
+        sprite.color = color;
+        laserCoroutine = null;
+        gameObject.SetActive(false);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -55,7 +76,11 @@ public class LaserController : MonoBehaviour
         {
             if (other.gameObject.CompareTag("Enemy"))
             {
-                other.gameObject.SetActive(false);
+                HpManager enemyHp = other.gameObject.GetComponent<HpManager>();
+                if (enemyHp)
+                {
+                    enemyHp.TakeDamage(attackPower);
+                }
             }
         }
     }

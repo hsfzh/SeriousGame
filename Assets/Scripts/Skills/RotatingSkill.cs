@@ -11,7 +11,7 @@ public class RotatingSkill : SkillBase
     protected override void ExecuteSkill()
     {
         GameObject disk =
-            ObjectPoolManager.Instance.SpawnFromPool("RotatingDisk", playerTransform.position, Quaternion.identity);
+            ObjectPoolManager.Instance.SpawnFromPool("RotatingDisk", playerTransform.position);
         RotatingDiskController diskController = disk.GetComponent<RotatingDiskController>();
         diskController.Initialize(playerTransform, duration, power, rotatingSpeed, activeDiskNum);
     }

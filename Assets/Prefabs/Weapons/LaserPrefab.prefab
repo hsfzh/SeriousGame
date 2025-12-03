@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 866485514393777730}
   - component: {fileID: 2799470667592322301}
   - component: {fileID: 5922241347926863682}
-  - component: {fileID: 7991678182305414108}
+  - component: {fileID: 5965238953824966161}
   m_Layer: 0
   m_Name: LaserPrefab
   m_TagString: Untagged
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 793d9329bf5dea84c99eaeb78a216c93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!61 &7991678182305414108
+--- !u!61 &5965238953824966161
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,16 +130,16 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 4.8, y: 0}
+  m_Offset: {x: 5.5, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0.5}
-    oldSize: {x: 9.6, y: 0.3}
+    oldSize: {x: 11, y: 1}
     newSize: {x: 9.6, y: 0.3}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 9.6, y: 0.3}
+  m_Size: {x: 11, y: 1}
   m_EdgeRadius: 0

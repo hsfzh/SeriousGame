@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,12 @@ using UnityEngine;
 public class LaserSkill : SkillBase
 {
     [SerializeField] private float duration;
+    [SerializeField] private List<float> width;
+
+    private void Awake()
+    {
+        coolTime += duration;
+    }
     protected override void ExecuteSkill()
     {
         Vector3 mouse = GetMouseWorldPosition();
@@ -15,13 +22,13 @@ public class LaserSkill : SkillBase
         Quaternion rotation = Quaternion.Euler(0, 0, angle);
 
         GameObject laser =
-            ObjectPoolManager.Instance.SpawnFromPool("Laser", playerTransform.position, rotation);
+            ObjectPoolManager.Instance.SpawnFromPool("Laser", playerTransform.position, rotation, new Vector3(1, width[level-1], 1));
 
         LaserController laserScript = laser.GetComponent<LaserController>();
         laserScript.Initialize(duration, power);
     }
     protected override void SkillLevelUp()
     {
-        power += levelUpPower;
+        power = levelPower[level - 1];
     }
 }

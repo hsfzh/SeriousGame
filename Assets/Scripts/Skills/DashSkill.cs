@@ -14,7 +14,7 @@ public class DashSkill : SkillBase
         mouse.y = Mathf.Clamp(mouse.y, -mapSize.y, mapSize.y);
         
         GameObject dash =
-            ObjectPoolManager.Instance.SpawnFromPool("Dash", mouse, Quaternion.identity);
+            ObjectPoolManager.Instance.SpawnFromPool("Dash", mouse);
 
         playerTransform.position = mouse;
 
@@ -24,7 +24,7 @@ public class DashSkill : SkillBase
     }
     protected override void SkillLevelUp()
     {
-        power += levelUpPower;
+        power = levelPower[level - 1];
         range += levelUpRange;
     }
     protected override bool CheckFireCondition()

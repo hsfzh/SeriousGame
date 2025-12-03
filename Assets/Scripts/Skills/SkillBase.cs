@@ -6,19 +6,20 @@ public abstract class SkillBase : MonoBehaviour
 {
     [Header("Skill Settings")]
     public string skillName;
-    public float coolTime;
+    [SerializeField] protected float coolTime;
     private float currentCoolTime;
     public int level = 1;
     private Camera mainCamera;
 
     protected Transform playerTransform;
-    [SerializeField] protected float power;
-    [SerializeField] protected float levelUpPower;
+    protected float power;
+    [SerializeField] protected List<float> levelPower;
 
-    public virtual void Initialize(Transform player)
+    public void Initialize(Transform player)
     {
         playerTransform = player;
         currentCoolTime = 0;
+        power = levelPower[0];
         mainCamera = Camera.main;
     }
     public void OnUpdate(bool isActive)
@@ -63,14 +64,14 @@ public abstract class SkillBase : MonoBehaviour
         }
         return Vector3.zero;
     }
-    protected Vector3 GetClosestEnemyPosition()
+    protected Vector3 GetClosestEnemyPosition(Vector3 startPos)
     {
         IReadOnlyList<Transform> enemyList = GameManager.Instance.ActiveEnemies;
         Vector3 closestEnemy = enemyList[0].position;
-        float closestSqrtDist = (closestEnemy - playerTransform.position).sqrMagnitude;
+        float closestSqrtDist = (closestEnemy - startPos).sqrMagnitude;
         foreach (var enemy in enemyList)
         {
-            float sqrtDist = (enemy.position - playerTransform.position).sqrMagnitude;
+            float sqrtDist = (enemy.position - startPos).sqrMagnitude;
             if (sqrtDist < closestSqrtDist)
             {
                 closestEnemy = enemy.position;
