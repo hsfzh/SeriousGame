@@ -17,6 +17,7 @@ public class PlayerLevelManager : MonoBehaviour
     public event Action OnLevelUp;
     private float expRatio;
     private float prevExpRatio;
+    [SerializeField] private PlayerStatManager playerStat;
 
     private void Awake()
     {
@@ -27,9 +28,9 @@ public class PlayerLevelManager : MonoBehaviour
         levelText.text = "Lvl 0";
         requiredExp = RequiredExp(0);
     }
-    public void IncreaseMagnetRange(float increaseAmount)
+    public void IncreaseMagnetRange(float newRadius)
     {
-        magnetRange += increaseAmount;
+        magnetRange = newRadius;
         magnet.radius = magnetRange;
     }
     public void AbsorbExp(int exp)
@@ -77,7 +78,7 @@ public class PlayerLevelManager : MonoBehaviour
         if (other.gameObject.CompareTag("Exp"))
         {
             ExpObject expScript = other.GetComponent<ExpObject>();
-            expScript.Magnetize(transform);
+            expScript.Magnetize(transform, playerStat.GetStat(StatType.ExpMultiply));
         }
     }
 }

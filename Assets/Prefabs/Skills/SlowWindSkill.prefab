@@ -45,15 +45,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: SlowWind
+  skillIcon: {fileID: 21300000, guid: 1c60a77754a585e4f93b737087b35e22, type: 3}
+  skillInfo: "\uAC00\uC7A5 \uAC00\uAE4C\uC6B4 \uBAAC\uC2A4\uD130\uD55C\uD14C \uBC14\uB78C\uC744
+    \uB0A0\uB9AC\uACE0 \uBC14\uB78C\uC5D0 \uB2FF\uC740 \uC801\uC744 \uB454\uD654
+    \uC2DC\uD0A8\uB2E4"
   coolTime: 5
   level: 1
-  power: 2
   levelPower:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
+  - 100
+  - 100
+  - 100
+  - 100
+  - 100
   speed: 2
   slowRatio: 0.7
   slowDuration: 2

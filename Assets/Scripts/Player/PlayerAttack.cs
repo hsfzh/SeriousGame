@@ -5,9 +5,8 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    [SerializeField] private List<SkillBase> skills = new List<SkillBase>();
+    private Dictionary<string, SkillBase> skills = new Dictionary<string, SkillBase>();
     [SerializeField] private float monsterSearchRadius;
-    [SerializeField] private int maxSkillLevel;
     [SerializeField] private SkillBase gunSkillPrefab;
     [SerializeField] private SkillBase dashSkillPrefab;
     [SerializeField] private SkillBase rotateSkillPrefab;
@@ -15,21 +14,10 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private SkillBase thunderSkillPrefab;
     [SerializeField] private SkillBase slowWindSkillPrefab;
     private bool isActive;
+    public event Action<SkillBase> OnNewSkillAdded;
 
     private void Start()
     {
-        //SkillBase gunSkillInstance = Instantiate(gunSkillPrefab, transform);
-        //SkillBase laserSkillInstance = Instantiate(laserSkillPrefab, transform);
-        //SkillBase rotatingSkillInstance = Instantiate(rotateSkillPrefab, transform);
-        //SkillBase thunderSkillInstance = Instantiate(thunderSkillPrefab, transform);
-        //SkillBase slowWindSkillInstance = Instantiate(slowWindSkillPrefab, transform);
-        //SkillBase dashSkillInstance = Instantiate(dashSkillPrefab, transform);
-        //AddSkill(gunSkillInstance);
-        //AddSkill(laserSkillInstance);
-        //AddSkill(rotatingSkillInstance);
-        //AddSkill(thunderSkillInstance);
-        //AddSkill(slowWindSkillInstance);
-        //AddSkill(dashSkillInstance);
         isActive = true;
     }
     void Update()
@@ -40,28 +28,21 @@ public class PlayerAttack : MonoBehaviour
         }
         if (GameManager.Instance.timeFlowing)
         {
-            foreach (var skill in skills)
+            foreach (var skill in skills.Values)
             {
-                skill.OnUpdate(isActive);
+                skill.OnUpdate(isActive, PlayerManager.Instance.GetPlayerStatManager().GetStat(StatType.AttackPower),
+                    PlayerManager.Instance.GetPlayerStatManager().GetStat(StatType.CoolTime));
             }
         }
     }
     public void AddSkill(SkillBase newSkill)
     {
-        SkillBase existingSkill = null;
-
-        foreach (var skill in skills)
-        {
-            if (skill.skillName == newSkill.skillName)
-            {
-                existingSkill = skill;
-                break;
-            }
-        }
+        string newSkillName = newSkill.skillName;
+        SkillBase existingSkill = skills.GetValueOrDefault(newSkillName, null);
         
         if (existingSkill)
         {
-            if (existingSkill.level >= maxSkillLevel)
+            if (existingSkill.level >= PlayerManager.Instance.maxSkillLevel)
                 return;
             existingSkill.LevelUp();
         }
@@ -69,7 +50,12 @@ public class PlayerAttack : MonoBehaviour
         {
             SkillBase skillToAdd = Instantiate(newSkill, transform);
             skillToAdd.Initialize(transform);
-            skills.Add(skillToAdd);
+            OnNewSkillAdded?.Invoke(skillToAdd);
+            skills.Add(newSkillName, skillToAdd);
         }
+    }
+    public IReadOnlyDictionary<string, SkillBase> GetPlayerSkills()
+    {
+        return skills;
     }
 }

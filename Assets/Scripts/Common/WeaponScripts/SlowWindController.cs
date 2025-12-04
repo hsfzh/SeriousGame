@@ -9,11 +9,19 @@ public class SlowWindController : MonoBehaviour
     private float attackPower;
     private float slowRatio;
     private float slowDuration;
+    [SerializeField] private float duration;
+    private float currentTime;
     
     private void Update()
     {
         if (GameManager.Instance.timeFlowing)
         {
+            currentTime += Time.deltaTime;
+            if (currentTime >= duration)
+            {
+                currentTime = 0;
+                gameObject.SetActive(false);
+            }
             transform.position += direction * (speed * Time.deltaTime);
             if (Mathf.Abs(transform.position.x) > GameManager.Instance.playableMapSize.x * 0.5f ||
                 Mathf.Abs(transform.position.y) > GameManager.Instance.playableMapSize.y * 0.5f)

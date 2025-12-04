@@ -11,6 +11,7 @@ public class ExpObject : MonoBehaviour
     [SerializeField] private float startSpeed;
     [SerializeField] private float accelerationRate;
     private float speed;
+    private int multipliedExp;
     
     private void OnEnable()
     {
@@ -24,18 +25,19 @@ public class ExpObject : MonoBehaviour
             float currentDistance = (transform.position - target.position).sqrMagnitude;
             if (currentDistance <= 0.1f)
             {
-                PlayerManager.Instance.GetPlayerLevelManager().AbsorbExp(expValue);
+                PlayerManager.Instance.GetPlayerLevelManager().AbsorbExp(multipliedExp);
                 gameObject.SetActive(false);
             }
             speed += speed * accelerationRate * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
         }
     }
-    public void Magnetize(Transform playerTransform)
+    public void Magnetize(Transform playerTransform, float expMultiply)
     {
         if (isMagnetized)
             return;
         speed = startSpeed;
+        multipliedExp = (int)(expValue * expMultiply);
         isMagnetized = true;
         target = playerTransform;
         gameObject.tag = "Untagged";

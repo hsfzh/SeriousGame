@@ -6,7 +6,6 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private Vector2 playerHalfSize;
-    [SerializeField] private float speed;
     private Rigidbody2D rigid;
     private Vector2 direction;
     public Vector2 playerBound { get; private set; }
@@ -25,10 +24,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.timeFlowing)
-        {
-            
-        }
+        
     }
     public void Move(Vector2 direc)
     {
@@ -36,27 +32,34 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Vector2 currentPos = rigid.position;
-        Vector2 finalVelocity = direction * speed;
+        if (!GameManager.Instance.timeFlowing)
+        {
+            rigid.velocity = Vector2.zero;
+        }
+        else
+        {
+            Vector2 currentPos = rigid.position;
+            Vector2 finalVelocity = direction * PlayerManager.Instance.GetPlayerStatManager().GetStat(StatType.MoveSpeed);
         
-        if (currentPos.x <= -playerBound.x && finalVelocity.x < 0)
-        {
-            finalVelocity.x = 0;
-        }
-        else if (currentPos.x >= playerBound.x && finalVelocity.x > 0)
-        {
-            finalVelocity.x = 0;
-        }
-        if (currentPos.y <= -playerBound.y && finalVelocity.y < 0)
-        {
-            finalVelocity.y = 0;
-        }
-        else if (currentPos.y >= playerBound.y && finalVelocity.y > 0)
-        {
-            finalVelocity.y = 0;
-        }
+            if (currentPos.x <= -playerBound.x && finalVelocity.x < 0)
+            {
+                finalVelocity.x = 0;
+            }
+            else if (currentPos.x >= playerBound.x && finalVelocity.x > 0)
+            {
+                finalVelocity.x = 0;
+            }
+            if (currentPos.y <= -playerBound.y && finalVelocity.y < 0)
+            {
+                finalVelocity.y = 0;
+            }
+            else if (currentPos.y >= playerBound.y && finalVelocity.y > 0)
+            {
+                finalVelocity.y = 0;
+            }
         
-        rigid.velocity = finalVelocity;
+            rigid.velocity = finalVelocity;
+        }
         
         float clampedX = Mathf.Clamp(rigid.position.x, -playerBound.x, playerBound.x);
         float clampedY = Mathf.Clamp(rigid.position.y, -playerBound.y, playerBound.y);

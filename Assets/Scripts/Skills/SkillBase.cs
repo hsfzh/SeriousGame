@@ -6,6 +6,8 @@ public abstract class SkillBase : MonoBehaviour
 {
     [Header("Skill Settings")]
     public string skillName;
+    [SerializeField] private Sprite skillIcon;
+    [SerializeField] private string skillInfo;
     [SerializeField] protected float coolTime;
     private float currentCoolTime;
     public int level = 1;
@@ -14,6 +16,7 @@ public abstract class SkillBase : MonoBehaviour
     protected Transform playerTransform;
     protected float power;
     [SerializeField] protected List<float> levelPower;
+    private float currCoolTimeReduction;
 
     public void Initialize(Transform player)
     {
@@ -21,31 +24,41 @@ public abstract class SkillBase : MonoBehaviour
         currentCoolTime = 0;
         power = levelPower[0];
         mainCamera = Camera.main;
+        currCoolTimeReduction = 1f;
     }
-    public void OnUpdate(bool isActive)
+    public void OnUpdate(bool isActive, float attackMultiplier, float coolTimeReduction)
     {
+        if (!Mathf.Approximately(currCoolTimeReduction, coolTimeReduction))
+        {
+            if (currCoolTimeReduction < 1f)
+            {
+                float reducedCoolTime = coolTime * (currCoolTimeReduction - coolTimeReduction);
+                currentCoolTime -= reducedCoolTime;
+            }
+            currCoolTimeReduction = coolTimeReduction;
+        }
         if (currentCoolTime > 0f)
         {
             currentCoolTime -= Time.deltaTime;
         }
         else if(isActive && CheckFireCondition())
         {
-            Fire();
+            Fire(attackMultiplier);
         }
     }
-    protected abstract void ExecuteSkill();
+    protected abstract void ExecuteSkill(float attackMultiplier);
     public void LevelUp()
     {
         level += 1;
         SkillLevelUp();
     }
     protected abstract void SkillLevelUp();
-    private void Fire()
+    private void Fire(float attackMultiplier)
     {
         if (currentCoolTime <= 0)
         {
-            ExecuteSkill();
-            currentCoolTime = coolTime; // 쿨타임 초기화
+            ExecuteSkill(attackMultiplier);
+            currentCoolTime = coolTime * currCoolTimeReduction; // 쿨타임 초기화
         }
     }
     protected Vector3 GetMouseWorldPosition()
@@ -83,5 +96,17 @@ public abstract class SkillBase : MonoBehaviour
     protected virtual bool CheckFireCondition()
     {
         return true;
+    }
+    public Sprite GetSkillIcon()
+    {
+        return skillIcon;
+    }
+    public string GetSkillInfo()
+    {
+        return skillInfo;
+    }
+    public float GetCoolTime()
+    {
+        return currentCoolTime;
     }
 }

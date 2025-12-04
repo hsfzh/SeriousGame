@@ -9,7 +9,7 @@ public class ThunderSkill : SkillBase
     [SerializeField] private float levelUpRadius;
     [SerializeField] private float duration;
     
-    protected override void ExecuteSkill()
+    protected override void ExecuteSkill(float attackMultiplier)
     {
         Vector3 mouse = GetMouseWorldPosition();
         Vector2 mapSize = GameManager.Instance.playableMapSize * 0.5f;
@@ -20,8 +20,8 @@ public class ThunderSkill : SkillBase
             ObjectPoolManager.Instance.SpawnFromPool("Thunder", mouse);
 
         ThunderController thunderScript = thunder.GetComponent<ThunderController>();
-        
-        thunderScript.Initialize(power, stunTime, radius, duration);
+
+        thunderScript.Initialize(power * attackMultiplier, stunTime, radius, duration);
     }
     protected override void SkillLevelUp()
     {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,9 +8,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] public Vector2 mapSize;
     [SerializeField] public Vector2 playableMapSize;
     [SerializeField] public float targetAspectRatio;
+    [SerializeField] private LevelUpUIManager levelUpUI;
     private List<Transform> activeEnemyTransforms = new List<Transform>();
     public IReadOnlyList<Transform> ActiveEnemies => activeEnemyTransforms;
     public bool timeFlowing { get; private set; }
+    private bool gameRunning;
     private void Awake()
     {
         if (Instance == null)
@@ -24,11 +27,30 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        timeFlowing = true;
+        timeFlowing = false;
+        gameRunning = false;
+        PlayerManager.Instance.GetPlayerLevelManager().OnLevelUp += OnPlayerLevelUp;
+    }
+    private void OnDestroy()
+    {
+        PlayerManager.Instance.GetPlayerLevelManager().OnLevelUp -= OnPlayerLevelUp;
     }
     void Update()
     {
-        
+        if (!gameRunning)
+        {
+            StartGame();
+        }
+    }
+    private void StartGame()
+    {
+        gameRunning = true;
+        levelUpUI.Show();
+    }
+    private void OnPlayerLevelUp()
+    {
+        levelUpUI.Show();
+        StopTime();
     }
     public void StopTime()
     {

@@ -1,15 +1,14 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    [field:SerializeField] public int maxSkillLevel { get; private set; }
     public static PlayerManager Instance { get; private set; }
     private PlayerMovement movement;
     private PlayerAttack attack;
     private HpManager playerHp;
     private PlayerLevelManager levelManager;
+    private PlayerStatManager statManager;
 
     private void Awake()
     {
@@ -26,6 +25,7 @@ public class PlayerManager : MonoBehaviour
         attack = GetComponent<PlayerAttack>();
         playerHp = GetComponent<HpManager>();
         levelManager = GetComponentInChildren<PlayerLevelManager>();
+        statManager = GetComponent<PlayerStatManager>();
         if (playerHp)
         {
             playerHp.OnDeath += OnDeath;
@@ -62,6 +62,10 @@ public class PlayerManager : MonoBehaviour
     public PlayerLevelManager GetPlayerLevelManager()
     {
         return levelManager;
+    }
+    public PlayerStatManager GetPlayerStatManager()
+    {
+        return statManager;
     }
     private void OnDeath()
     {

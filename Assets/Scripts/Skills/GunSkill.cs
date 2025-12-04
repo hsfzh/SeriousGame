@@ -8,7 +8,7 @@ public class GunSkill : SkillBase
     [SerializeField] private List<float> splashDamage;
     [SerializeField] private float splashRange;
     [SerializeField] private List<int> fireNum;
-    protected override void ExecuteSkill()
+    protected override void ExecuteSkill(float attackMultiplier)
     {
         Vector3 mouse = GetMouseWorldPosition();
         Vector2 direction = (mouse - playerTransform.position).normalized;
@@ -32,7 +32,8 @@ public class GunSkill : SkillBase
 
             BulletController bulletScript = bullet.GetComponent<BulletController>();
             
-            bulletScript.Initialize(finalDirection, actualSpeed, Vector2.zero, power, splashDamage[level - 1], splashRange);
+            bulletScript.Initialize(finalDirection, actualSpeed, Vector2.zero,
+                power * attackMultiplier, splashDamage[level - 1] * attackMultiplier, splashRange);
         }
     }
     protected override void SkillLevelUp()

@@ -25,11 +25,16 @@ public class HpManager : MonoBehaviour
     {
         if (IsDead || isInvincible)
             return;
-        currentHp -= dmg;
+        float actualDmg = dmg;
+        if (gameObject.CompareTag("Player"))
+        {
+            actualDmg = dmg * PlayerManager.Instance.GetPlayerStatManager().GetStat(StatType.DamageReduction);
+        }
+        currentHp -= actualDmg;
         DamageTextController damageText =
             ObjectPoolManager.Instance.SpawnFromPool("DamageText", transform.position + Vector3.up).GetComponent<DamageTextController>();
         Color textColor = gameObject.CompareTag("Enemy") ? new Color(0, 0, 1, 1) : new Color(1, 0, 0, 1);
-        damageText.Initialize(dmg, textColor);
+        damageText.Initialize(actualDmg, textColor);
         OnHpChange?.Invoke(currentHp/maxHp);
         if (currentHp <= 0)
         {

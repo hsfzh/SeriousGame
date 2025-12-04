@@ -66,7 +66,7 @@ public class RotatingDiskController : MonoBehaviour
         for (int i = 0; i < activeDiskNum; ++i)
         {
             float diskAngle = angle * i;
-            disks[i].transform.position = new Vector3(diskRadius * Mathf.Cos(diskAngle), diskRadius * Mathf.Sin(diskAngle), 0);
+            disks[i].transform.localPosition = new Vector3(diskRadius * Mathf.Cos(diskAngle), diskRadius * Mathf.Sin(diskAngle), 0);
         }
         for (int i = activeDiskNum; i < newDiskNum; ++i)
         {
@@ -74,7 +74,7 @@ public class RotatingDiskController : MonoBehaviour
             GameObject disk = Instantiate(diskPrefab, transform);
             DiskController diskController = disk.GetComponent<DiskController>();
             diskController.Initialize(attackPower);
-            disk.transform.position = new Vector3(diskRadius * Mathf.Cos(diskAngle), diskRadius * Mathf.Sin(diskAngle), 0);
+            disk.transform.localPosition = new Vector3(diskRadius * Mathf.Cos(diskAngle), diskRadius * Mathf.Sin(diskAngle), 0);
             disks.Add(disk);
         }
         activeDiskNum = newDiskNum;

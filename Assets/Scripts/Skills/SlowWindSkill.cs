@@ -9,7 +9,7 @@ public class SlowWindSkill : SkillBase
     [SerializeField] private float slowDuration;
     [SerializeField] private float levelUpDuration;
     [SerializeField] private float levelUpSlowRatio;
-    protected override void ExecuteSkill()
+    protected override void ExecuteSkill(float attackMultiplier)
     {
         Vector3 closestEnemy = GetClosestEnemyPosition(playerTransform.position);
         
@@ -24,7 +24,7 @@ public class SlowWindSkill : SkillBase
 
         SlowWindController slowWindScript = slowWind.GetComponent<SlowWindController>();
         Vector2 fireVelocity = PlayerManager.Instance.GetPlayerMovement().GetPlayerSpeed();
-        slowWindScript.Initialize(direction, speed, fireVelocity, power, slowRatio, slowDuration);
+        slowWindScript.Initialize(direction, speed, fireVelocity, power * attackMultiplier, slowRatio, slowDuration);
     }
     protected override void SkillLevelUp()
     {

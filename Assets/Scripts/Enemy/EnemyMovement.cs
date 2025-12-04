@@ -38,9 +38,9 @@ public class EnemyMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (isStunned)
+        if (!GameManager.Instance.timeFlowing || isStunned)
         {
-            rigid.velocity = new Vector2(0, 0);
+            rigid.velocity = Vector2.zero;
         }
         else
         {
@@ -81,6 +81,8 @@ public class EnemyMovement : MonoBehaviour
     }
     public void Stun(float duration)
     {
+        if (!gameObject.activeSelf)
+            return;
         if (stunCoroutine != null)
         {
             StopCoroutine(stunCoroutine);
@@ -96,6 +98,8 @@ public class EnemyMovement : MonoBehaviour
     }
     public void Slow(float slowRatio, float slowDuration)
     {
+        if (!gameObject.activeSelf)
+            return;
         if (slowCoroutine != null)
         {
             StopCoroutine(slowCoroutine);

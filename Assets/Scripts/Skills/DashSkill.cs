@@ -6,7 +6,7 @@ public class DashSkill : SkillBase
 {
     [SerializeField] private float range;
     [SerializeField] private float levelUpRange;
-    protected override void ExecuteSkill()
+    protected override void ExecuteSkill(float attackMultiplier)
     {
         Vector3 mouse = GetMouseWorldPosition();
         Vector2 mapSize = PlayerManager.Instance.GetPlayerMovement().playerBound;
@@ -20,7 +20,7 @@ public class DashSkill : SkillBase
 
         DashAttackController dashScript = dash.GetComponent<DashAttackController>();
         
-        dashScript.Initialize(power, range);
+        dashScript.Initialize(power * attackMultiplier, range);
     }
     protected override void SkillLevelUp()
     {

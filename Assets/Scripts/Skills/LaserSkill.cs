@@ -12,7 +12,7 @@ public class LaserSkill : SkillBase
     {
         coolTime += duration;
     }
-    protected override void ExecuteSkill()
+    protected override void ExecuteSkill(float attackMultiplier)
     {
         Vector3 mouse = GetMouseWorldPosition();
         Vector2 direction = (mouse - playerTransform.position);
@@ -25,7 +25,7 @@ public class LaserSkill : SkillBase
             ObjectPoolManager.Instance.SpawnFromPool("Laser", playerTransform.position, rotation, new Vector3(1, width[level-1], 1));
 
         LaserController laserScript = laser.GetComponent<LaserController>();
-        laserScript.Initialize(duration, power);
+        laserScript.Initialize(duration, power * attackMultiplier);
     }
     protected override void SkillLevelUp()
     {

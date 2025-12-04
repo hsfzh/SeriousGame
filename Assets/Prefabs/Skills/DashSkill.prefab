@@ -45,14 +45,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Dash
+  skillIcon: {fileID: 21300000, guid: 05c114eabd3f6fc469c59a4be500d771, type: 3}
+  skillInfo: "\uC6B0\uD074\uB9AD\uD55C \uACF3\uC73C\uB85C \uC21C\uAC04\uC774\uB3D9\uD558\uBA70
+    \uC8FC\uBCC0\uC5D0 \uB370\uBBF8\uC9C0\uB97C \uC900\uB2E4"
   coolTime: 5
   level: 1
-  power: 3
   levelPower:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
+  - 100
+  - 100
+  - 100
+  - 100
+  - 100
   range: 1
   levelUpRange: 0.5
