@@ -7,6 +7,7 @@ public class ShieldBuff : BuffBase
 {
     [SerializeField] private List<int> maxOverlap;
     public int currentOverlap;
+    private int prevHitObjectID;
 
     private void Awake()
     {
@@ -16,18 +17,28 @@ public class ShieldBuff : BuffBase
     {
         if (currentOverlap < maxOverlap[level - 1])
         {
-            GameObject shield = ObjectPoolManager.Instance.SpawnFromPool("Shield", playerTransform.position);
+            if (currentOverlap == 0)
+            {
+                GameObject shield = ObjectPoolManager.Instance.SpawnFromPool("Shield", playerTransform.position);
+                shield.GetComponent<ShieldController>().Initialize(this, playerTransform);
+            }
             currentOverlap += 1;
-            shield.GetComponent<ShieldController>().Initialize(this, playerTransform);
         }
     }
-    public void OnShieldDestroyed()
+    public void OnShieldDestroyed(GameObject shield, GameObject hitObject)
     {
-        if (currentOverlap <= 0)
-        {
-            Debug.LogError("currentOverlap doesn't match shield count");
+        int hitObjectID = hitObject.GetInstanceID();
+        if (hitObjectID == prevHitObjectID)
             return;
+        prevHitObjectID = hitObjectID;
+        if (hitObject.activeSelf)
+        {
+            hitObject.SetActive(false);
         }
         currentOverlap -= 1;
+        if (currentOverlap <= 0)
+        {
+            shield.SetActive(false);
+        }
     }
 }

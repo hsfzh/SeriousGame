@@ -1056,7 +1056,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &461878081
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1248,7 +1248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxDistance: {x: 11, y: 7}
   minDistance: {x: 10, y: 6}
-  spawnInterval: 500
+  spawnInterval: 2
   maxAttempt: 10
 --- !u!4 &480619575
 Transform:

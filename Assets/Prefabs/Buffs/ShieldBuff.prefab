@@ -64,3 +64,4 @@ MonoBehaviour:
   <isActiveBuff>k__BackingField: 1
   level: 1
   maxOverlap: 0100000001000000020000000200000003000000
+  currentOverlap: 0

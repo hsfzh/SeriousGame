@@ -89,4 +89,8 @@ public class HpManager : MonoBehaviour
         OnInvincibilityChange?.Invoke(false);
         invincibleCoroutine = null;
     }
+    public float GetInvincibleTime()
+    {
+        return hitInvincibilityDuration;
+    }
 }

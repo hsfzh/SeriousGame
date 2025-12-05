@@ -16,7 +16,8 @@ public class ShieldController : MonoBehaviour
     }
     private void Update()
     {
-        transform.position = player.position;
+        if(player)
+            transform.position = player.position;
     }
     public void Initialize(ShieldBuff shieldBuff, Transform playerTransform)
     {
@@ -27,9 +28,8 @@ public class ShieldController : MonoBehaviour
     {
         if (enemyTagsSet.Contains(other.gameObject.tag))
         {
-            other.gameObject.SetActive(false);
-            parent.OnShieldDestroyed();
-            gameObject.SetActive(false);
+            if(parent)
+                parent.OnShieldDestroyed(gameObject, other.gameObject);
         }
     }
 }
