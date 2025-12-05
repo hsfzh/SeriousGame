@@ -41,6 +41,7 @@ public class LaserController : MonoBehaviour
         duration = time;
         attackPower = power;
         isEnemyLaser = isEnemy;
+        gameObject.tag = isEnemy ? "EnemyWeapon" : "PlayerWeapon";
     }
     private IEnumerator LaserRoutine()
     {
@@ -62,7 +63,7 @@ public class LaserController : MonoBehaviour
     {
         if (isEnemyLaser)
         {
-            if (other.gameObject.CompareTag("Player"))
+            if (other.CompareTag("Player"))
             {
                 HpManager playerHp = PlayerManager.Instance.GetPlayerHpManager();
                 if (playerHp)
@@ -74,7 +75,7 @@ public class LaserController : MonoBehaviour
         }
         else
         {
-            if (other.gameObject.CompareTag("Enemy"))
+            if (other.CompareTag("Enemy"))
             {
                 HpManager enemyHp = other.gameObject.GetComponent<HpManager>();
                 if (enemyHp)

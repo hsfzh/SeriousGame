@@ -77,17 +77,17 @@ public abstract class SkillBase : MonoBehaviour
         }
         return Vector3.zero;
     }
-    protected Vector3 GetClosestEnemyPosition(Vector3 startPos)
+    protected Transform GetClosestEnemyPosition(Vector3 startPos, float range)
     {
         IReadOnlyList<Transform> enemyList = new List<Transform>(GameManager.Instance.ActiveEnemies);
-        Vector3 closestEnemy = enemyList[0].position;
-        float closestSqrtDist = (closestEnemy - startPos).sqrMagnitude;
+        Transform closestEnemy = null;
+        float closestSqrtDist = range * range;
         foreach (var enemy in enemyList)
         {
             float sqrtDist = (enemy.position - startPos).sqrMagnitude;
             if (sqrtDist < closestSqrtDist)
             {
-                closestEnemy = enemy.position;
+                closestEnemy = enemy;
                 closestSqrtDist = sqrtDist;
             }
         }

@@ -45,7 +45,7 @@ public class EnemyManager : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             HpManager playerHp = PlayerManager.Instance.GetPlayerHpManager();
             if (playerHp)
@@ -54,7 +54,6 @@ public class EnemyManager : MonoBehaviour
             }
         }
     }
-
     public void Kill()
     {
         myHp.Kill();

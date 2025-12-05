@@ -38,10 +38,11 @@ public class BulletController : MonoBehaviour
         splashPower = splashP;
         splashRange = splashR;
         isEnemyBullet = isEnemy;
+        gameObject.tag = isEnemy ? "EnemyWeapon" : "PlayerWeapon";
     }
     private void ApplySplashDamage()
     {
-        // TODO: 폭발 애니메이션 실행
+        // 있다면 여기서 폭발 애니메이션 실행
         float searchRange = splashRange * splashRange;
         var targetList = new List<Transform>(GameManager.Instance.ActiveEnemies);
         foreach (var enemy in targetList)
@@ -63,7 +64,7 @@ public class BulletController : MonoBehaviour
     {
         if (isEnemyBullet)
         {
-            if (other.gameObject.CompareTag("Player"))
+            if (other.CompareTag("Player"))
             {
                 HpManager playerHp = PlayerManager.Instance.GetPlayerHpManager();
                 if (playerHp)
@@ -75,7 +76,7 @@ public class BulletController : MonoBehaviour
         }
         else
         {
-            if (other.gameObject.CompareTag("Enemy"))
+            if (other.CompareTag("Enemy"))
             {
                 HpManager enemyHp = other.gameObject.GetComponent<HpManager>();
                 if (enemyHp)

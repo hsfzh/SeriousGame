@@ -18,7 +18,7 @@ public class PlayerStatManager : MonoBehaviour
     private Dictionary<StatType, float> stats;
     private Dictionary<StatType, float> modification = new Dictionary<StatType, float>();
     private Dictionary<string, BuffBase> buffs = new Dictionary<string, BuffBase>();
-    private List<BuffBase> activeBuffs = new List<BuffBase>();
+    private HashSet<BuffBase> activeBuffs = new HashSet<BuffBase>();
     public event Action<BuffBase> OnNewActiveBuffAdded;
 
     private void Awake()
@@ -77,8 +77,11 @@ public class PlayerStatManager : MonoBehaviour
         {
             if (addedBuff.isActiveBuff)
             {
-                activeBuffs.Add(addedBuff);
-                OnNewActiveBuffAdded?.Invoke(addedBuff);
+                bool isBuffAdded = activeBuffs.Add(addedBuff);
+                if (isBuffAdded)
+                {
+                    OnNewActiveBuffAdded?.Invoke(addedBuff);
+                }
             }
             else
             {
@@ -100,7 +103,7 @@ public class PlayerStatManager : MonoBehaviour
             }
         }
     }
-    public IReadOnlyList<BuffBase> GetPlayerActiveBuffs()
+    public IReadOnlyCollection<BuffBase> GetPlayerActiveBuffs()
     {
         return activeBuffs;
     }

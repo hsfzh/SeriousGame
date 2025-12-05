@@ -13,7 +13,7 @@ public class DiskController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy"))
         {
             HpManager enemyHp = other.gameObject.GetComponent<HpManager>();
             if (enemyHp)

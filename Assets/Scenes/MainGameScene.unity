@@ -418,8 +418,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e9a284d23ad78f4b9a3f1c6801d65de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapSize: {x: 47, y: 25.2}
-  playableMapSize: {x: 45, y: 23.1}
+  mapSize: {x: 24.32, y: 21.76}
+  playableMapSize: {x: 24.08, y: 20.48}
   targetAspectRatio: 1.777778
   levelUpUI: {fileID: 1873772085}
 --- !u!4 &166117092
@@ -1056,7 +1056,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &461878081
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1248,7 +1248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxDistance: {x: 11, y: 7}
   minDistance: {x: 10, y: 6}
-  spawnInterval: 2
+  spawnInterval: 500
   maxAttempt: 10
 --- !u!4 &480619575
 Transform:
@@ -2520,6 +2520,10 @@ MonoBehaviour:
     prefab: {fileID: 6146231568371787839, guid: ebece9aff01c76f40b0e31ce03d1a815, type: 3}
     size: 100
     isUIElement: 0
+  - poolTag: Shield
+    prefab: {fileID: 5521393530889212250, guid: a4017513c64d4fc4681095a156b9e8da, type: 3}
+    size: 3
+    isUIElement: 0
   canvasTransform: {fileID: 938856614}
 --- !u!4 &984866139
 Transform:
@@ -2861,7 +2865,7 @@ SpriteRenderer:
   m_SortingLayerID: 113102511
   m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6170b103fd2e11b46b8541d50c7288c4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4ec6982605a33b547a5953f332855a17, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2882,7 +2886,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}

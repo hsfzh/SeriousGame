@@ -75,7 +75,7 @@ public class PlayerLevelManager : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Exp"))
+        if (other.CompareTag("Exp"))
         {
             ExpObject expScript = other.GetComponent<ExpObject>();
             expScript.Magnetize(transform, playerStat.GetStat(StatType.ExpMultiply));

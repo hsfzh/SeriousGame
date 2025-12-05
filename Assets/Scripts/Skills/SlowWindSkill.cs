@@ -11,7 +11,13 @@ public class SlowWindSkill : SkillBase
     [SerializeField] private float levelUpSlowRatio;
     protected override void ExecuteSkill(float attackMultiplier)
     {
-        Vector3 closestEnemy = GetClosestEnemyPosition(playerTransform.position);
+        Transform closestEnemyTransform = GetClosestEnemyPosition(playerTransform.position, speed * 1.5f);
+        if (!closestEnemyTransform)
+        {
+            Debug.LogError("No Enemy in scene!");
+        }
+        
+        Vector3 closestEnemy = closestEnemyTransform.position;
         
         Vector2 direction = (closestEnemy - playerTransform.position).normalized;
 
@@ -25,6 +31,10 @@ public class SlowWindSkill : SkillBase
         SlowWindController slowWindScript = slowWind.GetComponent<SlowWindController>();
         Vector2 fireVelocity = PlayerManager.Instance.GetPlayerMovement().GetPlayerSpeed();
         slowWindScript.Initialize(direction, speed, fireVelocity, power * attackMultiplier, slowRatio, slowDuration);
+    }
+    protected override bool CheckFireCondition()
+    {
+        return GetClosestEnemyPosition(playerTransform.position, speed * 1.5f) != null;
     }
     protected override void SkillLevelUp()
     {

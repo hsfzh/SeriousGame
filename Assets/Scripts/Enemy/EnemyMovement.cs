@@ -38,42 +38,35 @@ public class EnemyMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (!GameManager.Instance.timeFlowing || isStunned)
+        Vector2 finalVelocity = Vector2.zero;
+        if (!targetContact && GameManager.Instance.timeFlowing && !isStunned)
         {
-            rigid.velocity = Vector2.zero;
-        }
-        else
-        {
-            Vector2 finalVelocity = Vector2.zero;
-            if (!targetContact)
+            Vector2 currentPos = rigid.position;
+
+            Vector3 playerPosition = PlayerManager.Instance.transform.position;
+
+            direction = (playerPosition - transform.position).normalized;
+        
+            finalVelocity = direction * (speed * speedRatio);
+        
+            if (currentPos.x <= -movementBound.x && finalVelocity.x < 0)
             {
-                Vector2 currentPos = rigid.position;
-
-                Vector3 playerPosition = PlayerManager.Instance.transform.position;
-
-                direction = (playerPosition - transform.position).normalized;
-        
-                finalVelocity = direction * (speed * speedRatio);
-        
-                if (currentPos.x <= -movementBound.x && finalVelocity.x < 0)
-                {
-                    finalVelocity.x = 0;
-                }
-                else if (currentPos.x >= movementBound.x && finalVelocity.x > 0)
-                {
-                    finalVelocity.x = 0;
-                }
-                if (currentPos.y <= -movementBound.y && finalVelocity.y < 0)
-                {
-                    finalVelocity.y = 0;
-                }
-                else if (currentPos.y >= movementBound.y && finalVelocity.y > 0)
-                {
-                    finalVelocity.y = 0;
-                }
+                finalVelocity.x = 0;
             }
-            rigid.velocity = finalVelocity;
+            else if (currentPos.x >= movementBound.x && finalVelocity.x > 0)
+            {
+                finalVelocity.x = 0;
+            }
+            if (currentPos.y <= -movementBound.y && finalVelocity.y < 0)
+            {
+                finalVelocity.y = 0;
+            }
+            else if (currentPos.y >= movementBound.y && finalVelocity.y > 0)
+            {
+                finalVelocity.y = 0;
+            }
         }
+        rigid.velocity = finalVelocity;
         float clampedX = Mathf.Clamp(rigid.position.x, -movementBound.x, movementBound.x);
         float clampedY = Mathf.Clamp(rigid.position.y, -movementBound.y, movementBound.y);
             
@@ -115,14 +108,14 @@ public class EnemyMovement : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             targetContact = true;
         }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             targetContact = false;
         }

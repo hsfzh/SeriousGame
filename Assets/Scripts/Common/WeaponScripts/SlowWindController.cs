@@ -30,18 +30,18 @@ public class SlowWindController : MonoBehaviour
             }
         }
     }
-    public void Initialize(Vector3 direc, float newSpeed, Vector2 fireVelocity, float power, float slow, float duration)
+    public void Initialize(Vector3 direc, float newSpeed, Vector2 fireVelocity, float power, float slow, float affectDuration)
     {
         direction = direc;
         float bonusSpeed = Vector2.Dot(fireVelocity, direction);
         speed = bonusSpeed > 0 ? newSpeed + bonusSpeed : newSpeed;
         attackPower = power;
         slowRatio = slow;
-        slowDuration = duration;
+        slowDuration = affectDuration;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy"))
         {
             HpManager enemyHp = other.gameObject.GetComponent<HpManager>();
             if (enemyHp)

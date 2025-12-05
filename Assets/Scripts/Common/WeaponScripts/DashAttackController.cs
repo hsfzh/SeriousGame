@@ -26,7 +26,7 @@ public class DashAttackController : MonoBehaviour
     }
     private IEnumerator DashRoutine()
     {
-        yield return null;
+        yield return new WaitForSeconds(0.05f);
         gameObject.SetActive(false);
     }
     public void Initialize(float power, float range)
@@ -38,7 +38,7 @@ public class DashAttackController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy"))
         {
             HpManager enemyHp = other.gameObject.GetComponent<HpManager>();
             if (enemyHp)

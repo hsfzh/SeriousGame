@@ -31,17 +31,17 @@ public class ThunderController : MonoBehaviour
         }
     }
 
-    public void Initialize(float power, float time, float range, float dur)
+    public void Initialize(float power, float time, float range, float affectDuration)
     {
         attackPower = power;
         stunTime = time;
         radius = range;
-        duration = dur;
+        duration = affectDuration;
         transform.localScale = new Vector3(1, 1, 1) * (radius / initialRadius);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy"))
         {
             other.gameObject.GetComponent<EnemyMovement>().Stun(stunTime);
             HpManager enemyHp = other.gameObject.GetComponent<HpManager>();
