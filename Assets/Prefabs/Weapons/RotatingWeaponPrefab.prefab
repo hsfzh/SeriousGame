@@ -45,5 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDiskNum: 6
-  diskRadius: 3
+  diskRadius: 0.7
   diskPrefab: {fileID: 5948565452532341326, guid: 487dab02ad38b0943a73b7bc7ecefc4f, type: 3}

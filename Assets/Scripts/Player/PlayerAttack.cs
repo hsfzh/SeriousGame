@@ -6,13 +6,6 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     private Dictionary<string, SkillBase> skills = new Dictionary<string, SkillBase>();
-    [SerializeField] private float monsterSearchRadius;
-    [SerializeField] private SkillBase gunSkillPrefab;
-    [SerializeField] private SkillBase dashSkillPrefab;
-    [SerializeField] private SkillBase rotateSkillPrefab;
-    [SerializeField] private SkillBase laserSkillPrefab;
-    [SerializeField] private SkillBase thunderSkillPrefab;
-    [SerializeField] private SkillBase slowWindSkillPrefab;
     private bool isActive;
     public event Action<SkillBase> OnNewSkillAdded;
 

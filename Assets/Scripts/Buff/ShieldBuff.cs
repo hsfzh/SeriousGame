@@ -31,10 +31,11 @@ public class ShieldBuff : BuffBase
         if (hitObjectID == prevHitObjectID)
             return;
         prevHitObjectID = hitObjectID;
-        if (hitObject.activeSelf)
+        if (hitObject.activeSelf && hitObject.CompareTag("EnemyWeapon"))
         {
             hitObject.SetActive(false);
         }
+        playerTransform.GetComponent<HpManager>().MakeInvincible(3f);
         currentOverlap -= 1;
         if (currentOverlap <= 0)
         {

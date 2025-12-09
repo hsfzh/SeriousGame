@@ -21,15 +21,18 @@ public class PlayerStatManager : MonoBehaviour
     private HashSet<BuffBase> activeBuffs = new HashSet<BuffBase>();
     public event Action<BuffBase> OnNewActiveBuffAdded;
 
-    private void Awake()
+    private void Start()
     {
-        stats = new Dictionary<StatType, float>();
         stats.Add(StatType.AttackPower, 1);     // 공격력은 배율만 저장하기에 초기값은 1
         stats.Add(StatType.CoolTime, 1);        // 쿨타임 감소율은 배율만 저장하기에 초기값은 1
         stats.Add(StatType.DamageReduction, 1); // 피해 감소율은 배율만 저장하기에 초기값은 1
-        stats.Add(StatType.MagnetRange, 1);     // 자석 범위는 타일 수
-        stats.Add(StatType.MoveSpeed, 5);       // 이동 속도는 초당 타일 수
         stats.Add(StatType.ExpMultiply, 1);     // 경험치 배율은 배율만 저장하기에 초기값은 1
+    }
+    public void Initialize(float magnetRange, float speed)
+    {
+        stats = new Dictionary<StatType, float>();
+        stats.Add(StatType.MagnetRange, magnetRange);     // 자석 범위는 타일 수
+        stats.Add(StatType.MoveSpeed, speed);       // 이동 속도는 초당 타일 수
     }
 
     private void Update()
@@ -87,7 +90,6 @@ public class PlayerStatManager : MonoBehaviour
             {
                 ApplyBuff(addedBuff);
             }
-            Debug.Log($"adding buff {newBuffName}");
         }
     }
     private void ApplyBuff(BuffBase buff)

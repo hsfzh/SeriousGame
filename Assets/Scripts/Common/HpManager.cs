@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class HpManager : MonoBehaviour
 {
-    [SerializeField] private float hitInvincibilityDuration = 0.5f;
-    [SerializeField] private float maxHp;
+    private float hitInvincibilityDuration = 0.5f;
+    private float maxHp;
     private float currentHp;
     public event Action<float> OnHpChange;
     public event Action OnDeath;
@@ -32,7 +32,7 @@ public class HpManager : MonoBehaviour
         }
         currentHp -= actualDmg;
         DamageTextController damageText =
-            ObjectPoolManager.Instance.SpawnFromPool("DamageText", transform.position + Vector3.up).GetComponent<DamageTextController>();
+            ObjectPoolManager.Instance.SpawnFromPool("DamageText", transform.position + Vector3.up * 0.3f).GetComponent<DamageTextController>();
         Color textColor = CompareTag("Enemy") ? new Color(0, 0, 1, 1) : new Color(1, 0, 0, 1);
         damageText.Initialize(actualDmg, textColor);
         OnHpChange?.Invoke(currentHp/maxHp);
@@ -92,5 +92,10 @@ public class HpManager : MonoBehaviour
     public float GetInvincibleTime()
     {
         return hitInvincibilityDuration;
+    }
+    public void Initialize(float newHp, float invincibleTime = 0.5f)
+    {
+        maxHp = newHp;
+        hitInvincibilityDuration = invincibleTime;
     }
 }

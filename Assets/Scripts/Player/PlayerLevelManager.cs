@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class PlayerLevelManager : MonoBehaviour
 {
     public int level { get; private set; }
-    [SerializeField] private float magnetRange;
+    private float magnetRange;
     [SerializeField] private Slider expGage;
     [SerializeField] private TextMeshProUGUI levelText;
     private CircleCollider2D magnet;
@@ -27,6 +27,10 @@ public class PlayerLevelManager : MonoBehaviour
         expGage.value = 0;
         levelText.text = "Lvl 0";
         requiredExp = RequiredExp(0);
+    }
+    public void Initialize(float range)
+    {
+        magnetRange = range;
     }
     public void IncreaseMagnetRange(float newRadius)
     {

@@ -11,11 +11,13 @@ public class ThunderController : MonoBehaviour
     private float attackPower;
     private float duration;
     private float currentTime;
+    private Vector3 initialScale;
 
     private void Awake()
     {
         CircleCollider2D thunderCollider = GetComponent<CircleCollider2D>();
         initialRadius = thunderCollider.radius;
+        initialScale = transform.localScale;
     }
 
     private void Update()
@@ -37,7 +39,7 @@ public class ThunderController : MonoBehaviour
         stunTime = time;
         radius = range;
         duration = affectDuration;
-        transform.localScale = new Vector3(1, 1, 1) * (radius / initialRadius);
+        transform.localScale = initialScale * (radius / initialRadius);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {

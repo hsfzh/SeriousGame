@@ -29,7 +29,7 @@ public class BulletController : MonoBehaviour
         }
     }
     public void Initialize(Vector3 direc, float newSpeed, Vector2 fireVelocity, float power,
-        float splashP, float splashR, bool isEnemy = false)
+        float splashP = 0, float splashR = 0, bool isEnemy = false)
     {
         direction = direc;
         float bonusSpeed = Vector2.Dot(fireVelocity, direction);

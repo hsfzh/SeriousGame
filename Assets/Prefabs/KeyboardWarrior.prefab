@@ -15,10 +15,10 @@ GameObject:
   - component: {fileID: 4455492754204991626}
   - component: {fileID: -7435770114655244025}
   - component: {fileID: -3955122812234547690}
-  - component: {fileID: 5231263814200699307}
-  - component: {fileID: -501075884879859370}
+  - component: {fileID: 2344760040466531683}
+  - component: {fileID: 3352743388692449049}
   m_Layer: 6
-  m_Name: EnemyPrefab
+  m_Name: KeyboardWarrior
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,7 +34,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -14.68, y: 12.71, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -80,8 +80,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: e7309b50bc7bd314e9e2b3d7b37af56b, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -142,15 +142,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 961e89388db908945ace2a1919afa2bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <enemyHalfSize>k__BackingField: {x: 0.01, y: 0.01}
-  <maxHp>k__BackingField: 100
-  <moveSpeed>k__BackingField: 0.5
-  <bulletType>k__BackingField: 
-  <bulletSpeed>k__BackingField: 0
-  <attackSpeed>k__BackingField: 0
-  <attackPower>k__BackingField: 0
-  <bodyAttackPower>k__BackingField: 100
-  <attackRange>k__BackingField: 0
+  <enemyHalfSize>k__BackingField: {x: 0.225, y: 0.25}
+  <maxHp>k__BackingField: 200
+  <moveSpeed>k__BackingField: 0.7
+  <bulletType>k__BackingField: KeyboardBullet
+  <bulletSpeed>k__BackingField: 2
+  <attackSpeed>k__BackingField: 2
+  <attackPower>k__BackingField: 100
+  <bodyAttackPower>k__BackingField: 50
+  <attackRange>k__BackingField: 3
   <isElite>k__BackingField: 0
 --- !u!114 &-7435770114655244025
 MonoBehaviour:
@@ -177,8 +177,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   invincibleAlpha: 0.5
---- !u!58 &5231263814200699307
-CircleCollider2D:
+--- !u!114 &2344760040466531683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3094528734937282189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bea125a953ab8d4fb4a43e6a668edad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!70 &3352743388692449049
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -206,21 +218,9 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.49999997
---- !u!114 &-501075884879859370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3094528734937282189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec001416370bddd42816c9271bb83353, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Size: {x: 0.45253682, y: 0.48946148}
+  m_Direction: 0

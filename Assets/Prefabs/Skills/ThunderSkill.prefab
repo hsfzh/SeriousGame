@@ -58,6 +58,6 @@ MonoBehaviour:
   - 100
   - 100
   stunTime: 1
-  radius: 1
+  radius: 0.5
   levelUpRadius: 0.5
   duration: 0.3

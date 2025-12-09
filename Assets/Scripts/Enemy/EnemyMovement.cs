@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 public class EnemyMovement : MonoBehaviour
 {
-    [SerializeField] private Vector2 enemyHalfSize;
+    private Vector2 enemyHalfSize;
     private float speed;
     private Rigidbody2D rigid;
     private Vector2 direction;
@@ -16,15 +16,27 @@ public class EnemyMovement : MonoBehaviour
     private Coroutine stunCoroutine;
     private float speedRatio;
     private Coroutine slowCoroutine;
+    private float playerSensingRange;
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
+    }
+    public void Initialize(EnemyManager enemyManager)
+    {
+        if (!enemyManager)
+        {
+            Debug.LogError("No enemyManager!");
+            return;
+        }
+        enemyHalfSize = enemyManager.enemyHalfSize;
+        speed = enemyManager.moveSpeed;
+        playerSensingRange = enemyManager.attackRange * enemyManager.attackRange;
     }
     // Start is called before the first frame update
     void Start()
     {
         direction = Vector2.zero;
-        speed = Random.Range(1f, 4f);
+        speed = Random.Range(0.5f, 1f);
         targetContact = false;
         Vector2 mapSize = GameManager.Instance.playableMapSize;
         movementBound = new Vector2(mapSize.x * 0.5f - enemyHalfSize.x, mapSize.y * 0.5f - enemyHalfSize.y);
@@ -39,11 +51,11 @@ public class EnemyMovement : MonoBehaviour
     private void FixedUpdate()
     {
         Vector2 finalVelocity = Vector2.zero;
-        if (!targetContact && GameManager.Instance.timeFlowing && !isStunned)
+        Vector3 playerPosition = PlayerManager.Instance.transform.position;
+        float distanceToPlayer = (playerPosition - transform.position).sqrMagnitude;
+        if (!targetContact && GameManager.Instance.timeFlowing && !isStunned && (distanceToPlayer > playerSensingRange))
         {
             Vector2 currentPos = rigid.position;
-
-            Vector3 playerPosition = PlayerManager.Instance.transform.position;
 
             direction = (playerPosition - transform.position).normalized;
         
@@ -105,6 +117,10 @@ public class EnemyMovement : MonoBehaviour
         speedRatio = slowRatio;
         yield return new WaitForSeconds(slowDuration);
         speedRatio = 1;
+    }
+    public Vector2 GetCurrentSpeed()
+    {
+        return rigid.velocity;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {

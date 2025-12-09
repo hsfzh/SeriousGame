@@ -3,6 +3,11 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     [field:SerializeField] public int maxSkillLevel { get; private set; }
+    [SerializeField] private float maxHp;
+    [SerializeField] private float hitInvincibilityDuration;
+    [SerializeField] private float magnetRange;
+    [SerializeField] private Vector2 playerHalfSize;
+    [SerializeField] private float moveSpeed;
     public static PlayerManager Instance { get; private set; }
     private PlayerMovement movement;
     private PlayerAttack attack;
@@ -29,7 +34,11 @@ public class PlayerManager : MonoBehaviour
         if (playerHp)
         {
             playerHp.OnDeath += OnDeath;
+            playerHp.Initialize(maxHp, hitInvincibilityDuration);
         }
+        levelManager.Initialize(magnetRange);
+        movement.Initialize(playerHalfSize);
+        statManager.Initialize(magnetRange, moveSpeed);
     }
     private void OnDestroy()
     {

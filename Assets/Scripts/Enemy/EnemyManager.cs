@@ -2,9 +2,19 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    [SerializeField] private float attackPower;
-    [SerializeField] private bool isElite;
+    [field:SerializeField] public Vector2 enemyHalfSize { get; private set; }
+    [field:SerializeField] public float maxHp { get; private set; }
+    [field:SerializeField] public float moveSpeed { get; private set; }
+    [field:SerializeField] public string bulletType { get; private set; }
+    [field:SerializeField] public float bulletSpeed { get; private set; }
+    [field:SerializeField] public float attackSpeed { get; private set; }
+    [field:SerializeField] public float attackPower { get; private set; }
+    [field:SerializeField] public float bodyAttackPower { get; private set; }
+    [field:SerializeField] public float attackRange { get; private set; }
+    [field:SerializeField] public bool isElite { get; private set; }
     private HpManager myHp;
+    private EnemyMovement movementManager;
+    private EnemyAttackBase attackManager;
 
     private void Awake()
     {
@@ -12,7 +22,13 @@ public class EnemyManager : MonoBehaviour
         if (myHp)
         {
             myHp.OnDeath += OnDeath;
+            myHp.Initialize(maxHp);
         }
+        movementManager = GetComponent<EnemyMovement>();
+        movementManager.Initialize(this);
+        attackManager = GetComponent<EnemyAttackBase>();
+        attackManager.Initialize(this);
+        
     }
     private void OnDestroy()
     {
@@ -43,19 +59,12 @@ public class EnemyManager : MonoBehaviour
         string expType = isElite ? "ShinyExp" : "NormalExp";
         GameObject exp = ObjectPoolManager.Instance.SpawnFromPool(expType, transform.position);
     }
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            HpManager playerHp = PlayerManager.Instance.GetPlayerHpManager();
-            if (playerHp)
-            {
-                playerHp.TakeDamage(attackPower);
-            }
-        }
-    }
     public void Kill()
     {
         myHp.Kill();
+    }
+    public Vector2 GetCurrentSpeed()
+    {
+        return movementManager.GetCurrentSpeed();
     }
 }

@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 public class EnemySpawnManager : MonoBehaviour
 {
     private Transform cameraTransform;
+    [SerializeField] private List<string> enemies;
     [SerializeField] private Vector2 maxDistance;
     [SerializeField] private Vector2 minDistance;
     [SerializeField] private float spawnInterval;
@@ -77,9 +78,10 @@ public class EnemySpawnManager : MonoBehaviour
 
             attempt += 1;
         }
-    
-        GameObject basicEnemy =
-            ObjectPoolManager.Instance.SpawnFromPool("Enemy", new Vector3(x, y, 0));
+
+        int enemyType = Random.Range(0, 2);
+        GameObject enemy =
+            ObjectPoolManager.Instance.SpawnFromPool(enemies[enemyType], new Vector3(x, y, 0));
     }
     private IEnumerator EnemySpawnRoutine()
     {
@@ -89,5 +91,40 @@ public class EnemySpawnManager : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
         }
         enemySpawnCoroutine = null;
+    }
+    private void OnDrawGizmos()
+    {
+        // 1. 카메라 트랜스폼이 아직 설정되지 않았다면 기본값(null)으로 둡니다.
+        if (cameraTransform == null && Camera.main != null)
+        {
+            cameraTransform = Camera.main.transform;
+        }
+        // 2. 카메라 위치 (EnemySpawnManager의 현재 위치)를 중심으로 설정
+        Vector3 center = transform.position;
+
+        // 3. 디버그 박스의 색상을 초록색으로 설정
+        Gizmos.color = Color.green;
+
+        // --- A. Min Distance 박스 그리기 ---
+        // Gizmos.DrawWireCube는 중심과 크기를 요구합니다.
+        // minDistance는 X, Y 축의 거리(half size)이므로, 크기는 (minDistance.x * 2, minDistance.y * 2)가 됩니다.
+        // Min Distance를 표시하는 박스 (스폰 금지 영역 경고)
+        Vector3 minSize = new Vector3(minDistance.x * 2, minDistance.y * 2, 0);
+        Gizmos.DrawWireCube(center, minSize);
+
+        // --- B. Max Distance 박스 그리기 ---
+        // Max Distance를 표시하는 박스 (스폰 가능 영역의 바깥 경계)
+        // 이 박스는 스폰 가능 영역의 최대 거리를 보여줍니다.
+        Vector3 maxSize = new Vector3(maxDistance.x * 2, maxDistance.y * 2, 0);
+        
+        // Box의 모양을 점선으로 바꾸고 싶을 때는 UnityEditor 라이브러리를 사용해야 하지만,
+        // 단순하게 투명한 초록색으로 덮거나, 다른 색으로 외곽선을 그릴 수 있습니다.
+        // 투명한 박스로 Max Distance 영역을 시각화합니다.
+        Gizmos.color = new Color(0, 1, 0, 0.1f); // 연한 초록색 (Fill)
+        Gizmos.DrawCube(center, maxSize);
+        
+        // 다시 진한 초록색으로 외곽선만 그립니다.
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(center, maxSize);
     }
 }

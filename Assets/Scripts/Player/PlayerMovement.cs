@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private Vector2 playerHalfSize;
+    private Vector2 playerHalfSize;
     private Rigidbody2D rigid;
     private Vector2 direction;
     public Vector2 playerBound { get; private set; }
@@ -13,6 +13,10 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
+    }
+    public void Initialize(Vector2 halfSize)
+    {
+        playerHalfSize = halfSize;
     }
     // Start is called before the first frame update
     void Start()

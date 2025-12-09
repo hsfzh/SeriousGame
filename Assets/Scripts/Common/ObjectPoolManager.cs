@@ -40,7 +40,7 @@ public class ObjectPoolManager : MonoBehaviour
             {
                 // 하이어라키 정리용 부모 오브젝트 생성
                 GameObject poolParent = new GameObject(info.poolTag + "_Pool");
-                poolParent.transform.SetParent(this.transform);
+                poolParent.transform.SetParent(transform);
                 for (int i = 0; i < info.size; i++)
                 {
                     GameObject obj = Instantiate(info.prefab, poolParent.transform);
