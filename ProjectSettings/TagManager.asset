@@ -9,6 +9,7 @@ TagManager:
   - Shield
   - EnemyWeapon
   - PlayerWeapon
+  - EnemyShield
   layers:
   - Default
   - TransparentFX

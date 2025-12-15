@@ -27,8 +27,7 @@ public class SlowWindSkill : SkillBase
 
         GameObject slowWind =
             ObjectPoolManager.Instance.SpawnFromPool("SlowWind", playerTransform.position, rotation: rotation);
-
-        // TODO: 관통 횟수 적용
+        
         SlowWindController slowWindScript = slowWind.GetComponent<SlowWindController>();
         Vector2 fireVelocity = PlayerManager.Instance.GetMovement().GetCurrentSpeed();
         slowWindScript.Initialize(direction, speed, fireVelocity, power * attackMultiplier, slowRatio[level-1],

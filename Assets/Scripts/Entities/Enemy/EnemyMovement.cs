@@ -7,12 +7,12 @@ using Random = UnityEngine.Random;
 public class EnemyMovement : MovementBase
 {
     private bool targetContact;
-    private bool isStunned;
+    protected bool isStunned;
     private Coroutine stunCoroutine;
-    private float speedRatio;
+    protected float speedRatio;
     private Coroutine slowCoroutine;
     private float playerSensingRange;
-    private EnemyManager myManager;
+    protected EnemyManager myManager;
     public void Initialize(EnemyManager enemyManager)
     {
         if (!enemyManager)

@@ -1113,8 +1113,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies:
-  - Enemy
+  - OrdinaryMask
   - KeyboardWarrior
+  - StubbornRock
+  - ClickBait
+  - ConfirmationBias
   maxDistance: {x: 8, y: 5}
   minDistance: {x: 7, y: 4}
   spawnInterval: 5
@@ -2353,10 +2356,6 @@ MonoBehaviour:
     prefab: {fileID: 1663915228467109293, guid: 600d7facda8279c47a6fc3a687515fb7, type: 3}
     size: 20
     isUIElement: 0
-  - poolTag: Enemy
-    prefab: {fileID: 3094528734937282189, guid: bc60b3759130c834882e5f3985a42884, type: 3}
-    size: 20
-    isUIElement: 0
   - poolTag: Laser
     prefab: {fileID: 5227766232060304128, guid: 7a5d23e7984d6d4409d6a2625cf031d9, type: 3}
     size: 10
@@ -2367,7 +2366,7 @@ MonoBehaviour:
     isUIElement: 0
   - poolTag: Thunder
     prefab: {fileID: 920750433941886068, guid: ed647cf0d5534a349b4ac8de04d8216b, type: 3}
-    size: 2
+    size: 5
     isUIElement: 0
   - poolTag: SlowWind
     prefab: {fileID: 6483149788083576208, guid: 9d0371bf74d1a7742be0e313ad9d3e05, type: 3}
@@ -2393,13 +2392,37 @@ MonoBehaviour:
     prefab: {fileID: 5521393530889212250, guid: a4017513c64d4fc4681095a156b9e8da, type: 3}
     size: 3
     isUIElement: 0
+  - poolTag: IndicationArrow
+    prefab: {fileID: 1911165543359697161, guid: a0e06c8e015eca24f9d0eda64147f304, type: 3}
+    size: 10
+    isUIElement: 0
   - poolTag: KeyboardBullet
     prefab: {fileID: 1663915228467109293, guid: cf5de41be02e40f4ab366745c10f82e8, type: 3}
     size: 50
     isUIElement: 0
-  - poolTag: KeyboardWarrior
-    prefab: {fileID: 3094528734937282189, guid: 6a731e5165512cc468b60d984c3c1a10, type: 3}
+  - poolTag: ConfirmationLaser
+    prefab: {fileID: 3247728937435924278, guid: 3fc239687cb5765449d1903f9fc809ed, type: 3}
     size: 50
+    isUIElement: 0
+  - poolTag: OrdinaryMask
+    prefab: {fileID: 3094528734937282189, guid: bc60b3759130c834882e5f3985a42884, type: 3}
+    size: 20
+    isUIElement: 0
+  - poolTag: KeyboardWarrior
+    prefab: {fileID: 3094528734937282189, guid: b2687c9cc8615284aba1e1cb09fc21c3, type: 3}
+    size: 20
+    isUIElement: 0
+  - poolTag: StubbornRock
+    prefab: {fileID: 3094528734937282189, guid: f1276ed0e73ba8d4d904e89ddcb14ba8, type: 3}
+    size: 20
+    isUIElement: 0
+  - poolTag: ClickBait
+    prefab: {fileID: 3094528734937282189, guid: 4b32085b1b0baf349b8d5787dd630840, type: 3}
+    size: 10
+    isUIElement: 0
+  - poolTag: ConfirmationBias
+    prefab: {fileID: 3094528734937282189, guid: 0f21147c4474f71489f3ac23e786a7bc, type: 3}
+    size: 20
     isUIElement: 0
   canvasTransform: {fileID: 938856614}
 --- !u!4 &984866139
@@ -5253,7 +5276,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1834591310, guid: 037dd0aa1bc10634a8dd50a0492195d1, type: 3}
+  m_Sprite: {fileID: -1204846685, guid: 975127a0c0e584562a0292a757851177, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5345,7 +5368,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -5403,7 +5426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   invincibleAlpha: 0.5
-  deadSprite: {fileID: 0}
+  deadSprite: {fileID: 1768071631, guid: 037dd0aa1bc10634a8dd50a0492195d1, type: 3}
 --- !u!114 &1972647643
 MonoBehaviour:
   m_ObjectHideFlags: 0

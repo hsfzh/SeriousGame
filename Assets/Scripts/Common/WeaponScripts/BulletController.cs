@@ -86,6 +86,10 @@ public class BulletController : MonoBehaviour
                     gameObject.SetActive(false);
                 }
             }
+            if (other.CompareTag("EnemyShield"))
+            {
+                gameObject.SetActive(false);
+            }
         }
     }
 }

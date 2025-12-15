@@ -31,7 +31,10 @@ public abstract class MovementBase : MonoBehaviour
     {
         if (!isForceApplied)
         {
-            GetComponent<SpriteRenderer>().flipX = rigid.velocity.x < 0;
+            Vector3 currentScale = transform.localScale;
+            float currentX = Mathf.Abs(currentScale.x);
+            currentScale.x = rigid.velocity.x < 0 ? -currentX : currentX;
+            transform.localScale = currentScale;
         }
     }
     public void Move(Vector2 direc)

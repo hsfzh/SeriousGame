@@ -79,9 +79,32 @@ public class EnemySpawnManager : MonoBehaviour
             attempt += 1;
         }
 
-        int enemyType = Random.Range(0, 2);
+        int enemyType = Random.Range(0, enemies.Count);
+        Vector3 spawnPosition = new Vector3(x, y, 0);
+        if (enemies[enemyType] == "ClickBait")
+        {
+            Vector3 direction = (PlayerManager.Instance.transform.position - spawnPosition).normalized;
+            float angle = Mathf.Atan2(direction.y, direction.x)*Mathf.Rad2Deg;
+            GameObject arrow = ObjectPoolManager.Instance.SpawnFromPool("IndicationArrow", spawnPosition + direction * 2f, 
+                rotation: Quaternion.Euler(0, 0, angle));
+            StartCoroutine(SpawnClickBait(arrow, spawnPosition, direction));
+        }
+        else
+        {
+            GameObject enemy =
+                ObjectPoolManager.Instance.SpawnFromPool(enemies[enemyType], spawnPosition);
+        }
+    }
+    private IEnumerator SpawnClickBait(GameObject indicationArrow, Vector3 spawnPosition, Vector3 direction)
+    {
+        yield return new WaitForSeconds(2f);
+        indicationArrow.SetActive(false);
         GameObject enemy =
-            ObjectPoolManager.Instance.SpawnFromPool(enemies[enemyType], new Vector3(x, y, 0));
+            ObjectPoolManager.Instance.SpawnFromPool("ClickBait", spawnPosition);
+        if (enemy.TryGetComponent(out ClickBaitMovement movement))
+        {
+            movement.SetDirection(direction);
+        }
     }
     private IEnumerator EnemySpawnRoutine()
     {
@@ -92,7 +115,8 @@ public class EnemySpawnManager : MonoBehaviour
         }
         enemySpawnCoroutine = null;
     }
-    private void OnDrawGizmos()
+    /*
+    private void OnDrawGizmos() // TODO: 나중에 삭제
     {
         // 1. 카메라 트랜스폼이 아직 설정되지 않았다면 기본값(null)으로 둡니다.
         if (cameraTransform == null && Camera.main != null)
@@ -127,4 +151,5 @@ public class EnemySpawnManager : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(center, maxSize);
     }
+    */
 }
