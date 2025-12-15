@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FlowerSpecialAnim
+  m_Controller: {fileID: 9100000, guid: 6b05dc2c8c6b148d79171889aba06dcd, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: ce28f95557b5a4842807f83719891afb, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 93cdc0a85992d47a0a3e2c8fbdad416b, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: a58e2024a1b90459b889f97ffea19958, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 721a7b5b3fccc44ac865fae411447181, type: 2}
