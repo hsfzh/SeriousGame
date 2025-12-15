@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 975127a0c0e584562a0292a757851177
+guid: 72689f209c4864264a063af0cf034d51
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Girl_0
+      name: Confirmation_Bias_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 47
-        height: 49
+        width: 114
+        height: 126
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0594f1c271b534aaeb6b13962015f12a
-      internalID: -1204846685
+      spriteID: 2366561dbb8b24ac6a391b30aea427c8
+      internalID: 1174663413
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Girl_1
+      name: Confirmation_Bias_1
       rect:
         serializedVersion: 2
-        x: 47
+        x: 114
         y: 0
-        width: 47
-        height: 49
+        width: 114
+        height: 126
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,20 +132,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 43f2c2d7cb5a346e4a2053fb07f51287
-      internalID: 1622303132
+      spriteID: db99cbed7d8b142fd91ba096c96152bd
+      internalID: -1045826829
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Girl_2
+      name: Confirmation_Bias_2
       rect:
         serializedVersion: 2
-        x: 94
+        x: 228
         y: 0
-        width: 47
-        height: 49
+        width: 114
+        height: 126
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,20 +153,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 54d0aa9f126f541c2960106d241d3e48
-      internalID: -364918840
+      spriteID: a20f209fe21da4588ae723a3b76005a5
+      internalID: 1827416799
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Girl_3
+      name: Confirmation_Bias_3
       rect:
         serializedVersion: 2
-        x: 141
+        x: 342
         y: 0
-        width: 47
-        height: 49
+        width: 114
+        height: 126
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,20 +174,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dbc214b104c3b4b2da0e3cee06325e2b
-      internalID: -563058456
+      spriteID: ccd86e6d8515244cd85a6dc14e657720
+      internalID: 1329182465
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Girl_4
+      name: Confirmation_Bias_4
       rect:
         serializedVersion: 2
-        x: 188
+        x: 456
         y: 0
-        width: 47
-        height: 49
+        width: 114
+        height: 126
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,20 +195,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c161ec67f89084d3d91ad086e59ca0a5
-      internalID: -30559604
+      spriteID: 0f3e7dd4d25204bc2bbbbacf5042de37
+      internalID: -44921526
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Girl_5
+      name: Confirmation_Bias_5
       rect:
         serializedVersion: 2
-        x: 235
+        x: 570
         y: 0
-        width: 47
-        height: 49
+        width: 114
+        height: 126
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -216,20 +216,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 63aeaf5c3bea742aea8c0133692f477a
-      internalID: -1107811635
+      spriteID: 0c264d2594e654654a9e972b3e21982c
+      internalID: 511056638
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Girl_6
+      name: Confirmation_Bias_6
       rect:
         serializedVersion: 2
-        x: 282
+        x: 684
         y: 0
-        width: 47
-        height: 49
+        width: 114
+        height: 126
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -237,8 +237,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8fc59aaa7c5ec48fc83e652e776646a0
-      internalID: 114159268
+      spriteID: 87a820fafc6c747e68cb25bdf2c02f8a
+      internalID: 909957798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Confirmation_Bias_7
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 0
+        width: 114
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9098f109b8f81449d8c2b5c9a0e6d2b4
+      internalID: -576896411
       vertices: []
       indices: 
       edges: []
@@ -254,13 +275,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Girl_0: -1204846685
-      Girl_1: 1622303132
-      Girl_2: -364918840
-      Girl_3: -563058456
-      Girl_4: -30559604
-      Girl_5: -1107811635
-      Girl_6: 114159268
+      Confirmation_Bias_0: 1174663413
+      Confirmation_Bias_1: -1045826829
+      Confirmation_Bias_2: 1827416799
+      Confirmation_Bias_3: 1329182465
+      Confirmation_Bias_4: -44921526
+      Confirmation_Bias_5: 511056638
+      Confirmation_Bias_6: 909957798
+      Confirmation_Bias_7: -576896411
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

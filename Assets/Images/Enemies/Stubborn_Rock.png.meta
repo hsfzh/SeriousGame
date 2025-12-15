@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b80f2a8728417418fb0817aaadb13c5f
+guid: a08015a57832542018cd4762bd26ea8e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Keyboard_Warrior_0
+      name: Stubborn_Rock_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 44
-        height: 52
+        width: 94
+        height: 49
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1a600b6f4f13d4967b286dcfa2acfba9
-      internalID: 736844832
+      spriteID: 4e10a831f468942e68cfe99c8e5e3b67
+      internalID: -1492974547
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Keyboard_Warrior_1
+      name: Stubborn_Rock_1
       rect:
         serializedVersion: 2
-        x: 44
+        x: 94
         y: 0
-        width: 44
-        height: 52
+        width: 94
+        height: 49
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,8 +132,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 538074a0f1ae14ae4b2133d1fd25c3aa
-      internalID: -594735707
+      spriteID: 07580955b417145ebad244448a6ee13e
+      internalID: -527896532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stubborn_Rock_2
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 0
+        width: 94
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b493962d4a3c445f9a2454ef72bb703
+      internalID: 1118444764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stubborn_Rock_3
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 0
+        width: 94
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 986a854ccdf9342eaa24babeda8fe415
+      internalID: 1366981022
       vertices: []
       indices: 
       edges: []
@@ -149,8 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Keyboard_Warrior_0: 736844832
-      Keyboard_Warrior_1: -594735707
+      Stubborn_Rock_0: -1492974547
+      Stubborn_Rock_1: -527896532
+      Stubborn_Rock_2: 1118444764
+      Stubborn_Rock_3: 1366981022
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

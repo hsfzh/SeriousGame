@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b80f2a8728417418fb0817aaadb13c5f
+guid: 47a0be88c2a6a4d7a82ed2f591973569
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Keyboard_Warrior_0
+      name: Igniter_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 44
-        height: 52
+        width: 42
+        height: 68
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1a600b6f4f13d4967b286dcfa2acfba9
-      internalID: 736844832
+      spriteID: d7c0e4c3dd06e4c05a4ae555d17e2c40
+      internalID: 2115352768
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Keyboard_Warrior_1
+      name: Igniter_1
       rect:
         serializedVersion: 2
-        x: 44
+        x: 42
         y: 0
-        width: 44
-        height: 52
+        width: 42
+        height: 68
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,8 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 538074a0f1ae14ae4b2133d1fd25c3aa
-      internalID: -594735707
+      spriteID: 2859521869b3d4e22bddeb5b7d30180f
+      internalID: 461177473
       vertices: []
       indices: 
       edges: []
@@ -149,8 +149,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Keyboard_Warrior_0: 736844832
-      Keyboard_Warrior_1: -594735707
+      Igniter_0: 2115352768
+      Igniter_1: 461177473
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
