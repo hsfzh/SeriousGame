@@ -7,6 +7,7 @@ public class PlayerAttack : MonoBehaviour
 {
     private Dictionary<string, SkillBase> skills = new Dictionary<string, SkillBase>();
     private bool isActive;
+    private bool isPlayerDead;
     public event Action<SkillBase> OnNewSkillAdded;
 
     private void Start()
@@ -15,6 +16,10 @@ public class PlayerAttack : MonoBehaviour
     }
     void Update()
     {
+        if (isPlayerDead)
+        {
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             isActive = !isActive;
@@ -50,5 +55,9 @@ public class PlayerAttack : MonoBehaviour
     public IReadOnlyDictionary<string, SkillBase> GetPlayerSkills()
     {
         return skills;
+    }
+    public void OnPlayerDeath()
+    {
+        isPlayerDead = true;
     }
 }

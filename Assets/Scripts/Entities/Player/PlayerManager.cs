@@ -8,6 +8,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float magnetRange;
     [SerializeField] private Vector2 playerHalfSize;
     [SerializeField] private float moveSpeed;
+    [SerializeField] private GameObject wand;
     public static PlayerManager Instance { get; private set; }
     private MovementBase movement;
     private PlayerAttack attack;
@@ -92,5 +93,7 @@ public class PlayerManager : MonoBehaviour
     {
         isDead = true;
         visualManager.OnDead();
+        attack.OnPlayerDeath();
+        wand.SetActive(false);
     }
 }

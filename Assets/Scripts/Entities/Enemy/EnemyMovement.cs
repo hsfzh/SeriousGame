@@ -20,7 +20,7 @@ public class EnemyMovement : MovementBase
             Debug.LogError("No enemyManager!");
             return;
         }
-        base.Initialize(enemyManager.enemyHalfSize);
+        base.Initialize(enemyManager.enemyHalfSize, enemyManager.isClamped);
         myManager = enemyManager;
         playerSensingRange = enemyManager.attackRange * enemyManager.attackRange;
         targetContact = false;

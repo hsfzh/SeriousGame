@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: -5398463611414173200}
   - component: {fileID: 6525332470278792843}
   - component: {fileID: 4576632379463183893}
+  - component: {fileID: 4871075207285378609}
   m_Layer: 6
   m_Name: ClickBait
   m_TagString: Enemy
@@ -248,3 +249,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f20951c5201ec145b5e41741fe40a03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &4871075207285378609
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3094528734937282189}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 5e37a65fcf6e145009265521d81ad1dc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

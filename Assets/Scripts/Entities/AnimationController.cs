@@ -21,10 +21,8 @@ public class AnimationController : MonoBehaviour
     void Update()
     {
         bool isAlive = hpManager ? !hpManager.IsDead : true;
-        if (isAlive)
-        {
-            bool isMoving = movement.IsMoving();
-            anim.SetBool(IsMoving, isMoving);
-        }
+        anim.enabled = isAlive;
+        bool isMoving = movement.IsMoving();
+        anim.SetBool(IsMoving, isMoving);
     }
 }

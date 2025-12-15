@@ -9,15 +9,17 @@ public abstract class MovementBase : MonoBehaviour
     protected Vector2 direction;
     public Vector2 myBound { get; protected set; }
     private bool isForceApplied;
+    private bool isClamped;
     public bool IsMoving() => rigid.velocity.sqrMagnitude > 0;
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
         isForceApplied = false;
     }
-    public void Initialize(Vector2 halfSize)
+    public void Initialize(Vector2 halfSize, bool clamp = true)
     {
         myHalfSize = halfSize;
+        isClamped = clamp;
     }
     // Start is called before the first frame update
     void Start()
@@ -55,7 +57,10 @@ public abstract class MovementBase : MonoBehaviour
             }
         }
 
-        ClampPosition();
+        if (isClamped)
+        {
+            ClampPosition();
+        }
     }
     protected abstract void ExecuteMove();
     private void ClampPosition()

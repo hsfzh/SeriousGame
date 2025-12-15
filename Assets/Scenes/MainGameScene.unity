@@ -923,7 +923,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &461878081
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1118,6 +1118,7 @@ MonoBehaviour:
   - StubbornRock
   - ClickBait
   - ConfirmationBias
+  - AttentionSeeker
   maxDistance: {x: 8, y: 5}
   minDistance: {x: 7, y: 4}
   spawnInterval: 5
@@ -2422,6 +2423,14 @@ MonoBehaviour:
     isUIElement: 0
   - poolTag: ConfirmationBias
     prefab: {fileID: 3094528734937282189, guid: 0f21147c4474f71489f3ac23e786a7bc, type: 3}
+    size: 20
+    isUIElement: 0
+  - poolTag: AttentionSeeker
+    prefab: {fileID: 3094528734937282189, guid: 56626d3267872764c9c1412ee30c4458, type: 3}
+    size: 20
+    isUIElement: 0
+  - poolTag: HateComment
+    prefab: {fileID: 3094528734937282189, guid: 39619b094f9202e4ba65e26349419616, type: 3}
     size: 20
     isUIElement: 0
   canvasTransform: {fileID: 938856614}
@@ -4188,12 +4197,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1663855698}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.38268343, w: 0.92387956}
+  m_LocalRotation: {x: -0, y: 0, z: -0.38268343, w: 0.92387956}
   m_LocalPosition: {x: 0.4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1972647636}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -45}
 --- !u!114 &1663855700
 MonoBehaviour:
@@ -5301,7 +5310,6 @@ RectTransform:
   m_Children:
   - {fileID: 1971905303}
   - {fileID: 1841924228}
-  - {fileID: 1663855699}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -5339,6 +5347,7 @@ MonoBehaviour:
   magnetRange: 0.5
   playerHalfSize: {x: 0.16, y: 0.2}
   moveSpeed: 1
+  wand: {fileID: 1663855698}
 --- !u!70 &1972647639
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -5426,7 +5435,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   invincibleAlpha: 0.5
-  deadSprite: {fileID: 1768071631, guid: 037dd0aa1bc10634a8dd50a0492195d1, type: 3}
+  deadSprite: {fileID: 114159268, guid: 975127a0c0e584562a0292a757851177, type: 3}
 --- !u!114 &1972647643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5775,6 +5784,7 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 1047646259}
   - {fileID: 166117092}
+  - {fileID: 1663855699}
   - {fileID: 1972647636}
   - {fileID: 774899316}
   - {fileID: 984866139}

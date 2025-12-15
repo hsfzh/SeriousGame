@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyRangedAttack : EnemyAttackBase
+public class AttentionSeekerAttack : EnemyAttackBase
 {
     private float attackPower;
     private float attackCoolTime;
     private float currentTime;
-    private float bulletSpeed;
     private string bulletName;
     private Vector3 bulletFireOffset;
 
@@ -16,7 +15,6 @@ public class EnemyRangedAttack : EnemyAttackBase
         base.Initialize(enemyManager);
         attackPower = enemyManager.attackPower;
         attackCoolTime = enemyManager.attackSpeed;
-        bulletSpeed = enemyManager.bulletSpeed;
         bulletName = enemyManager.bulletType;
         bulletFireOffset = enemyManager.bulletFireOffset;
     }
@@ -34,17 +32,11 @@ public class EnemyRangedAttack : EnemyAttackBase
     }
     private void Fire()
     {
-        Vector2 direction = (playerTransform.position - transform.position).normalized;
-        Vector2 fireVelocity = myManager.GetCurrentSpeed();
-        float rotationAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        
-        Quaternion rotation = Quaternion.Euler(0, 0, rotationAngle);
-
         GameObject bullet =
-            ObjectPoolManager.Instance.SpawnFromPool(bulletName, transform.position + bulletFireOffset, rotation: rotation);
-
-        BulletController bulletScript = bullet.GetComponent<BulletController>();
-            
-        bulletScript.Initialize(direction, bulletSpeed, fireVelocity, attackPower, isEnemy: true);
+            ObjectPoolManager.Instance.SpawnFromPool(bulletName, transform.position + bulletFireOffset);
+        if (bullet.TryGetComponent(out EnemyManager enemyManager))
+        {
+            enemyManager.SetParent(myManager);
+        }
     }
 }

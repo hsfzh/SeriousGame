@@ -17,10 +17,10 @@ GameObject:
   - component: {fileID: -3955122812234547690}
   - component: {fileID: -501075884879859370}
   - component: {fileID: -5398463611414173200}
-  - component: {fileID: 3113871197030279659}
-  - component: {fileID: 5962762439063508070}
+  - component: {fileID: 7963355626464819150}
+  - component: {fileID: 3449024830385824108}
   m_Layer: 6
-  m_Name: StubbornRock
+  m_Name: HateComment
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,12 +82,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1492974547, guid: a08015a57832542018cd4762bd26ea8e, type: 3}
+  m_Sprite: {fileID: 699005939, guid: 3276416d7ef9c4479b1fcc8b31544f43, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.94, y: 0.49}
+  m_Size: {x: 0.19, y: 0.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -144,9 +144,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 961e89388db908945ace2a1919afa2bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <enemyHalfSize>k__BackingField: {x: 0.425, y: 0.2}
-  <maxHp>k__BackingField: 300
-  <moveSpeed>k__BackingField: 0.2
+  <enemyHalfSize>k__BackingField: {x: 0.125, y: 0.125}
+  <maxHp>k__BackingField: 100
+  <moveSpeed>k__BackingField: 0.5
   <bulletType>k__BackingField: 
   <bulletSpeed>k__BackingField: 0
   <bulletFireOffset>k__BackingField: {x: 0, y: 0, z: 0}
@@ -155,7 +155,7 @@ MonoBehaviour:
   <bodyAttackPower>k__BackingField: 100
   <attackRange>k__BackingField: 0
   <isElite>k__BackingField: 0
-  canBeAttacked: 1
+  canBeAttacked: 0
   <isClamped>k__BackingField: 1
 --- !u!114 &-7435770114655244025
 MonoBehaviour:
@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c69d263749545142a70d8f8c1819fe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!61 &3113871197030279659
+--- !u!61 &7963355626464819150
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -243,16 +243,16 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.94, y: 0.49}
-    newSize: {x: 0.94, y: 0.49}
+    oldSize: {x: 0.31, y: 0.25}
+    newSize: {x: 0.19, y: 0.25}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.85, y: 0.4}
+  m_Size: {x: 0.25, y: 0.25}
   m_EdgeRadius: 0
---- !u!95 &5962762439063508070
+--- !u!95 &3449024830385824108
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -262,7 +262,7 @@ Animator:
   m_GameObject: {fileID: 3094528734937282189}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 9613a4d3ea4134390974b5d82e2c0806, type: 2}
+  m_Controller: {fileID: 22100000, guid: dfece6d9d57d74c10a44a51c963eecad, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
