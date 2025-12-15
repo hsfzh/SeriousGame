@@ -8,6 +8,7 @@ public class DashAttackController : MonoBehaviour
     private float initialRange;
     private float attackRange;
     private float attackPower;
+    private bool applyRepulse;
 
     private void Awake()
     {
@@ -29,12 +30,13 @@ public class DashAttackController : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
         gameObject.SetActive(false);
     }
-    public void Initialize(float power, float range)
+    public void Initialize(float power, float range, bool repulse)
     {
         attackRange = range;
         attackPower = power;
         float newScale = range / initialRange;
         transform.localScale = new Vector3(newScale, newScale, 1);
+        applyRepulse = repulse;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -44,6 +46,11 @@ public class DashAttackController : MonoBehaviour
             if (enemyHp)
             {
                 enemyHp.TakeDamage(attackPower);
+            }
+            if (applyRepulse)
+            {
+                MovementBase enemyMovement = other.GetComponent<MovementBase>();
+                enemyMovement.ApplyRepulsiveForce(transform.position, 2f);
             }
         }
     }

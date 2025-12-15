@@ -28,7 +28,7 @@ public class HpManager : MonoBehaviour
         float actualDmg = dmg;
         if (CompareTag("Player"))
         {
-            actualDmg = dmg * PlayerManager.Instance.GetPlayerStatManager().GetStat(StatType.DamageReduction);
+            actualDmg = dmg * PlayerManager.Instance.GetStatManager().GetStat(StatType.DamageReduction);
         }
         currentHp -= actualDmg;
         DamageTextController damageText =

@@ -9,11 +9,15 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private Vector2 playerHalfSize;
     [SerializeField] private float moveSpeed;
     public static PlayerManager Instance { get; private set; }
-    private PlayerMovement movement;
+    private MovementBase movement;
     private PlayerAttack attack;
     private HpManager playerHp;
     private PlayerLevelManager levelManager;
-    private PlayerStatManager statManager;
+    private StatManager statManager;
+    private AnimationController animationController;
+    private Animator anim;
+    private VisualManager visualManager;
+    public bool isDead { get; private set; }
 
     private void Awake()
     {
@@ -30,7 +34,7 @@ public class PlayerManager : MonoBehaviour
         attack = GetComponent<PlayerAttack>();
         playerHp = GetComponent<HpManager>();
         levelManager = GetComponentInChildren<PlayerLevelManager>();
-        statManager = GetComponent<PlayerStatManager>();
+        statManager = GetComponent<StatManager>();
         if (playerHp)
         {
             playerHp.OnDeath += OnDeath;
@@ -38,7 +42,15 @@ public class PlayerManager : MonoBehaviour
         }
         levelManager.Initialize(magnetRange);
         movement.Initialize(playerHalfSize);
-        statManager.Initialize(magnetRange, moveSpeed);
+        statManager.Initialize(moveSpeed, magnetRange);
+        anim = GetComponent<Animator>();
+        animationController = GetComponent<AnimationController>();
+        if (animationController)
+        {
+            animationController.Initialize(anim, movement);
+        }
+        isDead = false;
+        visualManager = GetComponent<VisualManager>();
     }
     private void OnDestroy()
     {
@@ -56,28 +68,29 @@ public class PlayerManager : MonoBehaviour
             movement.Move(new Vector2(x, y));
         }
     }
-    public PlayerMovement GetPlayerMovement()
+    public MovementBase GetMovement()
     {
         return movement;
     }
-    public PlayerAttack GetPlayerAttack()
+    public PlayerAttack GetAttack()
     {
         return attack;
     }
-    public HpManager GetPlayerHpManager()
+    public HpManager GetHpManager()
     {
         return playerHp;
     }
-    public PlayerLevelManager GetPlayerLevelManager()
+    public PlayerLevelManager GetLevelManager()
     {
         return levelManager;
     }
-    public PlayerStatManager GetPlayerStatManager()
+    public StatManager GetStatManager()
     {
         return statManager;
     }
     private void OnDeath()
     {
-        gameObject.SetActive(false);
+        isDead = true;
+        visualManager.OnDead();
     }
 }

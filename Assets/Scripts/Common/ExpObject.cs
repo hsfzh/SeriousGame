@@ -25,7 +25,7 @@ public class ExpObject : MonoBehaviour
             float currentDistance = (transform.position - target.position).sqrMagnitude;
             if (currentDistance <= 0.1f)
             {
-                PlayerManager.Instance.GetPlayerLevelManager().AbsorbExp(multipliedExp);
+                PlayerManager.Instance.GetLevelManager().AbsorbExp(multipliedExp);
                 gameObject.SetActive(false);
             }
             speed += speed * accelerationRate * Time.deltaTime;

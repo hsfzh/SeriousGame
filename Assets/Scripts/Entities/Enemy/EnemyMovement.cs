@@ -4,23 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class EnemyMovement : MonoBehaviour
+public class EnemyMovement : MovementBase
 {
-    private Vector2 enemyHalfSize;
-    private float speed;
-    private Rigidbody2D rigid;
-    private Vector2 direction;
-    private Vector2 movementBound;
     private bool targetContact;
     private bool isStunned;
     private Coroutine stunCoroutine;
     private float speedRatio;
     private Coroutine slowCoroutine;
     private float playerSensingRange;
-    void Awake()
-    {
-        rigid = GetComponent<Rigidbody2D>();
-    }
+    private EnemyManager myManager;
     public void Initialize(EnemyManager enemyManager)
     {
         if (!enemyManager)
@@ -28,61 +20,51 @@ public class EnemyMovement : MonoBehaviour
             Debug.LogError("No enemyManager!");
             return;
         }
-        enemyHalfSize = enemyManager.enemyHalfSize;
-        speed = enemyManager.moveSpeed;
+        base.Initialize(enemyManager.enemyHalfSize);
+        myManager = enemyManager;
         playerSensingRange = enemyManager.attackRange * enemyManager.attackRange;
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        direction = Vector2.zero;
-        speed = Random.Range(0.5f, 1f);
         targetContact = false;
-        Vector2 mapSize = GameManager.Instance.playableMapSize;
-        movementBound = new Vector2(mapSize.x * 0.5f - enemyHalfSize.x, mapSize.y * 0.5f - enemyHalfSize.y);
         isStunned = false;
         speedRatio = 1f;
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    private void FixedUpdate()
+    protected override void ExecuteMove()
     {
         Vector2 finalVelocity = Vector2.zero;
-        Vector3 playerPosition = PlayerManager.Instance.transform.position;
-        float distanceToPlayer = (playerPosition - transform.position).sqrMagnitude;
-        if (!targetContact && GameManager.Instance.timeFlowing && !isStunned && (distanceToPlayer > playerSensingRange))
+        if (!targetContact && !isStunned)
         {
+            Vector3 playerPosition = PlayerManager.Instance.transform.position;
+            float distanceSlowFactor = 1;
+            if (playerSensingRange > 0)
+            {
+                float distanceToPlayer = (playerPosition - transform.position).sqrMagnitude;
+                float distanceRatio = MathF.Min(1F, distanceToPlayer / playerSensingRange);
+                distanceSlowFactor = MathF.Pow(distanceRatio, 2f);
+            }
+            
             Vector2 currentPos = rigid.position;
 
             direction = (playerPosition - transform.position).normalized;
         
-            finalVelocity = direction * (speed * speedRatio);
+            finalVelocity = direction * (myManager.GetStatManager().GetStat(StatType.MoveSpeed) * speedRatio * distanceSlowFactor);
         
-            if (currentPos.x <= -movementBound.x && finalVelocity.x < 0)
+            if (currentPos.x <= -myBound.x && finalVelocity.x < 0)
             {
                 finalVelocity.x = 0;
             }
-            else if (currentPos.x >= movementBound.x && finalVelocity.x > 0)
+            else if (currentPos.x >= myBound.x && finalVelocity.x > 0)
             {
                 finalVelocity.x = 0;
             }
-            if (currentPos.y <= -movementBound.y && finalVelocity.y < 0)
+            if (currentPos.y <= -myBound.y && finalVelocity.y < 0)
             {
                 finalVelocity.y = 0;
             }
-            else if (currentPos.y >= movementBound.y && finalVelocity.y > 0)
+            else if (currentPos.y >= myBound.y && finalVelocity.y > 0)
             {
                 finalVelocity.y = 0;
             }
         }
         rigid.velocity = finalVelocity;
-        float clampedX = Mathf.Clamp(rigid.position.x, -movementBound.x, movementBound.x);
-        float clampedY = Mathf.Clamp(rigid.position.y, -movementBound.y, movementBound.y);
-            
-        rigid.position = new Vector2(clampedX, clampedY);
     }
     public void Stun(float duration)
     {
@@ -117,10 +99,6 @@ public class EnemyMovement : MonoBehaviour
         speedRatio = slowRatio;
         yield return new WaitForSeconds(slowDuration);
         speedRatio = 1;
-    }
-    public Vector2 GetCurrentSpeed()
-    {
-        return rigid.velocity;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {

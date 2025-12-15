@@ -17,7 +17,6 @@ public class PlayerLevelManager : MonoBehaviour
     public event Action OnLevelUp;
     private float expRatio;
     private float prevExpRatio;
-    [SerializeField] private PlayerStatManager playerStat;
 
     private void Awake()
     {
@@ -82,7 +81,7 @@ public class PlayerLevelManager : MonoBehaviour
         if (other.CompareTag("Exp"))
         {
             ExpObject expScript = other.GetComponent<ExpObject>();
-            expScript.Magnetize(transform, playerStat.GetStat(StatType.ExpMultiply));
+            expScript.Magnetize(transform, PlayerManager.Instance.GetStatManager().GetStat(StatType.ExpMultiply));
         }
     }
 }

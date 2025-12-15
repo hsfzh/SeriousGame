@@ -5,9 +5,9 @@ using UnityEngine;
 public class SlowWindSkill : SkillBase
 {
     [SerializeField] private float speed;
-    [SerializeField] private float slowRatio;
+    [SerializeField] private List<float> slowRatio;
+    [SerializeField] private List<int> penetrationCount;
     [SerializeField] private float slowDuration;
-    [SerializeField] private float levelUpDuration;
     [SerializeField] private float levelUpSlowRatio;
     protected override void ExecuteSkill(float attackMultiplier)
     {
@@ -28,9 +28,11 @@ public class SlowWindSkill : SkillBase
         GameObject slowWind =
             ObjectPoolManager.Instance.SpawnFromPool("SlowWind", playerTransform.position, rotation: rotation);
 
+        // TODO: 관통 횟수 적용
         SlowWindController slowWindScript = slowWind.GetComponent<SlowWindController>();
-        Vector2 fireVelocity = PlayerManager.Instance.GetPlayerMovement().GetPlayerSpeed();
-        slowWindScript.Initialize(direction, speed, fireVelocity, power * attackMultiplier, slowRatio, slowDuration);
+        Vector2 fireVelocity = PlayerManager.Instance.GetMovement().GetCurrentSpeed();
+        slowWindScript.Initialize(direction, speed, fireVelocity, power * attackMultiplier, slowRatio[level-1],
+            slowDuration, penetrationCount[level - 1]);
     }
     protected override bool CheckFireCondition()
     {
@@ -39,7 +41,5 @@ public class SlowWindSkill : SkillBase
     protected override void SkillLevelUp()
     {
         power = levelPower[level - 1];
-        slowDuration += levelUpDuration;
-        slowRatio -= levelUpSlowRatio;
     }
 }

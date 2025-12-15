@@ -9,28 +9,22 @@ public class SlowWindController : MonoBehaviour
     private float attackPower;
     private float slowRatio;
     private float slowDuration;
-    [SerializeField] private float duration;
-    private float currentTime;
+    private int penetrationCount;
     
     private void Update()
     {
         if (GameManager.Instance.timeFlowing)
         {
-            currentTime += Time.deltaTime;
-            if (currentTime >= duration)
-            {
-                currentTime = 0;
-                gameObject.SetActive(false);
-            }
             transform.position += direction * (speed * Time.deltaTime);
-            if (Mathf.Abs(transform.position.x) > GameManager.Instance.playableMapSize.x * 0.5f ||
-                Mathf.Abs(transform.position.y) > GameManager.Instance.playableMapSize.y * 0.5f)
+            if (Mathf.Abs(transform.position.x) > GameManager.Instance.playableMapSize.x ||
+                Mathf.Abs(transform.position.y) > GameManager.Instance.playableMapSize.y)
             {
                 gameObject.SetActive(false);
             }
         }
     }
-    public void Initialize(Vector3 direc, float newSpeed, Vector2 fireVelocity, float power, float slow, float affectDuration)
+    public void Initialize(Vector3 direc, float newSpeed, Vector2 fireVelocity, float power, float slow, 
+        float affectDuration, int penetration)
     {
         direction = direc;
         float bonusSpeed = Vector2.Dot(fireVelocity, direction);
@@ -38,17 +32,31 @@ public class SlowWindController : MonoBehaviour
         attackPower = power;
         slowRatio = slow;
         slowDuration = affectDuration;
+        penetrationCount = penetration + 1;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))
         {
-            HpManager enemyHp = other.gameObject.GetComponent<HpManager>();
-            if (enemyHp)
+            if (penetrationCount == -1 || penetrationCount > 0)
             {
-                enemyHp.TakeDamage(attackPower);
+                if (penetrationCount > 0)
+                {
+                    penetrationCount -= 1;
+                    if (penetrationCount == 0)
+                    {
+                        gameObject.SetActive(false);
+                    }
+                }
+                if (other.TryGetComponent(out HpManager enemyHp))
+                {
+                    enemyHp.TakeDamage(attackPower);
+                }
+                if (other.TryGetComponent(out EnemyMovement movement))
+                {
+                    movement.Slow(slowRatio, slowDuration);
+                }
             }
-            other.gameObject.GetComponent<EnemyMovement>().Slow(slowRatio, slowDuration);
         }
     }
 }

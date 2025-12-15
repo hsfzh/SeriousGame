@@ -40,10 +40,10 @@ public class LevelUpUIManager : MonoBehaviour
     }
     public void ChooseSkill(int skillChoiceIndex)
     {
-        PlayerAttack playerAttack = PlayerManager.Instance.GetPlayerAttack();
+        PlayerAttack playerAttack = PlayerManager.Instance.GetAttack();
         List<int> selectedSkillBuff = skillChoices[skillChoiceIndex].skillBuffIndex;
         playerAttack.AddSkill(skills[selectedSkillBuff[0]]);
-        PlayerStatManager playerStatManager = PlayerManager.Instance.GetPlayerStatManager();
+        StatManager playerStatManager = PlayerManager.Instance.GetStatManager();
         playerStatManager.AddBuff(buffs[selectedSkillBuff[1]]);
         GameManager.Instance.ResumeTime();
         gameObject.SetActive(false);

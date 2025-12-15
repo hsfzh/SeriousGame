@@ -6,23 +6,24 @@ using UnityEngine;
 public class VisualManager : MonoBehaviour
 {
     [SerializeField] private float invincibleAlpha;
+    [SerializeField] private Sprite deadSprite;
     private SpriteRenderer sprite;
     
     void Awake()
     {
         sprite = GetComponent<SpriteRenderer>();
-        HpManager playerHp = GetComponent<HpManager>();
-        if (playerHp)
+        HpManager hpManager = GetComponent<HpManager>();
+        if (hpManager)
         {
-            playerHp.OnInvincibilityChange += HandleInvincibleState;
+            hpManager.OnInvincibilityChange += HandleInvincibleState;
         }
     }
     private void OnDestroy()
     {
-        HpManager playerHp = GetComponent<HpManager>();
-        if (playerHp)
+        HpManager hpManager = GetComponent<HpManager>();
+        if (hpManager)
         {
-            playerHp.OnInvincibilityChange -= HandleInvincibleState;
+            hpManager.OnInvincibilityChange -= HandleInvincibleState;
         }
     }
     // Update is called once per frame
@@ -42,5 +43,9 @@ public class VisualManager : MonoBehaviour
             spriteColor.a = 1f;
         }
         sprite.color = spriteColor;
+    }
+    public void OnDead()
+    {
+        sprite.sprite = deadSprite;
     }
 }

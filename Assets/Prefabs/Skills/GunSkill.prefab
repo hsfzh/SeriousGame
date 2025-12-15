@@ -49,7 +49,12 @@ MonoBehaviour:
   skillInfo: "\uB9C8\uC6B0\uC2A4 \uCEE4\uC11C \uBC29\uD5A5\uC73C\uB85C \uD654\uC5FC\uC744
     \uBC1C\uC0AC\uD558\uACE0 \uC8FC\uBCC0\uC73C\uB85C \uD3ED\uBC1C \uB370\uBBF8\uC9C0\uB97C
     \uAC00\uD55C\uB2E4"
-  coolTime: 2
+  coolTime:
+  - 2
+  - 2
+  - 2
+  - 2
+  - 2
   level: 1
   levelPower:
   - 200

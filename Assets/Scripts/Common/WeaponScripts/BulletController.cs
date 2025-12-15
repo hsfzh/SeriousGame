@@ -66,7 +66,7 @@ public class BulletController : MonoBehaviour
         {
             if (other.CompareTag("Player"))
             {
-                HpManager playerHp = PlayerManager.Instance.GetPlayerHpManager();
+                HpManager playerHp = PlayerManager.Instance.GetHpManager();
                 if (playerHp)
                 {
                     playerHp.TakeDamage(attackPower);

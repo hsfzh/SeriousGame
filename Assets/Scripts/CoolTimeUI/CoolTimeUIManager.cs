@@ -8,8 +8,8 @@ public class CoolTimeUIManager : MonoBehaviour
     
     private void Start()
     {
-        PlayerAttack playerAttack = PlayerManager.Instance.GetPlayerAttack();
-        PlayerStatManager playerStatManager = PlayerManager.Instance.GetPlayerStatManager();
+        PlayerAttack playerAttack = PlayerManager.Instance.GetAttack();
+        StatManager playerStatManager = PlayerManager.Instance.GetStatManager();
         if (!playerAttack || !playerStatManager)
         {
             Debug.Log("PlayerAttack or PlayerStatManager missing!");
@@ -19,8 +19,8 @@ public class CoolTimeUIManager : MonoBehaviour
     }
     private void OnDestroy()
     {
-        PlayerAttack playerAttack = PlayerManager.Instance.GetPlayerAttack();
-        PlayerStatManager playerStatManager = PlayerManager.Instance.GetPlayerStatManager();
+        PlayerAttack playerAttack = PlayerManager.Instance.GetAttack();
+        StatManager playerStatManager = PlayerManager.Instance.GetStatManager();
         if (!playerAttack || !playerStatManager)
         {
             Debug.Log("PlayerAttack or PlayerStatManager missing!");

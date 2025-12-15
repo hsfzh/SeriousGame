@@ -23,8 +23,8 @@ public class PlayerAttack : MonoBehaviour
         {
             foreach (var skill in skills.Values)
             {
-                skill.OnUpdate(isActive, PlayerManager.Instance.GetPlayerStatManager().GetStat(StatType.AttackPower),
-                    PlayerManager.Instance.GetPlayerStatManager().GetStat(StatType.CoolTime));
+                skill.OnUpdate(isActive, PlayerManager.Instance.GetStatManager().GetStat(StatType.AttackPower),
+                    PlayerManager.Instance.GetStatManager().GetStat(StatType.CoolTime));
             }
         }
     }

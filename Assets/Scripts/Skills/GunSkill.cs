@@ -13,7 +13,7 @@ public class GunSkill : SkillBase
         Vector3 mouse = GetMouseWorldPosition();
         Vector2 direction = (mouse - playerTransform.position).normalized;
         float angle = 2 * Mathf.PI / fireNum[level - 1];
-        Vector2 fireVelocity = PlayerManager.Instance.GetPlayerMovement().GetPlayerSpeed();
+        Vector2 fireVelocity = PlayerManager.Instance.GetMovement().GetCurrentSpeed();
         float bonusSpeed = Vector2.Dot(fireVelocity, direction);
         float actualSpeed = bonusSpeed > 0 ? speed + bonusSpeed : speed;
 

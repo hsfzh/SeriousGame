@@ -7,11 +7,7 @@ public class LaserSkill : SkillBase
 {
     [SerializeField] private float duration;
     [SerializeField] private List<float> width;
-
-    private void Awake()
-    {
-        coolTime += duration;
-    }
+    
     protected override void ExecuteSkill(float attackMultiplier)
     {
         Vector3 mouse = GetMouseWorldPosition();

@@ -29,11 +29,11 @@ public class GameManager : MonoBehaviour
     {
         timeFlowing = false;
         gameRunning = false;
-        PlayerManager.Instance.GetPlayerLevelManager().OnLevelUp += OnPlayerLevelUp;
+        PlayerManager.Instance.GetLevelManager().OnLevelUp += OnPlayerLevelUp;
     }
     private void OnDestroy()
     {
-        PlayerManager.Instance.GetPlayerLevelManager().OnLevelUp -= OnPlayerLevelUp;
+        PlayerManager.Instance.GetLevelManager().OnLevelUp -= OnPlayerLevelUp;
     }
     void Update()
     {

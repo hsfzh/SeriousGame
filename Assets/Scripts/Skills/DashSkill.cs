@@ -9,7 +9,7 @@ public class DashSkill : SkillBase
     protected override void ExecuteSkill(float attackMultiplier)
     {
         Vector3 mouse = GetMouseWorldPosition();
-        Vector2 mapSize = PlayerManager.Instance.GetPlayerMovement().playerBound;
+        Vector2 mapSize = PlayerManager.Instance.GetMovement().myBound;
         mouse.x = Mathf.Clamp(mouse.x, -mapSize.x, mapSize.x);
         mouse.y = Mathf.Clamp(mouse.y, -mapSize.y, mapSize.y);
         
@@ -20,7 +20,7 @@ public class DashSkill : SkillBase
 
         DashAttackController dashScript = dash.GetComponent<DashAttackController>();
         
-        dashScript.Initialize(power * attackMultiplier, range);
+        dashScript.Initialize(power * attackMultiplier, range, level >= 3);
     }
     protected override void SkillLevelUp()
     {

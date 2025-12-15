@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -3955122812234547690}
   - component: {fileID: 5231263814200699307}
   - component: {fileID: -501075884879859370}
+  - component: {fileID: -5398463611414173200}
   m_Layer: 6
   m_Name: EnemyPrefab
   m_TagString: Enemy
@@ -177,6 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   invincibleAlpha: 0.5
+  deadSprite: {fileID: 0}
 --- !u!58 &5231263814200699307
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -222,5 +224,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec001416370bddd42816c9271bb83353, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-5398463611414173200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3094528734937282189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c69d263749545142a70d8f8c1819fe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

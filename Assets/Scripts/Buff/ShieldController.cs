@@ -26,8 +26,9 @@ public class ShieldController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (enemyTagsSet.Contains(other.gameObject.tag))
+        if (enemyTagsSet.Contains(other.tag))
         {
+            Debug.Log($"Shield hit by {other.tag}");
             if(parent)
                 parent.OnShieldDestroyed(gameObject, other.gameObject);
         }

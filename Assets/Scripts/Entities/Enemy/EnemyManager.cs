@@ -13,8 +13,10 @@ public class EnemyManager : MonoBehaviour
     [field:SerializeField] public float attackRange { get; private set; }
     [field:SerializeField] public bool isElite { get; private set; }
     private HpManager myHp;
-    private EnemyMovement movementManager;
+    private MovementBase movementManager;
     private EnemyAttackBase attackManager;
+    private StatManager statManager;
+    private VisualManager visualManager;
 
     private void Awake()
     {
@@ -24,11 +26,14 @@ public class EnemyManager : MonoBehaviour
             myHp.OnDeath += OnDeath;
             myHp.Initialize(maxHp);
         }
-        movementManager = GetComponent<EnemyMovement>();
-        movementManager.Initialize(this);
+        EnemyMovement myMovement = GetComponent<EnemyMovement>();
+        myMovement.Initialize(this);
+        movementManager = myMovement;
         attackManager = GetComponent<EnemyAttackBase>();
         attackManager.Initialize(this);
-        
+        statManager = GetComponent<StatManager>();
+        statManager.Initialize(moveSpeed);
+        visualManager = GetComponent<VisualManager>();
     }
     private void OnDestroy()
     {
@@ -66,5 +71,13 @@ public class EnemyManager : MonoBehaviour
     public Vector2 GetCurrentSpeed()
     {
         return movementManager.GetCurrentSpeed();
+    }
+    public MovementBase GetMovement()
+    {
+        return movementManager;
+    }
+    public StatManager GetStatManager()
+    {
+        return statManager;
     }
 }

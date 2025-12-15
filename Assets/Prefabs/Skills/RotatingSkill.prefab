@@ -48,7 +48,12 @@ MonoBehaviour:
   skillIcon: {fileID: 21300000, guid: e6c474f1224dcae449fdce72d79da39f, type: 3}
   skillInfo: "\uD50C\uB808\uC774\uC5B4 \uC8FC\uBCC0\uC744 \uD68C\uC804\uD558\uB294
     \uACB0\uACC4\uB97C \uC77C\uC815 \uC8FC\uAE30\uB9C8\uB2E4 \uC0DD\uC131\uD55C\uB2E4"
-  coolTime: 10
+  coolTime:
+  - 10
+  - 10
+  - 10
+  - 10
+  - 10
   level: 1
   levelPower:
   - 100
@@ -56,7 +61,7 @@ MonoBehaviour:
   - 220
   - 310
   - 420
-  duration: 4
-  leveUpDuration: 0.5
+  duration: 5
+  leveUpDuration: 1.25
   activeDiskNum: 2
   rotatingSpeed: 10

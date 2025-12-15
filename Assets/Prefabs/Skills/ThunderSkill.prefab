@@ -49,15 +49,19 @@ MonoBehaviour:
   skillInfo: "\uC88C\uD074\uB9AD\uD55C \uACF3\uC5D0 \uBC88\uAC1C\uB97C \uB0B4\uB9AC\uCCD0
     \uC77C\uC815 \uBC94\uC704 \uC774\uB0B4\uC758 \uC801\uD55C\uD14C \uB370\uBBF8\uC9C0\uB97C
     \uAC00\uD558\uACE0 \uC2A4\uD134\uC2DC\uD0A8\uB2E4"
-  coolTime: 4
+  coolTime:
+  - 4
+  - 4
+  - 4
+  - 4
+  - 4
   level: 1
   levelPower:
-  - 100
-  - 100
-  - 100
-  - 100
-  - 100
+  - 350
+  - 550
+  - 900
+  - 1400
+  - 2000
   stunTime: 1
-  radius: 0.5
-  levelUpRadius: 0.5
+  radius: 0.3
   duration: 0.3

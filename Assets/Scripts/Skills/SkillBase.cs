@@ -8,7 +8,7 @@ public abstract class SkillBase : MonoBehaviour
     public string skillName;
     [SerializeField] private Sprite skillIcon;
     [SerializeField] private string skillInfo;
-    [SerializeField] protected float coolTime;
+    [SerializeField] protected List<float> coolTime;
     private float currentCoolTime;
     public int level = 1;
     private Camera mainCamera;
@@ -32,7 +32,7 @@ public abstract class SkillBase : MonoBehaviour
         {
             if (currCoolTimeReduction < 1f)
             {
-                float reducedCoolTime = coolTime * (currCoolTimeReduction - coolTimeReduction);
+                float reducedCoolTime = coolTime[level - 1] * (currCoolTimeReduction - coolTimeReduction);
                 currentCoolTime -= reducedCoolTime;
             }
             currCoolTimeReduction = coolTimeReduction;
@@ -58,7 +58,7 @@ public abstract class SkillBase : MonoBehaviour
         if (currentCoolTime <= 0)
         {
             ExecuteSkill(attackMultiplier);
-            currentCoolTime = coolTime * currCoolTimeReduction; // 쿨타임 초기화
+            currentCoolTime = coolTime[level - 1] * currCoolTimeReduction; // 쿨타임 초기화
         }
     }
     protected Vector3 GetMouseWorldPosition()
