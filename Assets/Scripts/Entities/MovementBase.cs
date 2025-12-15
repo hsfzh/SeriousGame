@@ -10,11 +10,15 @@ public abstract class MovementBase : MonoBehaviour
     public Vector2 myBound { get; protected set; }
     private bool isForceApplied;
     private bool isClamped;
+    private bool isReversed;
+    private Coroutine reverseCoroutine;
+    private Coroutine forceCoroutine;
     public bool IsMoving() => rigid.velocity.sqrMagnitude > 0;
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
         isForceApplied = false;
+        isReversed = false;
     }
     public void Initialize(Vector2 halfSize, bool clamp = true)
     {
@@ -54,6 +58,10 @@ public abstract class MovementBase : MonoBehaviour
             if (!isForceApplied)
             {
                 ExecuteMove();
+                if (isReversed)
+                {
+                    rigid.velocity = -rigid.velocity;
+                }
             }
         }
 
@@ -81,13 +89,46 @@ public abstract class MovementBase : MonoBehaviour
         Vector2 forceDirection = (transform.position - repulsePoint).normalized;
         rigid.velocity = Vector2.zero;
         rigid.AddForce(forceDirection * magnitude, ForceMode2D.Impulse);
+
+        if (forceCoroutine != null)
+        {
+            StopCoroutine(forceCoroutine);
+        }
+        forceCoroutine = StartCoroutine(ResetPushStatusRoutine(0.5f));
+    }
+    public void ApplyForce(Vector2 direction, float magnitude)
+    {
+        isForceApplied = true;
         
-        StartCoroutine(ResetPushStatusRoutine(0.5f));
+        rigid.velocity = Vector2.zero;
+        rigid.AddForce(direction * magnitude, ForceMode2D.Impulse);
+        
+        if (forceCoroutine != null)
+        {
+            StopCoroutine(forceCoroutine);
+        }
+        forceCoroutine = StartCoroutine(ResetPushStatusRoutine(0.5f));
+    }
+    public void ReverseMovement(float duration)
+    {
+        isReversed = true;
+        if (reverseCoroutine != null)
+        {
+            StopCoroutine(reverseCoroutine);
+        }
+        reverseCoroutine = StartCoroutine(ResetReverseStatusRoutine(duration));
+    }
+    private IEnumerator ResetReverseStatusRoutine(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        isReversed = false;
+        reverseCoroutine = null;
     }
     private IEnumerator ResetPushStatusRoutine(float duration)
     {
         yield return new WaitForSeconds(duration);
         isForceApplied = false;
         rigid.velocity = Vector2.zero;
+        forceCoroutine = null;
     }
 }

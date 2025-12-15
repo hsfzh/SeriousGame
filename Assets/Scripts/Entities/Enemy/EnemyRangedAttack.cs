@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class EnemyRangedAttack : EnemyAttackBase
 {
-    private float attackPower;
-    private float attackCoolTime;
-    private float currentTime;
-    private float bulletSpeed;
-    private string bulletName;
-    private Vector3 bulletFireOffset;
-    private float attackRange;
+    protected float attackPower;
+    protected float attackCoolTime;
+    protected float currentTime;
+    protected float bulletSpeed;
+    protected string bulletName;
+    protected Vector3 bulletFireOffset;
+    protected float attackRange;
 
     public override void Initialize(EnemyManager enemyManager)
     {
@@ -35,7 +35,7 @@ public class EnemyRangedAttack : EnemyAttackBase
             }
         }
     }
-    private void Fire()
+    protected virtual void Fire()
     {
         Vector2 direction = (playerTransform.position - transform.position).normalized;
         Vector2 fireVelocity = myManager.GetCurrentSpeed();

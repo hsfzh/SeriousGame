@@ -11,6 +11,10 @@ public class DiskController : MonoBehaviour
     {
         attackPower = power;
     }
+    private void LateUpdate()
+    {
+        transform.rotation = Quaternion.identity;
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))

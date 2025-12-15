@@ -11,7 +11,7 @@ public class EnemyMovement : MovementBase
     private Coroutine stunCoroutine;
     protected float speedRatio;
     private Coroutine slowCoroutine;
-    private float playerSensingRange;
+    protected float playerSensingRange;
     protected EnemyManager myManager;
     public void Initialize(EnemyManager enemyManager)
     {

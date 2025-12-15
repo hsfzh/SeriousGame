@@ -79,7 +79,7 @@ public class EnemySpawnManager : MonoBehaviour
             attempt += 1;
         }
 
-        int enemyType = Random.Range(0, enemies.Count);
+        int enemyType = 6;// Random.Range(0, enemies.Count);
         Vector3 spawnPosition = new Vector3(x, y, 0);
         if (enemies[enemyType] == "ClickBait")
         {
