@@ -2431,7 +2431,7 @@ MonoBehaviour:
     isUIElement: 0
   - poolTag: HateComment
     prefab: {fileID: 3094528734937282189, guid: 39619b094f9202e4ba65e26349419616, type: 3}
-    size: 20
+    size: 50
     isUIElement: 0
   canvasTransform: {fileID: 938856614}
 --- !u!4 &984866139

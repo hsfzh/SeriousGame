@@ -9,6 +9,7 @@ public class HpManager : MonoBehaviour
     private float maxHp;
     private float currentHp;
     public event Action<float> OnHpChange;
+    public event Action OnAttacked;
     public event Action OnDeath;
     public event Action<bool> OnInvincibilityChange; // true면 무적 진입, false면 무적 종료
     private Coroutine invincibleCoroutine;
@@ -28,7 +29,8 @@ public class HpManager : MonoBehaviour
             return;
         if (!canBeAttacked)
         {
-            OnHpChange?.Invoke(1f);
+            OnAttacked?.Invoke();
+            MakeInvincible(hitInvincibilityDuration);
             return;
         }
         float actualDmg = dmg;

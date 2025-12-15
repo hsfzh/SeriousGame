@@ -35,7 +35,7 @@ public abstract class MovementBase : MonoBehaviour
         {
             Vector3 currentScale = transform.localScale;
             float currentX = Mathf.Abs(currentScale.x);
-            currentScale.x = rigid.velocity.x < 0 ? -currentX : currentX;
+            currentScale.x = direction.x < 0 ? -currentX : currentX;
             transform.localScale = currentScale;
         }
     }

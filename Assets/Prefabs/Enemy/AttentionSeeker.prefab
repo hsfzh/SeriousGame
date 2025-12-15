@@ -150,10 +150,10 @@ MonoBehaviour:
   <bulletType>k__BackingField: HateComment
   <bulletSpeed>k__BackingField: 0
   <bulletFireOffset>k__BackingField: {x: 0.3, y: 0.15, z: 0}
-  <attackSpeed>k__BackingField: 3
+  <attackSpeed>k__BackingField: 5
   <attackPower>k__BackingField: 0
   <bodyAttackPower>k__BackingField: 100
-  <attackRange>k__BackingField: 0
+  <attackRange>k__BackingField: -1
   <isElite>k__BackingField: 1
   canBeAttacked: 1
   <isClamped>k__BackingField: 1
@@ -224,7 +224,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

@@ -10,6 +10,7 @@ public class EnemyRangedAttack : EnemyAttackBase
     private float bulletSpeed;
     private string bulletName;
     private Vector3 bulletFireOffset;
+    private float attackRange;
 
     public override void Initialize(EnemyManager enemyManager)
     {
@@ -19,13 +20,15 @@ public class EnemyRangedAttack : EnemyAttackBase
         bulletSpeed = enemyManager.bulletSpeed;
         bulletName = enemyManager.bulletType;
         bulletFireOffset = enemyManager.bulletFireOffset;
+        attackRange = enemyManager.attackRange;
     }
     private void Update()
     {
         if (GameManager.Instance.timeFlowing)
         {
             currentTime += Time.deltaTime;
-            if (currentTime >= attackCoolTime)
+            float distanceToPlayer = (playerTransform.position - transform.position).sqrMagnitude;
+            if (currentTime >= attackCoolTime && (attackRange < 0 || distanceToPlayer <= attackRange))
             {
                 Fire();
                 currentTime = 0;

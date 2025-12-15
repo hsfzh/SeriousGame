@@ -48,4 +48,9 @@ public class VisualManager : MonoBehaviour
     {
         sprite.sprite = deadSprite;
     }
+    public void IncreaseScale(float ratio)
+    {
+        Vector3 currentScale = transform.localScale;
+        transform.localScale = currentScale * (1 + ratio);
+    }
 }

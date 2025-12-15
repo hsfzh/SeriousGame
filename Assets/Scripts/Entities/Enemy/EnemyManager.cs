@@ -32,6 +32,10 @@ public class EnemyManager : MonoBehaviour
             myHp.OnDeath += OnDeath;
             myHp.Initialize(maxHp);
             myHp.CanBeAttacked(canBeAttacked);
+            if (!canBeAttacked)
+            {
+                myHp.OnAttacked += OnAttacked;
+            }
         }
         EnemyMovement myMovement = GetComponent<EnemyMovement>();
         myMovement.Initialize(this);
@@ -55,6 +59,10 @@ public class EnemyManager : MonoBehaviour
         if (myHp)
         {
             myHp.OnDeath -= OnDeath;
+            if (!canBeAttacked)
+            {
+                myHp.OnAttacked -= OnAttacked;
+            }
         }
     }
     private void OnEnable()
@@ -72,6 +80,10 @@ public class EnemyManager : MonoBehaviour
         {
             parent.OnMyDeath -= Disappear;
         }
+    }
+    private void OnAttacked()
+    {
+        visualManager.IncreaseScale(0.3f);
     }
     private void OnDeath()
     {
