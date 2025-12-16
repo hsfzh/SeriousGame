@@ -54,6 +54,7 @@ MonoBehaviour:
   - 9.5
   - 9
   - 8.5
+  fireSound: {fileID: 8300000, guid: 382bf52ba3323ac40bc0706411d1ebda, type: 3}
   level: 1
   levelPower:
   - 10

@@ -105,7 +105,6 @@ public class GameManager : MonoBehaviour
     private void StartGame()
     {
         isActive = true;
-        noEnemyTime = 0;
         currentWave = 0;
         killCount = 0;
         spawnedEnemyCount = 0;
