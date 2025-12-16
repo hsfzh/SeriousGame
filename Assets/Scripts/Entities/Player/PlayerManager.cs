@@ -60,6 +60,11 @@ public class PlayerManager : MonoBehaviour
         {
             playerHp.OnDeath -= OnDeath;
         }
+
+        if (wand)
+        {
+            Destroy(wand);
+        }
     }
     private void Start()
     {
