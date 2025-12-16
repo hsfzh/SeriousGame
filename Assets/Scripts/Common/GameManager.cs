@@ -184,7 +184,7 @@ public class GameManager : MonoBehaviour
     }
     private IEnumerator StartNextWave()
     {
-        Debug.Log("Moving to next wave...");
+        Debug.Log("Moving from wave " + currentWave + " to wave " + (currentWave + 1));
         yield return new WaitForSeconds(5f);
         OnNextWave();
     }

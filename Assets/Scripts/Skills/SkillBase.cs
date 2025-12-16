@@ -66,7 +66,7 @@ public abstract class SkillBase : MonoBehaviour
             ExecuteSkill(attackMultiplier);
             if (fireSound)
             {
-                Debug.Log($"{skillName} playing fire sound");
+                // Debug.Log($"{skillName} playing fire sound");
                 SoundManager.Instance.PlaySFX(fireSound, fireVolume);
             }
             currentCoolTime = coolTime[level - 1] * currCoolTimeReduction; // 쿨타임 초기화

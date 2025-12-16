@@ -56,13 +56,14 @@ MonoBehaviour:
   - 4
   - 4
   fireSound: {fileID: 8300000, guid: f5854d82029684644bc4dd04d3fa2db9, type: 3}
+  fireVolume: 0.5
   level: 1
   levelPower:
-  - 15
-  - 25
-  - 40
-  - 60
-  - 90
+  - 10
+  - 20
+  - 32
+  - 50
+  - 72
   stunTime: 1
   radius: 0.3
   duration: 0.3

@@ -59,9 +59,9 @@ public class HpManager : MonoBehaviour
     {
         if (IsDead)
             return;
-        Debug.Log($"Hp before {healAmount} heal: {currentHp}");
+        // Debug.Log($"Hp before {healAmount} heal: {currentHp}");
         currentHp += healAmount;
-        Debug.Log($"Hp after {healAmount} heal: {currentHp}");
+        // Debug.Log($"Hp after {healAmount} heal: {currentHp}");
         if (currentHp > maxHp)
         {
             currentHp = maxHp;

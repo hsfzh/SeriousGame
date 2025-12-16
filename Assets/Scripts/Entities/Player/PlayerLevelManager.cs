@@ -70,7 +70,7 @@ public class PlayerLevelManager : MonoBehaviour
         HpManager playerHp = PlayerManager.Instance.GetHpManager();
         if (playerHp)
         {
-            playerHp.Heal(5);
+            playerHp.Heal(3);
         }
         level += 1;
         requiredExp = RequiredExp(level);
@@ -86,7 +86,7 @@ public class PlayerLevelManager : MonoBehaviour
     }
     private int RequiredExp(int currentLevel)
     {
-        return 5 + (currentLevel * (currentLevel + 1)) / 2;
+        return 6 + (currentLevel * (currentLevel + 1));
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
