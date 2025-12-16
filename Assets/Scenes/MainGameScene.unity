@@ -952,7 +952,7 @@ MonoBehaviour:
   - HatredVirus
   maxDistance: {x: 7, y: 4}
   minDistance: {x: 6, y: 3}
-  spawnInterval: 1
+  spawnInterval: 3
   maxAttempt: 10
 --- !u!4 &480619575
 Transform:
@@ -3853,7 +3853,7 @@ MonoBehaviour:
   hitInvincibilityDuration: 0.5
   magnetRange: 0.5
   playerHalfSize: {x: 0.16, y: 0.2}
-  moveSpeed: 1
+  moveSpeed: 1.5
   wand: {fileID: 1663855698}
 --- !u!70 &1972647639
 CapsuleCollider2D:

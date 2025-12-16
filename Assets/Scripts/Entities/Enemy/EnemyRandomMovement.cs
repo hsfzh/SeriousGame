@@ -38,9 +38,13 @@ public class EnemyRandomMovement : EnemyMovement
     {
         while (true)
         {
-            float x = Random.Range(-1, 1);
-            float y = Random.Range(-1, 1);
-            direction = new Vector2(x, y).normalized;
+            direction = Vector2.zero;
+            while (direction.magnitude != 0)
+            {
+                float x = Random.Range(-1, 1);
+                float y = Random.Range(-1, 1);
+                direction = new Vector2(x, y).normalized;
+            }
             yield return new WaitForSeconds(2f);
         }
     }
