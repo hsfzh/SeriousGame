@@ -56,11 +56,11 @@ MonoBehaviour:
   - 10
   level: 1
   levelPower:
-  - 100
-  - 150
-  - 220
-  - 310
-  - 420
+  - 20
+  - 30
+  - 44
+  - 62
+  - 84
   duration: 5
   leveUpDuration: 1.25
   activeDiskNum: 2

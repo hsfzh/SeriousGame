@@ -134,7 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <enemyHalfSize>k__BackingField: {x: 0.56, y: 0.205}
   <maxHp>k__BackingField: 10
-  <moveSpeed>k__BackingField: 1
+  <moveSpeed>k__BackingField: 0.5
   <bulletType>k__BackingField: HatredPulse
   <bulletSpeed>k__BackingField: 3
   <bulletFireOffset>k__BackingField: {x: 0, y: 0, z: 0}

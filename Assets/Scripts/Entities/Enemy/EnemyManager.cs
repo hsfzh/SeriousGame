@@ -82,6 +82,10 @@ public class EnemyManager : MonoBehaviour
     }
     private void OnDisable()
     {
+        if (canBeAttacked)
+        {
+            GameManager.Instance.AddKillCount();
+        }
         GameManager.Instance.RemoveEnemyTransform(transform);
         if (parent)
         {
@@ -125,7 +129,6 @@ public class EnemyManager : MonoBehaviour
     }
     private void OnDeath()
     {
-        GameManager.Instance.AddKillCount();
         DropExp();
         OnMyDeath?.Invoke();
         gameObject.SetActive(false);

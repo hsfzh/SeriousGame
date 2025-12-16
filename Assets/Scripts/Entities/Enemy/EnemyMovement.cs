@@ -34,12 +34,12 @@ public class EnemyMovement : MovementBase
         {
             Vector3 playerPosition = PlayerManager.Instance.transform.position;
             float distanceSlowFactor = 1;
-            if (playerSensingRange > 0)
-            {
-                float distanceToPlayer = (playerPosition - transform.position).sqrMagnitude;
-                float distanceRatio = MathF.Min(1F, distanceToPlayer / playerSensingRange);
-                distanceSlowFactor = MathF.Pow(distanceRatio, 2f);
-            }
+            //if (playerSensingRange > 0)
+            //{
+            //    float distanceToPlayer = (playerPosition - transform.position).sqrMagnitude;
+            //    float distanceRatio = MathF.Min(1F, distanceToPlayer / playerSensingRange);
+            //    distanceSlowFactor = MathF.Pow(distanceRatio, 2f);
+            //}
             
             Vector2 currentPos = rigid.position;
 

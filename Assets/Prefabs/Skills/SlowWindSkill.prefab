@@ -57,11 +57,11 @@ MonoBehaviour:
   - 4
   level: 1
   levelPower:
+  - 15
+  - 25
+  - 50
+  - 70
   - 100
-  - 200
-  - 350
-  - 600
-  - 900
   speed: 2
   slowRatio:
   - 0.5

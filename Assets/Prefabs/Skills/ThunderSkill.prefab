@@ -57,11 +57,11 @@ MonoBehaviour:
   - 4
   level: 1
   levelPower:
-  - 350
-  - 550
-  - 900
-  - 1400
-  - 2000
+  - 15
+  - 25
+  - 40
+  - 60
+  - 90
   stunTime: 1
   radius: 0.3
   duration: 0.3

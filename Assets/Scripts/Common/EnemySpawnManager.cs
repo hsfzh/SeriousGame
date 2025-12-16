@@ -99,7 +99,7 @@ public class EnemySpawnManager : MonoBehaviour
         {
             Vector3 direction = (PlayerManager.Instance.transform.position - spawnPosition).normalized;
             float angle = Mathf.Atan2(direction.y, direction.x)*Mathf.Rad2Deg;
-            GameObject arrow = ObjectPoolManager.Instance.SpawnFromPool("IndicationArrow", spawnPosition + direction * 2f, 
+            GameObject arrow = ObjectPoolManager.Instance.SpawnFromPool("IndicationArrow", spawnPosition + direction * 0.5f, 
                 rotation: Quaternion.Euler(0, 0, angle));
             StartCoroutine(SpawnClickBait(hpRatio, arrow, spawnPosition, direction));
         }

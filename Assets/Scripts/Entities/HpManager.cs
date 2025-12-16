@@ -31,7 +31,7 @@ public class HpManager : MonoBehaviour
         if (!canBeAttacked)
         {
             OnAttacked?.Invoke();
-            MakeInvincible(hitInvincibilityDuration);
+            //MakeInvincible(hitInvincibilityDuration);
             return;
         }
         float actualDmg = dmg;

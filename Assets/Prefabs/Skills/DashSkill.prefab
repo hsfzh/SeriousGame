@@ -56,10 +56,10 @@ MonoBehaviour:
   - 8.5
   level: 1
   levelPower:
-  - 150
-  - 250
-  - 420
-  - 650
-  - 950
+  - 10
+  - 20
+  - 30
+  - 60
+  - 100
   range: 1
   levelUpRange: 0.5

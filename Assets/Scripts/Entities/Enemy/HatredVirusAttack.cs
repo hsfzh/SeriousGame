@@ -16,7 +16,7 @@ public class HatredVirusAttack : EnemyRangedAttack
                 Fire();
                 currentTime = 0;
             }
-            if (stainAttackTime >= 2f)
+            if (stainAttackTime >= 1f)
             {
                 Vector3 newStainSize = new Vector3(4f, 1.58f, 1f);
                 Debug.Log($"Spawning stain of size {newStainSize}");
