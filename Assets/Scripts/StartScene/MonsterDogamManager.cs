@@ -23,7 +23,7 @@ public class MonsterDogamManager : MonoBehaviour
     public Button rightBtn;          
     
     // 사용자가 도달한 최대 웨이브 수. 나중에 게임에서 연결해야됨
-    public int currentMaxWave = 0;   
+    public static int currentMaxWave = 0;  
     
     [Header("Monster Data List")]
     public MonsterInfo[] monsterDataList; 

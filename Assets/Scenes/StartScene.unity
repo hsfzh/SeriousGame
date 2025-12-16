@@ -1279,7 +1279,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1023954172}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9326d16ffca6f7458e4b6bedc7adb99, type: 3}
   m_Name: 
@@ -2103,7 +2103,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1576740126}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9326d16ffca6f7458e4b6bedc7adb99, type: 3}
   m_Name: 
@@ -2814,7 +2814,6 @@ MonoBehaviour:
   descText: {fileID: 1400504098}
   leftBtn: {fileID: 1023954174}
   rightBtn: {fileID: 1576740128}
-  currentMaxWave: 5
   monsterDataList:
   - monsterName: "\uC624\uB514\uB108\uB9AC \uB9C8\uC2A4\uD06C"
     isElite: 0

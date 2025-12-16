@@ -196,6 +196,10 @@ public class GameManager : MonoBehaviour
         {
             maxWave = Mathf.Max(currentWave + 1, 15);
         }
+        if (currentWave > MonsterDogamManager.currentMaxWave)
+        {
+            MonsterDogamManager.currentMaxWave = currentWave;
+        }
         if (currentWave == 15)
         {
             OnGameClear();
