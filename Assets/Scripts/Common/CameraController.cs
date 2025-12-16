@@ -18,9 +18,7 @@ public class CameraController : MonoBehaviour
         Vector2 mapSize = gameManager.mapSize;
         float cameraHalfHeight = mainCamera.orthographicSize;
         Vector2 cameraHalfSize = new Vector2(gameManager.targetAspectRatio * cameraHalfHeight, cameraHalfHeight);
-        Debug.Log($"camera half size: {cameraHalfSize}");
         cameraBound = new Vector2(mapSize.x * 0.5f - cameraHalfSize.x, mapSize.y * 0.5f - cameraHalfSize.y);
-        Debug.Log($"camera bound: {cameraBound}");
     }
     // Update is called once per frame
     void Update()

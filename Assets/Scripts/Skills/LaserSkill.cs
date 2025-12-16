@@ -18,7 +18,7 @@ public class LaserSkill : SkillBase
         Quaternion rotation = Quaternion.Euler(0, 0, angle);
 
         GameObject laser =
-            ObjectPoolManager.Instance.SpawnFromPool("Laser", playerTransform.position, rotation, new Vector3(1, width[level-1], 1));
+            ObjectPoolManager.Instance.SpawnFromPool("Laser", playerTransform.position, rotation, new Vector3(1, width[level-1]/width[0], 1));
 
         LaserController laserScript = laser.GetComponent<LaserController>();
         laserScript.Initialize(duration, power * attackMultiplier);

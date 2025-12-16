@@ -10,23 +10,38 @@ public class EnemySpawnManager : MonoBehaviour
     [SerializeField] private List<string> enemies;
     [SerializeField] private Vector2 maxDistance;
     [SerializeField] private Vector2 minDistance;
-    [SerializeField] private float spawnInterval;
     [SerializeField] private float maxAttempt;
-    private Coroutine enemySpawnCoroutine;
+    private WaveData currentWaveData;
     void Start()
     {
         cameraTransform = Camera.main.transform;
+        GameManager.Instance.OnNewWave += UpdateWave;
+        currentWaveData = GameManager.Instance.waveDataList[0];
+        StartSpawnCoroutines();
+    }
+    private void StartSpawnCoroutines()
+    {
+        for (int i = 0; i < currentWaveData.spawnableMonsters.Count; ++i)
+        {
+            StartCoroutine(EnemySpawnRoutine(i, currentWaveData.totalSpawnCount[i], currentWaveData.spawnableMonsters[i],
+                currentWaveData.spawnInterval[i]));
+        }
     }
     // Update is called once per frame
     void Update()
     {
         transform.position = cameraTransform.position;
-        if (enemySpawnCoroutine == null && GameManager.Instance.timeFlowing)
-        {
-            enemySpawnCoroutine = StartCoroutine(EnemySpawnRoutine());
-        }
     }
-    void SpawnEnemy()
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnNewWave -= UpdateWave;
+    }
+    private void UpdateWave(WaveData newWaveData)
+    {
+        currentWaveData = newWaveData;
+        StartSpawnCoroutines();
+    }
+    void SpawnEnemy(int enemyToSpawn)
     {
         // 스폰 위치 결정
         Vector2 mapSize = GameManager.Instance.playableMapSize;
@@ -78,10 +93,9 @@ public class EnemySpawnManager : MonoBehaviour
 
             attempt += 1;
         }
-
-        int enemyType = Random.Range(0, enemies.Count);
+        
         Vector3 spawnPosition = new Vector3(x, y, 0);
-        if (enemies[enemyType] == "ClickBait")
+        if (enemies[enemyToSpawn] == "ClickBait")
         {
             Vector3 direction = (PlayerManager.Instance.transform.position - spawnPosition).normalized;
             float angle = Mathf.Atan2(direction.y, direction.x)*Mathf.Rad2Deg;
@@ -92,7 +106,7 @@ public class EnemySpawnManager : MonoBehaviour
         else
         {
             GameObject enemy =
-                ObjectPoolManager.Instance.SpawnFromPool(enemies[enemyType], spawnPosition);
+                ObjectPoolManager.Instance.SpawnFromPool(enemies[enemyToSpawn], spawnPosition);
         }
     }
     private IEnumerator SpawnClickBait(GameObject indicationArrow, Vector3 spawnPosition, Vector3 direction)
@@ -106,14 +120,15 @@ public class EnemySpawnManager : MonoBehaviour
             movement.SetDirection(direction);
         }
     }
-    private IEnumerator EnemySpawnRoutine()
+    private IEnumerator EnemySpawnRoutine(int myIndex, int spawnCount, int enemyToSpawn, float spawnInterval)
     {
-        while (GameManager.Instance.timeFlowing)
+        while (spawnCount > 0)
         {
-            SpawnEnemy();
+            SpawnEnemy(enemyToSpawn);
             yield return new WaitForSeconds(spawnInterval);
+            spawnCount -= 1;
+            currentWaveData.totalSpawnCount[myIndex] -= 1;
         }
-        enemySpawnCoroutine = null;
     }
     /*
     private void OnDrawGizmos() // TODO: 나중에 삭제

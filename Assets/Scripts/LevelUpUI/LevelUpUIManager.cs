@@ -14,13 +14,8 @@ public class LevelUpUIManager : MonoBehaviour
     private int rerollAttempt;
     private void OnEnable()
     {
-        Debug.Log("레벨업 UI 열림!");
         rerollAttempt = 0;
         toolTip.SetActive(false);
-    }
-    private void OnDisable()
-    {
-        Debug.Log("레벨업 UI 닫힘!");
     }
     public void Show()
     {

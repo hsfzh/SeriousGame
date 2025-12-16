@@ -1,8 +1,24 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+[System.Serializable]
+public struct WaveData
+{
+    [Tooltip("이 웨이브에 소환 가능한 적의 최대 인덱스 (0 ~ maxIndex까지 랜덤 소환)")]
+    public List<int> spawnableMonsters; 
+    
+    [Tooltip("몬스터 타입별 생성 간격")]
+    public List<float> spawnInterval;
+
+    [Tooltip("이 웨이브에서 몬스터별 소환할 총 수")]
+    public List<int> totalSpawnCount;
+
+    [Tooltip("이 웨이브의 지속 시간")] 
+    public float waveDuration;
+}
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance {get; private set;}
@@ -12,6 +28,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject uiCanavas;
     [SerializeField] private LevelUpUIManager levelUpUI;
     [SerializeField] private GameObject gameOverUI;
+    [field:SerializeField] public List<WaveData> waveDataList { get; private set; }
+    private int currentWave;
+    private Coroutine waveCoroutine;
+    public event Action<WaveData> OnNewWave;
     private List<Transform> activeEnemyTransforms = new List<Transform>();
     public IReadOnlyList<Transform> ActiveEnemies => activeEnemyTransforms;
     public bool timeFlowing { get; private set; }
@@ -46,7 +66,6 @@ public class GameManager : MonoBehaviour
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log($"씬 로드 완료! 이름: {scene.name}, 모드: {mode}");
         if (scene.name == "MainGameScene")
         {
             StopTime();
@@ -55,15 +74,30 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
-        //if (!gameRunning)
-        //{
-        //    StartGame();
-        //}
+        if (timeFlowing)
+        {
+            if (activeEnemyTransforms.Count == 0)
+            {
+                GotoNextWave();
+            }
+        }
     }
     private void StartGame()
     {
+        currentWave = 0;
         uiCanavas.SetActive(true);
         levelUpUI.Show();
+        if (waveCoroutine != null)
+        {
+            StopCoroutine(waveCoroutine);
+        }
+        waveCoroutine = StartCoroutine(WaveRoutine());
+    }
+    private IEnumerator WaveRoutine()
+    {
+        yield return new WaitForSeconds(waveDataList[currentWave].waveDuration);
+        GotoNextWave();
+        waveCoroutine = null;
     }
     private void OnPlayerLevelUp()
     {
@@ -74,6 +108,26 @@ public class GameManager : MonoBehaviour
     {
         StopTime();
         gameOverUI.SetActive(true);
+    }
+    private void GotoNextWave()
+    {
+        if (waveCoroutine != null)
+        {
+            StopCoroutine(waveCoroutine);
+        }
+        StartCoroutine(StartNextWave());
+    }
+    private IEnumerator StartNextWave()
+    {
+        yield return new WaitForSeconds(5f);
+        OnNextWave();
+    }
+    private void OnNextWave()
+    {
+        currentWave += 1;
+        Debug.Log($"Starting new Wave, wave number {currentWave}");
+        OnNewWave?.Invoke(waveDataList[currentWave]);
+        waveCoroutine = StartCoroutine(WaveRoutine());
     }
     public void GoToMainScreen()
     {
@@ -108,6 +162,8 @@ public class GameManager : MonoBehaviour
         List<Transform> enemiesToKill = new List<Transform>(activeEnemyTransforms);
         foreach (var enemy in enemiesToKill)
         {
+            if (activeEnemyTransforms.Count == 1)
+                return;
             EnemyManager enemyManager = enemy.GetComponent<EnemyManager>();
             enemyManager.Kill();
         }

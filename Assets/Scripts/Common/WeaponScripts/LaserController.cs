@@ -83,8 +83,6 @@ public class LaserController : MonoBehaviour
 
         foreach (RaycastHit2D hit in shieldHits)
         {
-            Debug.Log($"1단계 감지: {hit.collider.name}, Tag: {hit.collider.tag}, Layer: {LayerMask.LayerToName(hit.collider.gameObject.layer)}");
-
             if (hit.collider.CompareTag("EnemyShield"))
             {
                 EnemyManager enemy = hit.collider.GetComponentInParent<EnemyManager>();

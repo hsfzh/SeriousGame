@@ -27,7 +27,7 @@ public class DashAttackController : MonoBehaviour
     }
     private IEnumerator DashRoutine()
     {
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.25f);
         gameObject.SetActive(false);
     }
     public void Initialize(float power, float range, bool repulse)
