@@ -55,7 +55,7 @@ MonoBehaviour:
   - 4
   - 4
   - 4
-  fireSound: {fileID: 0}
+  fireSound: {fileID: 8300000, guid: f5854d82029684644bc4dd04d3fa2db9, type: 3}
   level: 1
   levelPower:
   - 15
