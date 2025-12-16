@@ -26,6 +26,7 @@ public class EnemyManager : MonoBehaviour
     private StatManager statManager;
     private VisualManager visualManager;
     private EnemyManager parent;
+    private bool isDisappearing;
     private Animator anim;
     private static readonly int IsHatred = Animator.StringToHash("IsHatred");
     public event Action OnMyDeath;
@@ -74,6 +75,10 @@ public class EnemyManager : MonoBehaviour
     }
     private void OnEnable()
     {
+        isDisappearing = false;
+        Vector3 fixedPos = transform.position;
+        fixedPos.z = 0f;
+        transform.position = fixedPos;
         GameManager.Instance.AddEnemyTransform(transform);
         if (myHp)
         {
@@ -82,6 +87,7 @@ public class EnemyManager : MonoBehaviour
     }
     private void OnDisable()
     {
+        isDisappearing = false;
         if (canBeAttacked)
         {
             GameManager.Instance.AddKillCount();
@@ -94,7 +100,7 @@ public class EnemyManager : MonoBehaviour
     }
     private void Update()
     {
-        if (GameManager.Instance.timeFlowing)
+        if (GameManager.Instance.timeFlowing && !isDisappearing)
         {
             if (!isHatred)
             {
@@ -108,7 +114,7 @@ public class EnemyManager : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (GameManager.Instance.timeFlowing)
+        if (GameManager.Instance.timeFlowing && !isDisappearing)
         {
             if (!isHatred)
             {
@@ -122,7 +128,7 @@ public class EnemyManager : MonoBehaviour
     }
     private void OnAttacked()
     {
-        if (!isHatred)
+        if (!isHatred && transform.localScale.x <= 7f && !isDisappearing)
         {
             visualManager.IncreaseScale(0.3f);
         }
@@ -135,7 +141,21 @@ public class EnemyManager : MonoBehaviour
     }
     private void Disappear()
     {
+        isDisappearing = true;
+        movementManager.Stop();
+        StartCoroutine(DisappearRoutine());
+    }
+    private IEnumerator DisappearRoutine()
+    {
+        float alpha = 1;
+        while (alpha > 0)
+        {
+            alpha -= Time.deltaTime;
+            visualManager.AdjustAlpha(alpha);
+            yield return null;
+        }
         gameObject.SetActive(false);
+        isDisappearing = false;
     }
     private void DropExp()
     {

@@ -14,7 +14,7 @@ public class EnemyRandomMovement : EnemyMovement
         {
             Vector3 playerPosition = PlayerManager.Instance.transform.position;
             float distanceToPlayer = (playerPosition - transform.position).magnitude;
-            if (distanceToPlayer >= 7f)
+            if (distanceToPlayer >= 2.7f)
             {
                 if (directionDecisionCoroutine != null)
                 {
@@ -39,7 +39,7 @@ public class EnemyRandomMovement : EnemyMovement
         while (true)
         {
             direction = Vector2.zero;
-            while (direction.magnitude != 0)
+            while (direction.magnitude < 0.01f)
             {
                 float x = Random.Range(-1, 1);
                 float y = Random.Range(-1, 1);

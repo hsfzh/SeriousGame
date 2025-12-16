@@ -47,6 +47,10 @@ public abstract class MovementBase : MonoBehaviour
     {
         direction = direc.normalized;
     }
+    public void Stop()
+    {
+        rigid.velocity = Vector2.zero;
+    }
     public void OnFixedUpdate()
     {
         if (!GameManager.Instance.timeFlowing)

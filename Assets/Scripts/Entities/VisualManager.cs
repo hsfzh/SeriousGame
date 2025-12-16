@@ -53,9 +53,15 @@ public class VisualManager : MonoBehaviour
         Vector3 currentScale = transform.localScale;
         transform.localScale = currentScale * (1 + ratio);
     }
-
     public void ResetScale()
     {
         transform.localScale = Vector3.one;
+    }
+    public void AdjustAlpha(float alpha)
+    {
+        alpha = Mathf.Clamp(alpha, 0, 1);
+        Color currentColor = sprite.color;
+        currentColor.a = alpha;
+        sprite.color = currentColor;
     }
 }

@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
     }
     private void StartGame()
     {
-        currentWave = 0;
+        currentWave = 7;
         killCount = 0;
         spawnedEnemyCount = 0;
         foreach (var spawnCount in waveDataList[currentWave].totalSpawnCount)

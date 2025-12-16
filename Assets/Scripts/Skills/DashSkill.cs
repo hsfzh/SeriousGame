@@ -18,6 +18,11 @@ public class DashSkill : SkillBase
 
         playerTransform.position = mouse;
 
+        if (playerTransform.TryGetComponent(out HpManager playerHp))
+        {
+            playerHp.MakeInvincible(0.5f);
+        }
+
         DashAttackController dashScript = dash.GetComponent<DashAttackController>();
         
         dashScript.Initialize(power * attackMultiplier, range, level >= 3);

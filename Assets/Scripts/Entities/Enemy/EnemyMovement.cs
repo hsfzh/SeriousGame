@@ -6,12 +6,10 @@ using Random = UnityEngine.Random;
 
 public class EnemyMovement : MovementBase
 {
-    private bool targetContact;
     protected bool isStunned;
     private Coroutine stunCoroutine;
     protected float speedRatio;
     private Coroutine slowCoroutine;
-    protected float playerSensingRange;
     protected EnemyManager myManager;
     public void Initialize(EnemyManager enemyManager)
     {
@@ -22,15 +20,29 @@ public class EnemyMovement : MovementBase
         }
         base.Initialize(enemyManager.enemyHalfSize, enemyManager.isClamped);
         myManager = enemyManager;
-        playerSensingRange = enemyManager.attackRange * enemyManager.attackRange;
-        targetContact = false;
         isStunned = false;
         speedRatio = 1f;
+    }
+    private void OnDisable()
+    {
+        // 오브젝트가 꺼질 때 코루틴이 돌고 있었다면 확실하게 정리
+        isStunned = false;
+        speedRatio = 1f;
+
+        // 코루틴 변수들도 null 처리 (유니티가 꺼질 때 자동으로 멈추긴 하지만 안전하게)
+        stunCoroutine = null;
+        slowCoroutine = null;
+    
+        // 리지드바디 속도 초기화 (중요: 멈춘 상태로 재등장 방지)
+        if (rigid != null)
+        {
+            rigid.velocity = Vector2.zero;
+        }
     }
     protected override void ExecuteMove()
     {
         Vector2 finalVelocity = Vector2.zero;
-        if (!targetContact && !isStunned)
+        if (!isStunned)
         {
             Vector3 playerPosition = PlayerManager.Instance.transform.position;
             float distanceSlowFactor = 1;
@@ -103,19 +115,5 @@ public class EnemyMovement : MovementBase
         speedRatio = slowRatio;
         yield return new WaitForSeconds(slowDuration);
         speedRatio = 1;
-    }
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            targetContact = true;
-        }
-    }
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            targetContact = false;
-        }
     }
 }

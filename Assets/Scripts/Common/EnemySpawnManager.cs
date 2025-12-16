@@ -16,8 +16,8 @@ public class EnemySpawnManager : MonoBehaviour
     {
         cameraTransform = Camera.main.transform;
         GameManager.Instance.OnNewWave += UpdateWave;
-        currentWaveData = GameManager.Instance.waveDataList[0];
-        StartSpawnCoroutines(0);
+        currentWaveData = GameManager.Instance.waveDataList[GameManager.Instance.currentWave];
+        StartSpawnCoroutines(GameManager.Instance.currentWave);
     }
     private void StartSpawnCoroutines(int currentWave)
     {
