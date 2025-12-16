@@ -1,8 +1,11 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class StartManager : MonoBehaviour
 {
+    [SerializeField] private Button startButton;
+    [SerializeField] private Button monsterButton;
     [SerializeField] private GameObject monsterPanel;
     private GameObject activePanel;
 
@@ -15,13 +18,22 @@ public class StartManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (activePanel)
-            {
-                activePanel.SetActive(false);
-                activePanel = null;
-            }
+            ClosePanel();
         }
     }
+
+    public void ClosePanel()
+    {
+        if (activePanel)
+        {
+            activePanel.SetActive(false);
+            activePanel = null;
+
+            startButton.interactable = true;
+            monsterButton.interactable = true;
+        }
+    }
+
     public void StartGame()
     {
         SceneManager.LoadScene("MainGameScene");
@@ -33,5 +45,8 @@ public class StartManager : MonoBehaviour
             return;
         activePanel = panel;
         panel.SetActive(true);
+
+        startButton.interactable = false;
+        monsterButton.interactable = false;
     }
 }
