@@ -46,6 +46,8 @@ public class GameManager : MonoBehaviour
     private bool waveTransitioning;
     private int killCount;
     private int spawnedEnemyCount;
+    private float noEnemyTime;
+    private bool isActive;
     private void Awake()
     {
         if (Instance == null)
@@ -83,12 +85,26 @@ public class GameManager : MonoBehaviour
             StopTime();
             StartGame();
         }
+        else
+        {
+            isActive = false;
+        }
     }
     void Update()
     {
+        if (!isActive)
+            return;
+        if (activeEnemyTransforms.Count == 0)
+        {
+            noEnemyTime += Time.deltaTime;
+        }
+        else
+        {
+            noEnemyTime = 0;
+        }
         if (timeFlowing && !waveTransitioning && spawnedEnemyCount > 0)
         {
-            if (killCount == spawnedEnemyCount)
+            if (killCount == spawnedEnemyCount || noEnemyTime > 5f)
             {
                 waveTransitioning = true;
                 GotoNextWave();
@@ -97,6 +113,8 @@ public class GameManager : MonoBehaviour
     }
     private void StartGame()
     {
+        isActive = true;
+        noEnemyTime = 0;
         currentWave = 0;
         killCount = 0;
         spawnedEnemyCount = 0;
@@ -147,11 +165,6 @@ public class GameManager : MonoBehaviour
         {
             StopCoroutine(waveCoroutine);
         }
-        if (currentWave == 14)
-        {
-            OnGameClear();
-            return;
-        }
         StartCoroutine(StartNextWave());
     }
     private IEnumerator StartNextWave()
@@ -166,7 +179,12 @@ public class GameManager : MonoBehaviour
         currentWave += 1;
         if (currentWave + 1 > maxWave)
         {
-            maxWave = currentWave + 1;
+            maxWave = Mathf.Max(currentWave + 1, 15);
+        }
+        if (currentWave == 15)
+        {
+            OnGameClear();
+            return;
         }
         foreach (var spawnCount in waveDataList[currentWave].totalSpawnCount)
         {
@@ -189,10 +207,7 @@ public class GameManager : MonoBehaviour
             waveDataList[currentWave].spawnInterval[i] = halfDuration / (waveDataList[currentWave].totalSpawnCount[i]);
         }
         OnNewWave?.Invoke(waveDataList[currentWave]);
-        if (currentWave < 14)
-        {
-            waveCoroutine = StartCoroutine(WaveRoutine());
-        }
+        waveCoroutine = StartCoroutine(WaveRoutine());
     }
     public void GoToMainScreen()
     {

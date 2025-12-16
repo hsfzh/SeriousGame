@@ -356,10 +356,12 @@ MonoBehaviour:
     - 4.67
     - 3
     - 14
-    totalSpawnCount: 960000001e000000460000000a0000000a0000000a0000000f00000004000000
+    totalSpawnCount: 640000001e000000320000000a0000000a0000000a0000000f00000004000000
     waveDuration: 60
     hpRatio: 8
   maxWave: 0
+  killCount: 0
+  spawnedEnemyCount: 0
 --- !u!4 &166117092
 Transform:
   m_ObjectHideFlags: 0
@@ -2199,7 +2201,7 @@ MonoBehaviour:
   poolSettings:
   - poolTag: Bullet
     prefab: {fileID: 1663915228467109293, guid: 600d7facda8279c47a6fc3a687515fb7, type: 3}
-    size: 20
+    size: 50
     isUIElement: 0
   - poolTag: Laser
     prefab: {fileID: 5227766232060304128, guid: 7a5d23e7984d6d4409d6a2625cf031d9, type: 3}
@@ -2223,11 +2225,11 @@ MonoBehaviour:
     isUIElement: 0
   - poolTag: DamageText
     prefab: {fileID: 6532746922993097680, guid: 068b916286563e24ebed6e85b9cddf53, type: 3}
-    size: 50
+    size: 100
     isUIElement: 1
   - poolTag: NormalExp
     prefab: {fileID: 6471351291849280945, guid: dbcc92c5af8131c45870e3f394bca8c5, type: 3}
-    size: 100
+    size: 200
     isUIElement: 0
   - poolTag: ShinyExp
     prefab: {fileID: 6146231568371787839, guid: ebece9aff01c76f40b0e31ce03d1a815, type: 3}
@@ -2239,7 +2241,7 @@ MonoBehaviour:
     isUIElement: 0
   - poolTag: IndicationArrow
     prefab: {fileID: 1911165543359697161, guid: a0e06c8e015eca24f9d0eda64147f304, type: 3}
-    size: 10
+    size: 20
     isUIElement: 0
   - poolTag: KeyboardBullet
     prefab: {fileID: 1663915228467109293, guid: cf5de41be02e40f4ab366745c10f82e8, type: 3}
@@ -2255,15 +2257,15 @@ MonoBehaviour:
     isUIElement: 0
   - poolTag: OrdinaryMask
     prefab: {fileID: 3094528734937282189, guid: bc60b3759130c834882e5f3985a42884, type: 3}
-    size: 20
+    size: 150
     isUIElement: 0
   - poolTag: KeyboardWarrior
     prefab: {fileID: 3094528734937282189, guid: b2687c9cc8615284aba1e1cb09fc21c3, type: 3}
-    size: 20
+    size: 30
     isUIElement: 0
   - poolTag: StubbornRock
     prefab: {fileID: 3094528734937282189, guid: f1276ed0e73ba8d4d904e89ddcb14ba8, type: 3}
-    size: 20
+    size: 70
     isUIElement: 0
   - poolTag: ClickBait
     prefab: {fileID: 3094528734937282189, guid: 4b32085b1b0baf349b8d5787dd630840, type: 3}
@@ -2271,11 +2273,11 @@ MonoBehaviour:
     isUIElement: 0
   - poolTag: ConfirmationBias
     prefab: {fileID: 3094528734937282189, guid: 0f21147c4474f71489f3ac23e786a7bc, type: 3}
-    size: 20
+    size: 25
     isUIElement: 0
   - poolTag: AttentionSeeker
     prefab: {fileID: 3094528734937282189, guid: 56626d3267872764c9c1412ee30c4458, type: 3}
-    size: 20
+    size: 12
     isUIElement: 0
   - poolTag: HateComment
     prefab: {fileID: 3094528734937282189, guid: 39619b094f9202e4ba65e26349419616, type: 3}
@@ -2283,11 +2285,11 @@ MonoBehaviour:
     isUIElement: 0
   - poolTag: Igniter
     prefab: {fileID: 3094528734937282189, guid: a2cedd43d6a702b4b81affa55889eaad, type: 3}
-    size: 20
+    size: 15
     isUIElement: 0
   - poolTag: HatredVirus
     prefab: {fileID: 3094528734937282189, guid: 422909ce1f21bec458348ddeb9c5882c, type: 3}
-    size: 20
+    size: 5
     isUIElement: 0
   - poolTag: Stain
     prefab: {fileID: 5030005143321134485, guid: 0456d3836bdeee241a82dbdf9c914abb, type: 3}

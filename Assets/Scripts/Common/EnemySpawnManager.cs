@@ -23,7 +23,7 @@ public class EnemySpawnManager : MonoBehaviour
     {
         for (int i = 0; i < currentWaveData.spawnableMonsters.Count; ++i)
         {
-            StartCoroutine(EnemySpawnRoutine(currentWave, i, currentWaveData.totalSpawnCount[i], currentWaveData.spawnableMonsters[i],
+            StartCoroutine(EnemySpawnRoutine(currentWave, currentWaveData.totalSpawnCount[i], currentWaveData.spawnableMonsters[i],
                 currentWaveData.spawnInterval[i]));
         }
     }
@@ -128,7 +128,7 @@ public class EnemySpawnManager : MonoBehaviour
             movement.SetDirection(direction);
         }
     }
-    private IEnumerator EnemySpawnRoutine(int currentWave, int myIndex, int spawnCount, int enemyToSpawn, float spawnInterval)
+    private IEnumerator EnemySpawnRoutine(int currentWave, int spawnCount, int enemyToSpawn, float spawnInterval)
     {
         float hpRatio = GameManager.Instance.waveDataList[currentWave].hpRatio;
         while (spawnCount > 0)
@@ -136,7 +136,6 @@ public class EnemySpawnManager : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
             SpawnEnemy(hpRatio, enemyToSpawn);
             spawnCount -= 1;
-            currentWaveData.totalSpawnCount[myIndex] -= 1;
         }
     }
 }

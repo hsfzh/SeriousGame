@@ -16,5 +16,10 @@ public class ClickBaitMovement : EnemyMovement
             finalVelocity = myDirection * (myManager.GetStatManager().GetStat(StatType.MoveSpeed) * speedRatio);
         }
         rigid.velocity = finalVelocity;
+        if (Mathf.Abs(rigid.position.x) >= GameManager.Instance.mapSize.x ||
+            Mathf.Abs(rigid.position.y) >= GameManager.Instance.mapSize.y)
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

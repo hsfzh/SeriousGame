@@ -189,7 +189,10 @@ public class EnemyManager : MonoBehaviour
         {
             return;
         }
-        hatredCoroutine = StartCoroutine(HatredRoutine());
+        if (gameObject.activeInHierarchy)
+        {
+            hatredCoroutine = StartCoroutine(HatredRoutine());
+        }
     }
     private IEnumerator HatredRoutine()
     {
