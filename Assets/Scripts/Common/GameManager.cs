@@ -46,7 +46,6 @@ public class GameManager : MonoBehaviour
     private bool waveTransitioning;
     private int killCount;
     private int spawnedEnemyCount;
-    private float noEnemyTime;
     private bool isActive;
     private void Awake()
     {
@@ -94,17 +93,9 @@ public class GameManager : MonoBehaviour
     {
         if (!isActive)
             return;
-        if (activeEnemyTransforms.Count == 0)
-        {
-            noEnemyTime += Time.deltaTime;
-        }
-        else
-        {
-            noEnemyTime = 0;
-        }
         if (timeFlowing && !waveTransitioning && spawnedEnemyCount > 0)
         {
-            if (killCount == spawnedEnemyCount || noEnemyTime > 5f)
+            if (killCount == spawnedEnemyCount)
             {
                 waveTransitioning = true;
                 GotoNextWave();
