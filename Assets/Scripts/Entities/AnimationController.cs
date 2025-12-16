@@ -16,8 +16,6 @@ public class AnimationController : MonoBehaviour
         anim = myAnim;
         hpManager = GetComponent<HpManager>();
     }
-
-    // Update is called once per frame
     void Update()
     {
         bool isAlive = hpManager ? !hpManager.IsDead : true;

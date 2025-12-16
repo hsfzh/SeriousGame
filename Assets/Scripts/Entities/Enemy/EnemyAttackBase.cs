@@ -8,6 +8,7 @@ public class EnemyAttackBase : MonoBehaviour
     protected EnemyManager myManager;
     private float bodyAttackPower;
     protected Transform playerTransform;
+    protected float currentTime;
 
     public virtual void Initialize(EnemyManager enemyManager)
     {
@@ -26,6 +27,28 @@ public class EnemyAttackBase : MonoBehaviour
             if (PlayerManager.Instance)
             {
                 playerTransform = PlayerManager.Instance.transform;
+            }
+        }
+    }
+    public virtual void OnUpdate()
+    {
+        
+    }
+
+    public void HatredUpdate()
+    {
+        if (GameManager.Instance.timeFlowing)
+        {
+            currentTime += Time.deltaTime;
+            if (currentTime >= 1f)
+            {
+                GameObject stain = ObjectPoolManager.Instance.SpawnFromPool("Stain", transform.position);
+                if (TryGetComponent(out StainController stainController))
+                {
+                    Debug.Log("Hatred virus leaving stain");
+                    stainController.Initialize(50f, 5f);
+                }
+                currentTime = 0;
             }
         }
     }

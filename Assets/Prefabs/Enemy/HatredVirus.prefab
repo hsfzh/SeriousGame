@@ -11,16 +11,16 @@ GameObject:
   - component: {fileID: 3846093855195297446}
   - component: {fileID: 9125778000459292538}
   - component: {fileID: 371950790894298627}
-  - component: {fileID: 6442990486176662893}
   - component: {fileID: 4455492754204991626}
   - component: {fileID: -7435770114655244025}
   - component: {fileID: -3955122812234547690}
   - component: {fileID: -5398463611414173200}
-  - component: {fileID: 7963355626464819150}
-  - component: {fileID: 3449024830385824108}
-  - component: {fileID: 7072013502756506686}
+  - component: {fileID: -2202241369572545445}
+  - component: {fileID: 91909157805248267}
+  - component: {fileID: -6854228780551593698}
+  - component: {fileID: -164180270116231605}
   m_Layer: 6
-  m_Name: AttentionSeeker
+  m_Name: HatredVirus
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,12 +82,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1939727196, guid: 4e6550ed6ecea4707806c38cd08982f5, type: 3}
+  m_Sprite: {fileID: 1192032227, guid: 24a3ea91fdbbd4588b3722a80dcf4897, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.19, y: 0.25}
+  m_Size: {x: 0.44, y: 0.52}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -120,18 +120,6 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &6442990486176662893
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3094528734937282189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 554f590f30beaf54ab6d1e632d68da72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4455492754204991626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,21 +132,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 961e89388db908945ace2a1919afa2bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <enemyHalfSize>k__BackingField: {x: 0.31, y: 0.315}
-  <maxHp>k__BackingField: 100
-  <moveSpeed>k__BackingField: 0
-  <bulletType>k__BackingField: HateComment
-  <bulletSpeed>k__BackingField: 0
-  <bulletFireOffset>k__BackingField: {x: 0.3, y: 0.15, z: 0}
-  <attackSpeed>k__BackingField: 5
-  <attackPower>k__BackingField: 0
-  <bodyAttackPower>k__BackingField: 100
-  <attackRange>k__BackingField: -1
+  <enemyHalfSize>k__BackingField: {x: 0.22, y: 0}
+  <maxHp>k__BackingField: 500
+  <moveSpeed>k__BackingField: 0.2
+  <bulletType>k__BackingField: HatredPulse
+  <bulletSpeed>k__BackingField: 3
+  <bulletFireOffset>k__BackingField: {x: 0, y: 0, z: 0}
+  <attackSpeed>k__BackingField: 8
+  <attackPower>k__BackingField: 50
+  <bodyAttackPower>k__BackingField: 150
+  <attackRange>k__BackingField: 5
   <isElite>k__BackingField: 1
   canBeAttacked: 1
   <isClamped>k__BackingField: 1
   isHatred: 0
-  canBeHatred: 1
+  canBeHatred: 0
 --- !u!114 &-7435770114655244025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,7 +185,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c69d263749545142a70d8f8c1819fe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!61 &7963355626464819150
+--- !u!95 &-2202241369572545445
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3094528734937282189}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 38effa06de09f4849a4b892b3712f28f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!61 &91909157805248267
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -233,37 +242,16 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.62, y: 0.63}
-    newSize: {x: 0.19, y: 0.25}
+    oldSize: {x: 1.12, y: 0.41}
+    newSize: {x: 0.44, y: 0.52}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.62, y: 0.63}
+  m_Size: {x: 1.12, y: 0.41}
   m_EdgeRadius: 0
---- !u!95 &3449024830385824108
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3094528734937282189}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 112bf15f08f264b3eb7b08cca3e87d9c, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7072013502756506686
+--- !u!114 &-6854228780551593698
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -272,6 +260,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 3094528734937282189}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb927d212eeb0184fbd97684c4b73795, type: 3}
+  m_Script: {fileID: 11500000, guid: 28bab853387b1d64aaec46e297da0aff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-164180270116231605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3094528734937282189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f1464ca3f538934aa5387de6fd91ac5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -53,4 +53,9 @@ public class VisualManager : MonoBehaviour
         Vector3 currentScale = transform.localScale;
         transform.localScale = currentScale * (1 + ratio);
     }
+
+    public void ResetScale()
+    {
+        transform.localScale = Vector3.one;
+    }
 }

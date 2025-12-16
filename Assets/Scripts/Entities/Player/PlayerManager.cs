@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
@@ -60,6 +61,10 @@ public class PlayerManager : MonoBehaviour
             playerHp.OnDeath -= OnDeath;
         }
     }
+    private void Start()
+    {
+        //OnDeath();
+    }
     private void Update()
     {
         if (GameManager.Instance.timeFlowing)
@@ -68,6 +73,10 @@ public class PlayerManager : MonoBehaviour
             float y = Input.GetAxisRaw("Vertical");
             movement.Move(new Vector2(x, y));
         }
+    }
+    private void FixedUpdate()
+    {
+        movement.OnFixedUpdate();
     }
     public MovementBase GetMovement()
     {
@@ -95,5 +104,6 @@ public class PlayerManager : MonoBehaviour
         visualManager.OnDead();
         attack.OnPlayerDeath();
         wand.SetActive(false);
+        GameManager.Instance.OnGameOver();
     }
 }

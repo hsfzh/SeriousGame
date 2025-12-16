@@ -12,17 +12,15 @@ public class LevelUpUIManager : MonoBehaviour
     [SerializeField] private List<SkillChoiceData> skillChoices;
     [SerializeField] private int maxRerollChance;
     private int rerollAttempt;
-    // Start is called before the first frame update
-    void Start()
-    {
-        toolTip.SetActive(false);
-        rerollAttempt = 0;
-        gameObject.SetActive(false);
-    }
     private void OnEnable()
     {
+        Debug.Log("레벨업 UI 열림!");
         rerollAttempt = 0;
         toolTip.SetActive(false);
+    }
+    private void OnDisable()
+    {
+        Debug.Log("레벨업 UI 닫힘!");
     }
     public void Show()
     {

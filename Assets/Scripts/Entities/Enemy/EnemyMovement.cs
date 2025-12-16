@@ -66,6 +66,10 @@ public class EnemyMovement : MovementBase
         }
         rigid.velocity = finalVelocity;
     }
+    protected override void ExecuteHatredMove()
+    {
+        ExecuteMove();
+    }
     public void Stun(float duration)
     {
         if (!gameObject.activeSelf)

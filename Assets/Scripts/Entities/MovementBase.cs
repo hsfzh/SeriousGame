@@ -47,7 +47,7 @@ public abstract class MovementBase : MonoBehaviour
     {
         direction = direc.normalized;
     }
-    private void FixedUpdate()
+    public void OnFixedUpdate()
     {
         if (!GameManager.Instance.timeFlowing)
         {
@@ -70,6 +70,27 @@ public abstract class MovementBase : MonoBehaviour
             ClampPosition();
         }
     }
+    public void OnHatredFixedUpdate()
+    {
+        if (!GameManager.Instance.timeFlowing)
+        {
+            rigid.velocity = Vector2.zero;
+        }
+        else
+        {
+            if (!isForceApplied)
+            {
+                ExecuteHatredMove();
+            }
+        }
+
+        if (isClamped)
+        {
+            ClampPosition();
+        }
+    }
+
+    protected virtual void ExecuteHatredMove() { }
     protected abstract void ExecuteMove();
     private void ClampPosition()
     {

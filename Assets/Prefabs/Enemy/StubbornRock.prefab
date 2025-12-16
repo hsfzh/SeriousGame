@@ -157,6 +157,8 @@ MonoBehaviour:
   <isElite>k__BackingField: 0
   canBeAttacked: 1
   <isClamped>k__BackingField: 1
+  isHatred: 0
+  canBeHatred: 1
 --- !u!114 &-7435770114655244025
 MonoBehaviour:
   m_ObjectHideFlags: 0

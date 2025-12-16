@@ -5,12 +5,11 @@ using UnityEngine;
 public class EnemyRangedAttack : EnemyAttackBase
 {
     protected float attackPower;
-    protected float attackCoolTime;
-    protected float currentTime;
     protected float bulletSpeed;
     protected string bulletName;
     protected Vector3 bulletFireOffset;
     protected float attackRange;
+    protected float attackCoolTime;
 
     public override void Initialize(EnemyManager enemyManager)
     {
@@ -22,7 +21,7 @@ public class EnemyRangedAttack : EnemyAttackBase
         bulletFireOffset = enemyManager.bulletFireOffset;
         attackRange = enemyManager.attackRange;
     }
-    private void Update()
+    public override void OnUpdate()
     {
         if (GameManager.Instance.timeFlowing)
         {
