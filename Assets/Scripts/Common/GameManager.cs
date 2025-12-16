@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -34,8 +35,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private LevelUpUIManager levelUpUI;
     [SerializeField] private GameObject gameOverUI;
     [SerializeField] private GameObject pauseUI;
-    [SerializeField] private GameObject newEliteText;
-    [SerializeField] private GameObject dangerText;
+    [SerializeField] private TextMeshProUGUI newEliteText;
+    [SerializeField] private TextMeshProUGUI dangerText;
+    [SerializeField] private TextMeshProUGUI waveText;
+
     [field:SerializeField] public List<WaveData> waveDataList { get; private set; }
     public int currentWave { get; private set; }
     public int maxWave;
@@ -48,6 +51,7 @@ public class GameManager : MonoBehaviour
     private int killCount;
     private int spawnedEnemyCount;
     private bool isActive;
+
     private void Awake()
     {
         if (Instance == null)
@@ -124,8 +128,9 @@ public class GameManager : MonoBehaviour
         {
             spawnedEnemyCount += spawnCount;
         }
-        newEliteText.SetActive(false);
-        dangerText.SetActive(false);
+        newEliteText.gameObject.SetActive(false);
+        dangerText.gameObject.SetActive(false);
+        UpdateWaveText();
         uiCanvas.SetActive(true);
         levelUpUI.Show();
         if (waveCoroutine != null)
@@ -150,8 +155,8 @@ public class GameManager : MonoBehaviour
     public void OnGameOver()
     {
         StopTime();
-        dangerText.SetActive(false);
-        newEliteText.SetActive(false);
+        dangerText.gameObject.SetActive(false);
+        newEliteText.gameObject.SetActive(false);
         gameOverUI.SetActive(true);
     }
     private void OnGameClear()
@@ -198,19 +203,44 @@ public class GameManager : MonoBehaviour
         List<int> dangerWaves = new List<int>{4, 9, 14};
         if (newEliteWaves.Contains(currentWave))
         {
-            newEliteText.SetActive(true);
+            string eliteMobName;
+            switch (currentWave)
+            {
+                case 4:
+                    eliteMobName = "편향껍질>이";
+                    break;
+                case 7:
+                    eliteMobName = "관심종자>가";
+                    break;
+                case 9:
+                    eliteMobName = "이그나이터>가";
+                    break;
+                case 11:
+                    eliteMobName = "헤이트리드 바이러스>가";
+                    break;
+                default:
+                    eliteMobName = "Unknown Elite";
+                    break;
+            }
+            newEliteText.text = $"엘리트 몹 <{eliteMobName} 출현합니다.";
+            newEliteText.gameObject.SetActive(true);
         }
         if (dangerWaves.Contains(currentWave))
         {
-            dangerText.SetActive(true);
+            dangerText.gameObject.SetActive(true);
         }
         float halfDuration = waveDataList[currentWave].waveDuration * 0.5f;
         for (int i = 0; i < waveDataList[currentWave].spawnableMonsters.Count; ++i)
         {
             waveDataList[currentWave].spawnInterval[i] = halfDuration / (waveDataList[currentWave].totalSpawnCount[i]);
         }
+        UpdateWaveText();
         OnNewWave?.Invoke(waveDataList[currentWave]);
         waveCoroutine = StartCoroutine(WaveRoutine());
+    }
+    public void UpdateWaveText()
+    {
+        waveText.text = $"Wave {currentWave + 1}/15";
     }
     public void GoToMainScreen()
     {
