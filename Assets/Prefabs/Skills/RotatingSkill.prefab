@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce5f43de43f00e345b987dbc40e91f48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: RotatingDisk
+  skillName: "\uD3EC\uC639"
   skillIcon: {fileID: 21300000, guid: e6c474f1224dcae449fdce72d79da39f, type: 3}
   skillInfo: "\uD50C\uB808\uC774\uC5B4 \uC8FC\uBCC0\uC744 \uD68C\uC804\uD558\uB294
     \uACB0\uACC4\uB97C \uC77C\uC815 \uC8FC\uAE30\uB9C8\uB2E4 \uC0DD\uC131\uD55C\uB2E4"
@@ -54,6 +54,7 @@ MonoBehaviour:
   - 10
   - 10
   - 10
+  fireSound: {fileID: 0}
   level: 1
   levelPower:
   - 20

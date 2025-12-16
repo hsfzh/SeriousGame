@@ -11,6 +11,7 @@ public class SkillBuffInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField] private Button parentButton;
     [SerializeField] private ToolTipManager toolTip;
     [SerializeField] private TextMeshProUGUI level;
+    [SerializeField] private TextMeshProUGUI nameText;
     private string information;
     private Image myImage;
 
@@ -18,9 +19,10 @@ public class SkillBuffInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         myImage = GetComponent<Image>();
     }
-    public void Initialize(Sprite icon, string info, int levelNum)
+    public void Initialize(Sprite icon, string name, string info, int levelNum)
     {
         myImage.sprite = icon;
+        nameText.text = name;
         information = info;
         if (levelNum == 0)
         {

@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 922d728034b466b43bc8ad775ec49396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buffName: ShieldBuff
+  buffName: "\uC218\uD638\uC11D"
   buffIcon: {fileID: 21300000, guid: f8bfce98356720847a6016b5dcad2595, type: 3}
   buffInfo: "\uC77C\uC815 \uC2DC\uAC04\uB9C8\uB2E4 \uBCF4\uD638\uB9C9\uC744 \uC0DD\uC131\uD55C\uB2E4"
   <affectingStat>k__BackingField: 06000000
