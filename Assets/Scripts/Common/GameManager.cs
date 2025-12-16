@@ -116,7 +116,6 @@ public class GameManager : MonoBehaviour
         {
             if (killCount == spawnedEnemyCount)
             {
-                waveTransitioning = true;
                 GotoNextWave();
             }
         }
@@ -176,6 +175,10 @@ public class GameManager : MonoBehaviour
     }
     private void GotoNextWave()
     {
+        if (waveTransitioning) return;
+
+        waveTransitioning = true;
+
         if (waveCoroutine != null)
         {
             StopCoroutine(waveCoroutine);
@@ -184,7 +187,7 @@ public class GameManager : MonoBehaviour
     }
     private IEnumerator StartNextWave()
     {
-        Debug.Log("Moving from wave " + currentWave + " to wave " + (currentWave + 1));
+        Debug.Log("Moving from wave " + (currentWave + 1) + " to wave " + (currentWave + 2));
         yield return new WaitForSeconds(5f);
         OnNextWave();
     }

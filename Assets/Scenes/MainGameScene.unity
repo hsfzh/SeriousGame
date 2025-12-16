@@ -511,7 +511,7 @@ MonoBehaviour:
     - 2.33
     totalSpawnCount: 190000000a000000
     waveDuration: 30
-    hpRatio: 1.5
+    hpRatio: 1.25
   - spawnableMonsters: 000000000200000003000000
     spawnInterval:
     - 1.11
@@ -519,7 +519,7 @@ MonoBehaviour:
     - 7
     totalSpawnCount: 140000000a00000004000000
     waveDuration: 30
-    hpRatio: 2
+    hpRatio: 1.5
   - spawnableMonsters: 000000000100000002000000
     spawnInterval:
     - 0.54
@@ -527,7 +527,7 @@ MonoBehaviour:
     - 1.5
     totalSpawnCount: 280000000f0000000f000000
     waveDuration: 30
-    hpRatio: 2.5
+    hpRatio: 1.75
   - spawnableMonsters: 00000000010000000300000004000000
     spawnInterval:
     - 0.64
@@ -536,14 +536,14 @@ MonoBehaviour:
     - 7.88
     totalSpawnCount: 320000000f0000000700000005000000
     waveDuration: 45
-    hpRatio: 3
+    hpRatio: 2
   - spawnableMonsters: 0200000003000000
     spawnInterval:
     - 0.54
     - 4.2
-    totalSpawnCount: 2800000006000000
+    totalSpawnCount: 4600000007000000
     waveDuration: 30
-    hpRatio: 3.5
+    hpRatio: 2.25
   - spawnableMonsters: 000000000200000004000000
     spawnInterval:
     - 0.36
@@ -551,13 +551,13 @@ MonoBehaviour:
     - 2.33
     totalSpawnCount: 3c000000140000000a000000
     waveDuration: 30
-    hpRatio: 4
+    hpRatio: 2.5
   - spawnableMonsters: 05000000
     spawnInterval:
     - 10.5
-    totalSpawnCount: 05000000
-    waveDuration: 60
-    hpRatio: 4.5
+    totalSpawnCount: 0a000000
+    waveDuration: 45
+    hpRatio: 2.75
   - spawnableMonsters: 000000000100000003000000
     spawnInterval:
     - 0.27
@@ -565,7 +565,7 @@ MonoBehaviour:
     - 3
     totalSpawnCount: 500000001900000008000000
     waveDuration: 30
-    hpRatio: 5
+    hpRatio: 3
   - spawnableMonsters: 0000000001000000020000000500000006000000
     spawnInterval:
     - 0.86
@@ -575,14 +575,14 @@ MonoBehaviour:
     - 10.5
     totalSpawnCount: 320000000f0000001e0000000800000005000000
     waveDuration: 60
-    hpRatio: 5.5
+    hpRatio: 3.25
   - spawnableMonsters: 0000000002000000
     spawnInterval:
     - 0.27
     - 0.43
     totalSpawnCount: 5000000032000000
     waveDuration: 30
-    hpRatio: 6
+    hpRatio: 3.5
   - spawnableMonsters: 010000000400000007000000
     spawnInterval:
     - 2.25
@@ -590,7 +590,7 @@ MonoBehaviour:
     - 15.75
     totalSpawnCount: 0f0000001900000003000000
     waveDuration: 45
-    hpRatio: 6.5
+    hpRatio: 3.75
   - spawnableMonsters: 00000000030000000500000007000000
     spawnInterval:
     - 0.53
@@ -599,7 +599,7 @@ MonoBehaviour:
     - 15.75
     totalSpawnCount: 3c0000000a0000000c00000003000000
     waveDuration: 45
-    hpRatio: 7
+    hpRatio: 4
   - spawnableMonsters: 0000000001000000020000000500000006000000
     spawnInterval:
     - 0.61
@@ -609,7 +609,7 @@ MonoBehaviour:
     - 4.67
     totalSpawnCount: 460000000f00000023000000080000000a000000
     waveDuration: 60
-    hpRatio: 7.5
+    hpRatio: 4.25
   - spawnableMonsters: 0000000001000000020000000300000004000000050000000600000007000000
     spawnInterval:
     - 0.28
@@ -622,7 +622,7 @@ MonoBehaviour:
     - 14
     totalSpawnCount: 640000001e000000320000000a0000000a0000000a0000000f00000004000000
     waveDuration: 60
-    hpRatio: 8
+    hpRatio: 4.5
   maxWave: 0
   bgmClip: {fileID: 8300000, guid: a3ec84fab47ee304fbc97dc3743aa890, type: 3}
   levelUpClip: {fileID: 8300000, guid: 534b2d8891310934a9bcc5a48c6eb3a2, type: 3}

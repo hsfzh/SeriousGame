@@ -55,14 +55,15 @@ MonoBehaviour:
   - 10
   - 10
   fireSound: {fileID: 0}
+  fireVolume: 0.5
   level: 1
   levelPower:
-  - 20
+  - 10
+  - 18
   - 30
-  - 44
-  - 62
-  - 84
+  - 45
+  - 60
   duration: 5
   leveUpDuration: 1.25
   activeDiskNum: 2
-  rotatingSpeed: 10
+  rotatingSpeed: 8
