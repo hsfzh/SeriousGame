@@ -3,57 +3,155 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+[System.Serializable]
+public class DialogueStep
+{
+    [TextArea] public string sentence; // 대사
+    public EndingEnemy targetEnemy; // 찾아갈 적
+}
+
 public class EndingManager : MonoBehaviour
 {
-    [Header("UI Components")]
-    public Image fadePanel;        // 검은색 패널
-    public GameObject credits;       // 크레딧 텍스트
+    [Header("UI & Object Refs")]
+    public Text textDisplay;
+    public Transform playerTransform;
+    public QuestPointer questPointer;
+    public Image fadePanel;
+    public GameObject credits;
 
     [Header("Settings")]
-    public string nextSceneName = "GameScene"; // 이동할 씬 이름
-    public float fadeDuration = 3.0f;          // 페이드 걸리는 시간
-    public float waitSeconds = 1.0f;
-    public float creditSeconds = 3.0f;           // 크레딧 보여주는 시간
+    public float typingSpeed = 0.05f;
+    public float interactionDistance = 2.0f;
+    public string nextSceneName = "TitleScene";
+
+    public DialogueStep[] dialogues; 
+
+    private int index = 0;
+    private bool isTyping = false;
+    private bool isWaitingForInteraction = false;
+    private bool isTerminated = false;
+    private EndingEnemy currentTarget;
 
     void Start()
     {
-        // 시작할 때 패널은 투명하게, 크레딧은 안 보이게 초기화
-        if (fadePanel != null)
+        fadePanel.color = new Color(0,0,0,0);
+        credits.SetActive(false);
+        questPointer.HidePointer();
+
+        StartCoroutine(Type());
+    }
+
+    void Update()
+    {
+        if (isWaitingForInteraction && currentTarget != null)
         {
-            fadePanel.gameObject.SetActive(true);
-            fadePanel.color = new Color(0, 0, 0, 0);
+            float distance = Vector2.Distance(playerTransform.position, currentTarget.transform.position);
+
+            if (distance <= interactionDistance && (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)))
+            {
+                CompleteInteraction();
+            }
+            return;
         }
-        if (credits != null) credits.SetActive(false);
+
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        {
+            if (isTyping)
+            {
+                StopAllCoroutines();
+                textDisplay.text = dialogues[index].sentence;
+                isTyping = false;
+                
+                CheckIfInteractionNeeded();
+            }
+            else
+            {
+                NextSentence();
+            }
+        }
     }
 
-    // 외부(DialogueManager)에서 이 함수를 부르면 엔딩이 시작됨
-    public void StartEndingSequence()
+    void CheckIfInteractionNeeded()
     {
-        StartCoroutine(ProcessEnding());
+        if (dialogues[index].targetEnemy != null)
+        {
+            isWaitingForInteraction = true;
+            currentTarget = dialogues[index].targetEnemy;
+
+            currentTarget.StartHighlight();
+            
+            questPointer.SetTarget(currentTarget.transform);
+        }
     }
 
-    IEnumerator ProcessEnding()
+    void CompleteInteraction()
     {
-        // 1. 페이드 아웃 (점점 어둡게)
+        currentTarget.StopHighlight();
+        
+        questPointer.HidePointer();
+
+        isWaitingForInteraction = false;
+        currentTarget = null;
+
+        NextSentence();
+    }
+
+    IEnumerator Type()
+    {
+        isTyping = true;
+        textDisplay.text = "";
+        
+        string sentence = dialogues[index].sentence;
+
+        foreach (char letter in sentence.ToCharArray())
+        {
+            textDisplay.text += letter;
+            yield return new WaitForSeconds(typingSpeed);
+        }
+
+        isTyping = false;
+        
+        CheckIfInteractionNeeded();
+    }
+
+    void NextSentence()
+    {
+        if (isTerminated) return;
+
+        if (index < dialogues.Length - 1)
+        {
+            index++;
+            textDisplay.text = "";
+            StartCoroutine(Type());
+        }
+        else
+        {
+            StartCoroutine(EndingSequence());
+        }
+    }
+
+    IEnumerator EndingSequence()
+    {
+        isTerminated = true;
+
+        float duration = 3f;
         float time = 0f;
-        while (time < fadeDuration)
+
+        fadePanel.gameObject.SetActive(true);
+        while (time < duration)
         {
             time += Time.deltaTime;
-            float alpha = time / fadeDuration;
-            if (fadePanel != null) fadePanel.color = new Color(0, 0, 0, alpha);
+            fadePanel.color = new Color(0, 0, 0, time / duration);
             yield return null;
         }
-        if (fadePanel != null) fadePanel.color = new Color(0, 0, 0, 1);
 
-        yield return new WaitForSeconds(waitSeconds);
+        fadePanel.color = Color.black;
+        yield return new WaitForSeconds(1f);
 
-        // 2. 크레딧 켜기
-        if (credits != null) credits.SetActive(true);
+        credits.SetActive(true);
 
-        // 3. 대기
-        yield return new WaitForSeconds(creditSeconds);
+        yield return new WaitForSeconds(3f);
 
-        // 4. 씬 이동
         SceneManager.LoadScene(nextSceneName);
     }
 }
