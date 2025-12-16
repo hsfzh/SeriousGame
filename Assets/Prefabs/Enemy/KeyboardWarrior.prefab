@@ -145,14 +145,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <enemyHalfSize>k__BackingField: {x: 0.22, y: 0.26}
-  <maxHp>k__BackingField: 200
-  <moveSpeed>k__BackingField: 0.5
+  <maxHp>k__BackingField: 5
+  <moveSpeed>k__BackingField: 1.5
   <bulletType>k__BackingField: KeyboardBullet
   <bulletSpeed>k__BackingField: 2
   <bulletFireOffset>k__BackingField: {x: 0.075, y: -0.14, z: 0}
   <attackSpeed>k__BackingField: 2
-  <attackPower>k__BackingField: 100
-  <bodyAttackPower>k__BackingField: 50
+  <attackPower>k__BackingField: 1
+  <bodyAttackPower>k__BackingField: 1
   <attackRange>k__BackingField: 3
   <isElite>k__BackingField: 0
   canBeAttacked: 1

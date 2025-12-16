@@ -6,6 +6,7 @@ using UnityEngine;
 public class HpManager : MonoBehaviour
 {
     private float hitInvincibilityDuration = 0.5f;
+    private float baseMaxHp;
     private float maxHp;
     private float currentHp;
     public event Action<float> OnHpChange;
@@ -107,7 +108,14 @@ public class HpManager : MonoBehaviour
     }
     public void Initialize(float newHp, float invincibleTime = 0.5f)
     {
-        maxHp = newHp;
+        baseMaxHp = newHp;
+        maxHp = baseMaxHp;
         hitInvincibilityDuration = invincibleTime;
+    }
+    public void SetHpRatio(float ratio)
+    {
+        maxHp = baseMaxHp * ratio;
+        currentHp = maxHp;
+        OnHpChange?.Invoke(1f);
     }
 }

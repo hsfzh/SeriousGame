@@ -125,6 +125,7 @@ public class EnemyManager : MonoBehaviour
     }
     private void OnDeath()
     {
+        GameManager.Instance.AddKillCount();
         DropExp();
         OnMyDeath?.Invoke();
         gameObject.SetActive(false);
