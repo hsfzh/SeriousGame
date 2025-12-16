@@ -1,29 +1,39 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class StartManager : MonoBehaviour
 {
+    [SerializeField] private Button startButton;
+    [SerializeField] private Button monsterButton;
     [SerializeField] private GameObject monsterPanel;
-    [SerializeField] private GameObject skillPanel;
     private GameObject activePanel;
-    // Start is called before the first frame update
+
     void Start()
     {
         monsterPanel.SetActive(false);
-        skillPanel.SetActive(false);
     }
-    // Update is called once per frame
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (activePanel)
-            {
-                activePanel.SetActive(false);
-                activePanel = null;
-            }
+            ClosePanel();
         }
     }
+
+    public void ClosePanel()
+    {
+        if (activePanel)
+        {
+            activePanel.SetActive(false);
+            activePanel = null;
+
+            startButton.interactable = true;
+            monsterButton.interactable = true;
+        }
+    }
+
     public void StartGame()
     {
         SceneManager.LoadScene("MainGameScene");
@@ -35,5 +45,8 @@ public class StartManager : MonoBehaviour
             return;
         activePanel = panel;
         panel.SetActive(true);
+
+        startButton.interactable = false;
+        monsterButton.interactable = false;
     }
 }
