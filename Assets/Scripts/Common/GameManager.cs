@@ -52,6 +52,9 @@ public class GameManager : MonoBehaviour
     private int spawnedEnemyCount;
     private bool isActive;
 
+    public AudioClip bgmClip;
+    public AudioClip levelUpClip;
+
     private void Awake()
     {
         if (Instance == null)
@@ -120,6 +123,7 @@ public class GameManager : MonoBehaviour
     }
     private void StartGame()
     {
+        SoundManager.Instance.PlayBGM(bgmClip);
         isActive = true;
         currentWave = 0;
         killCount = 0;
@@ -149,12 +153,14 @@ public class GameManager : MonoBehaviour
     }
     private void OnPlayerLevelUp()
     {
+        SoundManager.Instance.PlaySFX(levelUpClip);
         levelUpUI.Show();
         StopTime();
     }
     public void OnGameOver()
     {
         StopTime();
+        SoundManager.Instance.StopBGM();
         dangerText.gameObject.SetActive(false);
         newEliteText.gameObject.SetActive(false);
         gameOverUI.SetActive(true);
@@ -162,6 +168,7 @@ public class GameManager : MonoBehaviour
     private void OnGameClear()
     {
         maxWave = 15;
+        SoundManager.Instance.StopBGM();
         Destroy(PlayerManager.Instance.gameObject);
         gameOverUI.SetActive(false);
         uiCanvas.SetActive(false);

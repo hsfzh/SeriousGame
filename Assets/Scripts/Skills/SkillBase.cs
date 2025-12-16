@@ -18,7 +18,7 @@ public abstract class SkillBase : MonoBehaviour
     protected float power;
     [SerializeField] protected List<float> levelPower;
     private float currCoolTimeReduction;
-    private AudioSource audio;
+    private AudioClip audio;
 
     public void Initialize(Transform player)
     {
@@ -27,7 +27,7 @@ public abstract class SkillBase : MonoBehaviour
         power = levelPower[0];
         mainCamera = Camera.main;
         currCoolTimeReduction = 1f;
-        audio = FindObjectOfType<AudioSource>();
+        audio = FindObjectOfType<AudioClip>();
     }
     public void OnUpdate(bool isActive, float attackMultiplier, float coolTimeReduction)
     {
@@ -64,7 +64,7 @@ public abstract class SkillBase : MonoBehaviour
             if (audio && fireSound)
             {
                 Debug.Log($"{skillName} playing fire sound");
-                audio.PlayOneShot(fireSound);
+                SoundManager.Instance.PlaySFX(fireSound);
             }
             currentCoolTime = coolTime[level - 1] * currCoolTimeReduction; // 쿨타임 초기화
         }

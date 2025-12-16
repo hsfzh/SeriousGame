@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class LevelUpUIManager : MonoBehaviour
@@ -11,6 +12,8 @@ public class LevelUpUIManager : MonoBehaviour
     [SerializeField] private List<BuffBase> buffs;
     [SerializeField] private List<SkillChoiceData> skillChoices;
     [SerializeField] private int maxRerollChance;
+    [SerializeField] private Button rerollButton;
+    [SerializeField] private AudioClip selectClip;
     private int rerollAttempt;
     private void OnEnable()
     {
@@ -21,6 +24,7 @@ public class LevelUpUIManager : MonoBehaviour
     {
         gameObject.SetActive(true);
         Initialize();
+        rerollButton.gameObject.SetActive(true);
     }
     private void Initialize()
     {
@@ -48,6 +52,7 @@ public class LevelUpUIManager : MonoBehaviour
         StatManager playerStatManager = PlayerManager.Instance.GetStatManager();
         playerStatManager.AddBuff(buffs[selectedSkillBuff[1]]);
         GameManager.Instance.ResumeTime();
+        SoundManager.Instance.PlaySFX(selectClip);
         gameObject.SetActive(false);
     }
     public void Reroll()
@@ -56,6 +61,11 @@ public class LevelUpUIManager : MonoBehaviour
         {
             Initialize();
             rerollAttempt += 1;
+
+            if (rerollAttempt >= maxRerollChance)
+            {
+                rerollButton.gameObject.SetActive(false);
+            }
         }
     }
 }

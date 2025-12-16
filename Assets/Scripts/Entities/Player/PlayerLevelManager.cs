@@ -18,6 +18,7 @@ public class PlayerLevelManager : MonoBehaviour
     public event Action OnLevelUp;
     private float expRatio;
     private float prevExpRatio;
+    [SerializeField] private AudioClip pickupClip;
 
     private void Awake()
     {
@@ -52,6 +53,7 @@ public class PlayerLevelManager : MonoBehaviour
             LevelUp();
             AbsorbExp(excessiveExp);
         }
+        SoundManager.Instance.PlaySFX(pickupClip);
     }
     private void LateUpdate()
     {
