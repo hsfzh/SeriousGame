@@ -11,17 +11,17 @@ public class HatredVirusAttack : EnemyRangedAttack
         {
             currentTime += Time.deltaTime;
             stainAttackTime += Time.deltaTime;
-            float distanceToPlayer = (playerTransform.position - transform.position).sqrMagnitude;
-            if (currentTime >= attackCoolTime && (attackRange < 0 || distanceToPlayer <= attackRange))
+            if (currentTime >= attackCoolTime)
             {
                 Fire();
                 currentTime = 0;
             }
             if (stainAttackTime >= 2f)
             {
-                Debug.Log("Hatred virus leaving stain");
-                GameObject stain = ObjectPoolManager.Instance.SpawnFromPool("Stain", transform.position);
-                if (TryGetComponent(out StainController stainController))
+                Vector3 newStainSize = new Vector3(4f, 1.58f, 1f);
+                Debug.Log($"Spawning stain of size {newStainSize}");
+                GameObject stain = ObjectPoolManager.Instance.SpawnFromPool("Stain", transform.position, scale: newStainSize);
+                if (stain.TryGetComponent(out StainController stainController))
                 {
                     stainController.Initialize(50f, 5f);
                 }

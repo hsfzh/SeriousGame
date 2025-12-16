@@ -16,7 +16,6 @@ public class StainController : MonoBehaviour
     }
     private void OnEnable()
     {
-        Debug.Log("stain spawned!");
         currentTime = 0;
     }
     private void Update()
@@ -26,7 +25,6 @@ public class StainController : MonoBehaviour
             currentTime += Time.deltaTime;
             if (currentTime >= duration)
             {
-                Debug.Log($"stain disappearing! duration was {duration}");
                 gameObject.SetActive(false);
             }
         }

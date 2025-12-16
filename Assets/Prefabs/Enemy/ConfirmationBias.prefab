@@ -82,7 +82,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 1174663413, guid: 72689f209c4864264a063af0cf034d51, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 961e89388db908945ace2a1919afa2bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <enemyHalfSize>k__BackingField: {x: 0.225, y: 0.25}
+  <enemyHalfSize>k__BackingField: {x: 0.57, y: 0.63}
   <maxHp>k__BackingField: 200
   <moveSpeed>k__BackingField: 0.7
   <bulletType>k__BackingField: ConfirmationLaser

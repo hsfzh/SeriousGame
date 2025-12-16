@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3846093855195297446}
   - component: {fileID: 9125778000459292538}
   - component: {fileID: 371950790894298627}
-  - component: {fileID: 6442990486176662893}
   - component: {fileID: 4455492754204991626}
   - component: {fileID: -7435770114655244025}
   - component: {fileID: -3955122812234547690}
@@ -19,6 +18,7 @@ GameObject:
   - component: {fileID: 7963355626464819150}
   - component: {fileID: 3449024830385824108}
   - component: {fileID: 7072013502756506686}
+  - component: {fileID: -3673598289958168213}
   m_Layer: 6
   m_Name: AttentionSeeker
   m_TagString: Enemy
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 1939727196, guid: 4e6550ed6ecea4707806c38cd08982f5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -120,18 +120,6 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &6442990486176662893
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3094528734937282189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 554f590f30beaf54ab6d1e632d68da72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4455492754204991626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,7 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <enemyHalfSize>k__BackingField: {x: 0.31, y: 0.315}
   <maxHp>k__BackingField: 100
-  <moveSpeed>k__BackingField: 0
+  <moveSpeed>k__BackingField: 0.4
   <bulletType>k__BackingField: HateComment
   <bulletSpeed>k__BackingField: 0
   <bulletFireOffset>k__BackingField: {x: 0.3, y: 0.15, z: 0}
@@ -273,5 +261,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb927d212eeb0184fbd97684c4b73795, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-3673598289958168213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3094528734937282189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f1464ca3f538934aa5387de6fd91ac5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

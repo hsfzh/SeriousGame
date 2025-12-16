@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class HatredVirusMovement : EnemyMovement
+public class EnemyRandomMovement : EnemyMovement
 {
     private Coroutine directionDecisionCoroutine;
     protected override void ExecuteMove()

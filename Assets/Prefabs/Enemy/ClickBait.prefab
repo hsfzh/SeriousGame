@@ -81,7 +81,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -1982852377, guid: f0b3b4a3f2e364f8d98f2ef6c7f6b33b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 961e89388db908945ace2a1919afa2bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <enemyHalfSize>k__BackingField: {x: 1.075, y: 0.625}
+  <enemyHalfSize>k__BackingField: {x: 2.15, y: 1.25}
   <maxHp>k__BackingField: 1000
   <moveSpeed>k__BackingField: 5
   <bulletType>k__BackingField: 

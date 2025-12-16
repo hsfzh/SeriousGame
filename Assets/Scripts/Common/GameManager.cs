@@ -47,7 +47,6 @@ public class GameManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log($"씬 로드 완료! 이름: {scene.name}, 모드: {mode}");
-
         if (scene.name == "MainGameScene")
         {
             StopTime();
@@ -63,6 +62,7 @@ public class GameManager : MonoBehaviour
     }
     private void StartGame()
     {
+        uiCanavas.SetActive(true);
         levelUpUI.Show();
     }
     private void OnPlayerLevelUp()

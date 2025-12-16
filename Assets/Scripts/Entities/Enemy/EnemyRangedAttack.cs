@@ -26,8 +26,8 @@ public class EnemyRangedAttack : EnemyAttackBase
         if (GameManager.Instance.timeFlowing)
         {
             currentTime += Time.deltaTime;
-            float distanceToPlayer = (playerTransform.position - transform.position).sqrMagnitude;
-            if (currentTime >= attackCoolTime && (attackRange < 0 || distanceToPlayer <= attackRange))
+            float distanceToPlayer = (playerTransform.position - transform.position).magnitude;
+            if (currentTime >= attackCoolTime && (attackRange < 0 || distanceToPlayer <= attackRange + 1f))
             {
                 Fire();
                 currentTime = 0;

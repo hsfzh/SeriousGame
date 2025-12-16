@@ -42,8 +42,11 @@ public class EnemyAttackBase : MonoBehaviour
             currentTime += Time.deltaTime;
             if (currentTime >= 1f)
             {
-                GameObject stain = ObjectPoolManager.Instance.SpawnFromPool("Stain", transform.position);
-                if (TryGetComponent(out StainController stainController))
+                Vector2 originalStainSize = new Vector2(0.25f, 0.16f);
+                Vector3 newStainSize = new Vector3(0.165f / originalStainSize.x,
+                    0.125f / originalStainSize.y, 1f);
+                GameObject stain = ObjectPoolManager.Instance.SpawnFromPool("Stain", transform.position, scale: newStainSize);
+                if (stain.TryGetComponent(out StainController stainController))
                 {
                     Debug.Log("Hatred virus leaving stain");
                     stainController.Initialize(50f, 5f);
