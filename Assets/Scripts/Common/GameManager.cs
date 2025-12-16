@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject uiCanvas;
     [SerializeField] private LevelUpUIManager levelUpUI;
     [SerializeField] private GameObject gameOverUI;
+    [SerializeField] private GameObject pauseUI;
     [SerializeField] private GameObject newEliteText;
     [SerializeField] private GameObject dangerText;
     [field:SerializeField] public List<WaveData> waveDataList { get; private set; }
@@ -93,6 +94,17 @@ public class GameManager : MonoBehaviour
     {
         if (!isActive)
             return;
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (pauseUI.activeSelf)
+            {
+                ResumeGame();
+            }
+            else
+            {
+                Pause();
+            }
+        }
         if (timeFlowing && !waveTransitioning && spawnedEnemyCount > 0)
         {
             if (killCount == spawnedEnemyCount)
@@ -122,6 +134,7 @@ public class GameManager : MonoBehaviour
         }
         waveTransitioning = false;
         waveCoroutine = StartCoroutine(WaveRoutine());
+        pauseUI.SetActive(false);
     }
     private IEnumerator WaveRoutine()
     {
@@ -203,8 +216,19 @@ public class GameManager : MonoBehaviour
     {
         Destroy(PlayerManager.Instance.gameObject);
         gameOverUI.SetActive(false);
+        pauseUI.SetActive(false);
         uiCanvas.SetActive(false);
         SceneManager.LoadScene("StartScene");
+    }
+    public void ResumeGame()
+    {
+        ResumeTime();
+        pauseUI.SetActive(false);
+    }
+    private void Pause()
+    {
+        StopTime();
+        pauseUI.SetActive(true);
     }
     public void StopTime()
     {
