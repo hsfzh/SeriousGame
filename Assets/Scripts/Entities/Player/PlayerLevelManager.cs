@@ -65,9 +65,10 @@ public class PlayerLevelManager : MonoBehaviour
     {
         if (level == maxLevel)
             return;
-        if (TryGetComponent(out HpManager playerHp))
+        HpManager playerHp = PlayerManager.Instance.GetHpManager();
+        if (playerHp)
         {
-            playerHp.Heal(4);
+            playerHp.Heal(5);
         }
         level += 1;
         requiredExp = RequiredExp(level);

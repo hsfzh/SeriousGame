@@ -88,6 +88,7 @@ public class EnemyManager : MonoBehaviour
     private void OnDisable()
     {
         isDisappearing = false;
+        isHatred = false;
         if (canBeAttacked)
         {
             GameManager.Instance.AddKillCount();

@@ -49,6 +49,7 @@ public class RotatingDiskController : MonoBehaviour
     }
     public void Initialize(Transform player, float time, float power, float rpm, int newDiskNum, bool isEnemy = false)
     {
+        currentTime = 0;
         playerTransform = player;
         duration = time;
         attackPower = power;

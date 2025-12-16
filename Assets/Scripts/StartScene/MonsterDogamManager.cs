@@ -35,6 +35,11 @@ public class MonsterDogamManager : MonoBehaviour
         leftBtn.onClick.AddListener(OnClickLeft);
         rightBtn.onClick.AddListener(OnClickRight);
 
+        if (GameManager.Instance)
+        {
+            currentMaxWave = GameManager.Instance.maxWave;
+        }
+
         UpdateUI();
     }
 

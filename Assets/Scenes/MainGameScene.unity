@@ -359,6 +359,7 @@ MonoBehaviour:
     totalSpawnCount: 960000001e000000460000000a0000000a0000000a0000000f00000004000000
     waveDuration: 60
     hpRatio: 8
+  maxWave: 0
 --- !u!4 &166117092
 Transform:
   m_ObjectHideFlags: 0

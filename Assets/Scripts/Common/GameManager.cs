@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject dangerText;
     [field:SerializeField] public List<WaveData> waveDataList { get; private set; }
     public int currentWave { get; private set; }
+    public int maxWave;
     private Coroutine waveCoroutine;
     public event Action<WaveData> OnNewWave;
     private List<Transform> activeEnemyTransforms = new List<Transform>();
@@ -60,6 +61,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        maxWave = 1;
         PlayerManager.Instance.GetLevelManager().OnLevelUp += OnPlayerLevelUp;
     }
     private void OnDestroy()
@@ -133,6 +135,7 @@ public class GameManager : MonoBehaviour
     }
     private void OnGameClear()
     {
+        maxWave = 15;
         Destroy(PlayerManager.Instance.gameObject);
         gameOverUI.SetActive(false);
         uiCanvas.SetActive(false);
@@ -161,6 +164,10 @@ public class GameManager : MonoBehaviour
     {
         waveTransitioning = false;
         currentWave += 1;
+        if (currentWave + 1 > maxWave)
+        {
+            maxWave = currentWave + 1;
+        }
         foreach (var spawnCount in waveDataList[currentWave].totalSpawnCount)
         {
             spawnedEnemyCount += spawnCount;
