@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class PlayerLevelManager : MonoBehaviour
 {
     public int level { get; private set; }
+    private readonly int maxLevel = 29;
     private float magnetRange;
     [SerializeField] private Slider expGage;
     [SerializeField] private TextMeshProUGUI levelText;
@@ -24,7 +25,7 @@ public class PlayerLevelManager : MonoBehaviour
         currentExp = 0;
         magnet = GetComponent<CircleCollider2D>();
         expGage.value = 0;
-        levelText.text = "Lvl 0";
+        levelText.text = "Lvl 1";
         requiredExp = RequiredExp(0);
     }
     public void Initialize(float range)
@@ -38,6 +39,8 @@ public class PlayerLevelManager : MonoBehaviour
     }
     public void AbsorbExp(int exp)
     {
+        if (level == maxLevel)
+            return;
         if (exp <= 0)
             return;
         currentExp += exp;
@@ -60,10 +63,12 @@ public class PlayerLevelManager : MonoBehaviour
     }
     private void LevelUp()
     {
+        if (level == maxLevel)
+            return;
         level += 1;
         requiredExp = RequiredExp(level);
         expGage.value = 0;
-        levelText.text = "Lvl " + level;
+        levelText.text = "Lvl " + (level + 1);
         OnLevelUp?.Invoke();
     }
     private void UpdateGageUI()

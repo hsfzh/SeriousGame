@@ -24,10 +24,19 @@ public class LevelUpUIManager : MonoBehaviour
     }
     private void Initialize()
     {
+        int maxLevel = PlayerManager.Instance.maxSkillLevel;
         for (int i = 0; i < skillChoices.Count; ++i)
         {
             int selectedSkill = Random.Range(0, skills.Count);
+            while (PlayerManager.Instance.GetAttack().GetSkillLevel(skills[selectedSkill].skillName) >= maxLevel)
+            {
+                selectedSkill = Random.Range(0, skills.Count);
+            }
             int selectedBuff =  Random.Range(0, buffs.Count);
+            while (PlayerManager.Instance.GetStatManager().GetBuffLevel(buffs[selectedBuff].buffName) >= maxLevel)
+            {
+                selectedBuff = Random.Range(0, skills.Count);
+            }
             skillChoices[i].SetSkillChoice(skills[selectedSkill], buffs[selectedBuff], selectedSkill, selectedBuff);
         }
     }

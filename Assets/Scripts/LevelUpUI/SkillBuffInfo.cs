@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -9,6 +10,7 @@ public class SkillBuffInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 {
     [SerializeField] private Button parentButton;
     [SerializeField] private ToolTipManager toolTip;
+    [SerializeField] private TextMeshProUGUI level;
     private string information;
     private Image myImage;
 
@@ -16,10 +18,19 @@ public class SkillBuffInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         myImage = GetComponent<Image>();
     }
-    public void Initialize(Sprite icon, string info)
+    public void Initialize(Sprite icon, string info, int levelNum)
     {
         myImage.sprite = icon;
         information = info;
+        if (levelNum == 0)
+        {
+            level.enabled = false;
+        }
+        else
+        {
+            level.enabled = true;
+            level.text = "Lv. " + levelNum;
+        }
     }
     public void OnPointerEnter(PointerEventData eventData)
     {

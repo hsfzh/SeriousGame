@@ -14,7 +14,9 @@ public class SkillChoiceData : MonoBehaviour
         skillBuffIndex = new List<int>();
         skillBuffIndex.Add(skillIndex);
         skillBuffIndex.Add(buffIndex);
-        skillInfo.Initialize(skill.GetSkillIcon(), skill.GetSkillInfo());
-        buffInfo.Initialize(buff.GetBuffIcon(), buff.GetBuffInfo());
+        int skillLevel = PlayerManager.Instance.GetAttack().GetSkillLevel(skill.skillName);
+        skillInfo.Initialize(skill.GetSkillIcon(), skill.GetSkillInfo(), skillLevel);
+        int buffLevel = PlayerManager.Instance.GetStatManager().GetBuffLevel(buff.buffName);
+        buffInfo.Initialize(buff.GetBuffIcon(), buff.GetBuffInfo(), buffLevel);
     }
 }

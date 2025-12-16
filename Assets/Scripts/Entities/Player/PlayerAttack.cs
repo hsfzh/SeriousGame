@@ -60,4 +60,24 @@ public class PlayerAttack : MonoBehaviour
     {
         isPlayerDead = true;
     }
+    public int GetSkillLevel(string skillName)
+    {
+        if (skills.TryGetValue(skillName, out SkillBase skill))
+        {
+            return skill.level;
+        }
+        return 0;
+    }
+    public int GetMaxLevelSkillCount()
+    {
+        int result = 0;
+        foreach (var skill in skills.Values)
+        {
+            if (skill.level == PlayerManager.Instance.maxSkillLevel)
+            {
+                result += 1;
+            }
+        }
+        return result;
+    }
 }

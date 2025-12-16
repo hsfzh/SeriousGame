@@ -107,4 +107,28 @@ public class StatManager : MonoBehaviour
     {
         return activeBuffs;
     }
+    public IReadOnlyDictionary<string, BuffBase> GetPlayerBuffs()
+    {
+        return buffs;
+    }
+    public int GetBuffLevel(string buffName)
+    {
+        if (buffs.TryGetValue(buffName, out BuffBase buff))
+        {
+            return buff.level;
+        }
+        return 0;
+    }
+    public int GetMaxLevelBuffCount()
+    {
+        int result = 0;
+        foreach (var buff in buffs.Values)
+        {
+            if (buff.level == PlayerManager.Instance.maxSkillLevel)
+            {
+                result += 1;
+            }
+        }
+        return result;
+    }
 }
