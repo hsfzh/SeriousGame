@@ -56,13 +56,14 @@ MonoBehaviour:
   - 4
   - 4
   fireSound: {fileID: 8300000, guid: 1a735ee26d6175b4caf7d3614c133aa8, type: 3}
+  fireVolume: 0.5
   level: 1
   levelPower:
   - 15
   - 25
-  - 50
-  - 70
-  - 100
+  - 38
+  - 55
+  - 69
   speed: 2
   slowRatio:
   - 0.5
