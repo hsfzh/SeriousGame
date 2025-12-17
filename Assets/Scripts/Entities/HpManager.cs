@@ -16,6 +16,8 @@ public class HpManager : MonoBehaviour
     private Coroutine invincibleCoroutine;
     private bool isInvincible;
     private bool canBeAttacked = true;
+    [SerializeField] private AudioClip hitSound;
+    private float hitVolume = 0.35f;
     public bool IsDead => currentHp <= 0;
     
     void Start()
@@ -33,6 +35,10 @@ public class HpManager : MonoBehaviour
             OnAttacked?.Invoke();
             MakeInvincible(hitInvincibilityDuration);
             return;
+        }
+        if (hitSound)
+        {
+            SoundManager.Instance.PlaySFX(hitSound, hitVolume);
         }
         float actualDmg = dmg;
         if (CompareTag("Player"))
