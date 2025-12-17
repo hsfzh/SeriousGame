@@ -71,11 +71,10 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         maxWave = 1;
-        PlayerManager.Instance.GetLevelManager().OnLevelUp += OnPlayerLevelUp;
     }
     private void OnDestroy()
     {
-        PlayerManager.Instance.GetLevelManager().OnLevelUp -= OnPlayerLevelUp;
+        
     }
     private void OnEnable()
     {
@@ -140,6 +139,7 @@ public class GameManager : MonoBehaviour
         {
             StopCoroutine(waveCoroutine);
         }
+        PlayerManager.Instance.GetLevelManager().OnLevelUp += OnPlayerLevelUp;
         waveTransitioning = false;
         waveCoroutine = StartCoroutine(WaveRoutine());
         pauseUI.SetActive(false);
@@ -168,6 +168,7 @@ public class GameManager : MonoBehaviour
     {
         maxWave = 15;
         SoundManager.Instance.StopBGM();
+        PlayerManager.Instance.GetLevelManager().OnLevelUp -= OnPlayerLevelUp;
         Destroy(PlayerManager.Instance.gameObject);
         gameOverUI.SetActive(false);
         uiCanvas.SetActive(false);
@@ -258,6 +259,7 @@ public class GameManager : MonoBehaviour
     }
     public void GoToMainScreen()
     {
+        PlayerManager.Instance.GetLevelManager().OnLevelUp -= OnPlayerLevelUp;
         Destroy(PlayerManager.Instance.gameObject);
         gameOverUI.SetActive(false);
         pauseUI.SetActive(false);
