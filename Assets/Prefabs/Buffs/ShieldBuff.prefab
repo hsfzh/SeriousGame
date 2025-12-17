@@ -46,7 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buffName: "\uC218\uD638\uC11D"
   buffIcon: {fileID: 21300000, guid: f8bfce98356720847a6016b5dcad2595, type: 3}
-  buffInfo: "\uC77C\uC815 \uC2DC\uAC04\uB9C8\uB2E4 \uBCF4\uD638\uB9C9\uC744 \uC0DD\uC131\uD55C\uB2E4"
+  buffInfo: "\uC77C\uC815 \uC2DC\uAC04\uB9C8\uB2E4 \uACF5\uACA9\uC744 \uB9C9\uC544\uC8FC\uB294
+    \uBCF4\uD638\uB9C9\uC744 \uC0DD\uC131\uD55C\uB2E4."
   <affectingStat>k__BackingField: 06000000
   buffAmount:
   - Floats:

@@ -46,9 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: "\uBC14\uB78C"
   skillIcon: {fileID: 21300000, guid: 1c60a77754a585e4f93b737087b35e22, type: 3}
-  skillInfo: "\uAC00\uC7A5 \uAC00\uAE4C\uC6B4 \uBAAC\uC2A4\uD130\uD55C\uD14C \uBC14\uB78C\uC744
-    \uB0A0\uB9AC\uACE0 \uBC14\uB78C\uC5D0 \uB2FF\uC740 \uC801\uC744 \uB454\uD654
-    \uC2DC\uD0A8\uB2E4"
+  skillInfo: "\uAC00\uC7A5 \uAC00\uAE4C\uC6B4 \uBAAC\uC2A4\uD130\uC5D0\uAC8C \uBC14\uB78C\uC744
+    \uB0A0\uB824 \uB300\uBBF8\uC9C0\uB97C \uC785\uD788\uACE0 \uB454\uD654\uC2DC\uD0A8\uB2E4"
   coolTime:
   - 4
   - 4
@@ -63,14 +62,14 @@ MonoBehaviour:
   - 25
   - 38
   - 55
-  - 69
+  - 70
   speed: 2
   slowRatio:
   - 0.5
   - 0.5
   - 0.6
   - 0.6
-  - 0.7
+  - 0.8
   penetrationCount: 03000000040000000500000006000000ffffffff
   slowDuration: 6
   levelUpSlowRatio: 0.05

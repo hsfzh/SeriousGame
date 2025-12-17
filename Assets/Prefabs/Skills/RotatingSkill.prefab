@@ -46,8 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: "\uD3EC\uC639"
   skillIcon: {fileID: 21300000, guid: e6c474f1224dcae449fdce72d79da39f, type: 3}
-  skillInfo: "\uD50C\uB808\uC774\uC5B4 \uC8FC\uBCC0\uC744 \uD68C\uC804\uD558\uB294
-    \uACB0\uACC4\uB97C \uC77C\uC815 \uC8FC\uAE30\uB9C8\uB2E4 \uC0DD\uC131\uD55C\uB2E4"
+  skillInfo: "\uC77C\uC815 \uC8FC\uAE30\uB9C8\uB2E4 \uD50C\uB808\uC774\uC5B4 \uC8FC\uBCC0\uC744
+    \uD68C\uC804\uD558\uB294 \uD558\uD2B8 \uC7A5\uB9C9\uC744 \uC0DD\uC131\uD55C\uB2E4"
   coolTime:
   - 10
   - 10
@@ -59,10 +59,10 @@ MonoBehaviour:
   level: 1
   levelPower:
   - 10
-  - 18
-  - 30
-  - 45
-  - 60
+  - 20
+  - 34
+  - 54
+  - 75
   duration: 5
   leveUpDuration: 1.25
   activeDiskNum: 2

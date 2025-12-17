@@ -46,9 +46,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: "\uBC1C\uD654"
   skillIcon: {fileID: 21300000, guid: 433c82a588c97424dbf47744687b7b8a, type: 3}
-  skillInfo: "\uB9C8\uC6B0\uC2A4 \uCEE4\uC11C \uBC29\uD5A5\uC73C\uB85C \uD654\uC5FC\uC744
-    \uBC1C\uC0AC\uD558\uACE0 \uC8FC\uBCC0\uC73C\uB85C \uD3ED\uBC1C \uB370\uBBF8\uC9C0\uB97C
-    \uAC00\uD55C\uB2E4"
+  skillInfo: "\uB9C8\uC6B0\uC2A4 \uBC29\uD5A5\uC73C\uB85C \uD654\uC5FC\uC744 \uBC1C\uC0AC\uD558\uACE0,
+    \uBA85\uC911 \uC2DC \uD3ED\uBC1C\uD558\uC5EC \uCD94\uAC00 \uBC94\uC704 \uD53C\uD574\uB97C
+    \uC785\uD78C\uB2E4."
   coolTime:
   - 2
   - 2
@@ -56,12 +56,13 @@ MonoBehaviour:
   - 2
   - 2
   fireSound: {fileID: 8300000, guid: 29801a41ffd76a94483fed526c6fdaf8, type: 3}
+  fireVolume: 0.5
   level: 1
   levelPower:
-  - 20
+  - 18
   - 30
-  - 50
-  - 60
+  - 48
+  - 70
   - 100
   speed: 5
   splashDamage:

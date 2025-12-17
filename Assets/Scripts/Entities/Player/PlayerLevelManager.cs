@@ -86,7 +86,7 @@ public class PlayerLevelManager : MonoBehaviour
     }
     private int RequiredExp(int currentLevel)
     {
-        return (int)(6 + (currentLevel * (currentLevel + 1)) * 0.7f);
+        return 6 + (currentLevel * (currentLevel + 1));
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
