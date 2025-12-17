@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class HpManager : MonoBehaviour
 {
+    // [핵심] static으로 선언하여 모든 적이 이 변수 하나를 공유함
+    private static float lastHitSoundTime = 0f; 
+    // 사운드 중첩 방지 최소 간격 (0.05초 ~ 0.1초 추천)
+    private const float SOUND_COOLDOWN = 0.05f;
     private float hitInvincibilityDuration = 0.5f;
     private float baseMaxHp;
     private float maxHp;
@@ -17,7 +21,7 @@ public class HpManager : MonoBehaviour
     private bool isInvincible;
     private bool canBeAttacked = true;
     [SerializeField] private AudioClip hitSound;
-    private float hitVolume = 0.35f;
+    private float hitVolume = 0.5f;
     public bool IsDead => currentHp <= 0;
     
     void Start()
@@ -38,7 +42,18 @@ public class HpManager : MonoBehaviour
         }
         if (hitSound)
         {
-            SoundManager.Instance.PlaySFX(hitSound, hitVolume);
+            if (gameObject.CompareTag("Enemy"))
+            {
+                if (Time.time - lastHitSoundTime >= SOUND_COOLDOWN)
+                {
+                    SoundManager.Instance.PlaySFX(hitSound, hitVolume);
+                    lastHitSoundTime = Time.time; 
+                }
+            }
+            else
+            {
+                SoundManager.Instance.PlaySFX(hitSound, hitVolume);
+            }
         }
         float actualDmg = dmg;
         if (CompareTag("Player"))
