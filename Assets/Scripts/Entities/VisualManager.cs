@@ -51,6 +51,8 @@ public class VisualManager : MonoBehaviour
     public void IncreaseScale(float ratio)
     {
         Vector3 currentScale = transform.localScale;
+        if (currentScale.x > 5f || currentScale.y > 5f)
+            return;
         transform.localScale = currentScale * (1 + ratio);
     }
     public void ResetScale()

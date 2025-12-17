@@ -95,36 +95,15 @@ public class EnemySpawnManager : MonoBehaviour
         }
         
         Vector3 spawnPosition = new Vector3(x, y, 0);
-        if (enemies[enemyToSpawn] == "ClickBait")
-        {
-            Vector3 direction = (PlayerManager.Instance.transform.position - spawnPosition).normalized;
-            float angle = Mathf.Atan2(direction.y, direction.x)*Mathf.Rad2Deg;
-            GameObject arrow = ObjectPoolManager.Instance.SpawnFromPool("IndicationArrow", spawnPosition + direction * 0.5f, 
-                rotation: Quaternion.Euler(0, 0, angle));
-            StartCoroutine(SpawnClickBait(hpRatio, arrow, spawnPosition, direction));
-        }
-        else
-        {
-            GameObject enemy =
-                ObjectPoolManager.Instance.SpawnFromPool(enemies[enemyToSpawn], spawnPosition);
-            if (enemy.TryGetComponent(out HpManager enemyHp))
-            {
-                enemyHp.SetHpRatio(hpRatio);
-            }
-        }
-    }
-    private IEnumerator SpawnClickBait(float hpRatio, GameObject indicationArrow, Vector3 spawnPosition, Vector3 direction)
-    {
-        yield return new WaitForSeconds(2f);
-        indicationArrow.SetActive(false);
         GameObject enemy =
-            ObjectPoolManager.Instance.SpawnFromPool("ClickBait", spawnPosition);
+            ObjectPoolManager.Instance.SpawnFromPool(enemies[enemyToSpawn], spawnPosition);
         if (enemy.TryGetComponent(out HpManager enemyHp))
         {
             enemyHp.SetHpRatio(hpRatio);
         }
         if (enemy.TryGetComponent(out ClickBaitMovement movement))
         {
+            Vector3 direction = (PlayerManager.Instance.transform.position - spawnPosition).normalized;
             movement.SetDirection(direction);
         }
     }

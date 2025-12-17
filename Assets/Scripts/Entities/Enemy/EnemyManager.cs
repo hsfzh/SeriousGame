@@ -79,7 +79,8 @@ public class EnemyManager : MonoBehaviour
         Vector3 fixedPos = transform.position;
         fixedPos.z = 0f;
         transform.position = fixedPos;
-        GameManager.Instance.AddEnemyTransform(transform);
+        if(GameManager.Instance)
+            GameManager.Instance.AddEnemyTransform(transform);
         if (myHp)
         {
             myHp.Revive();
@@ -129,7 +130,7 @@ public class EnemyManager : MonoBehaviour
     }
     private void OnAttacked()
     {
-        if (!isHatred && transform.localScale.x <= 7f && !isDisappearing)
+        if (!isHatred && !isDisappearing)
         {
             visualManager.IncreaseScale(0.3f);
         }

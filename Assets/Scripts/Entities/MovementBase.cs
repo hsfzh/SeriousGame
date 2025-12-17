@@ -119,7 +119,11 @@ public abstract class MovementBase : MonoBehaviour
         {
             StopCoroutine(forceCoroutine);
         }
-        forceCoroutine = StartCoroutine(ResetPushStatusRoutine(0.5f));
+
+        if (gameObject.activeInHierarchy)
+        {
+            forceCoroutine = StartCoroutine(ResetPushStatusRoutine(0.5f));
+        }
     }
     public void ApplyForce(Vector2 direction, float magnitude)
     {

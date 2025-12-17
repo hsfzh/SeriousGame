@@ -67,6 +67,7 @@ public class ObjectPoolManager : MonoBehaviour
         GameObject objectToSpawn = poolDictionary[poolTag].Dequeue();
         
         objectToSpawn.SetActive(true);
+        position.z = 0;
         objectToSpawn.transform.position = position;
         if (rotation != null)
         {
@@ -74,7 +75,10 @@ public class ObjectPoolManager : MonoBehaviour
         }
         if (scale != null)
         {
-            objectToSpawn.transform.localScale = scale.Value;
+            Vector3 scaleToApply = scale.Value;
+            scaleToApply.y = Mathf.Abs(scaleToApply.y);
+            scaleToApply.z = 1;
+            objectToSpawn.transform.localScale = scaleToApply;
         }
         
         poolDictionary[poolTag].Enqueue(objectToSpawn);
