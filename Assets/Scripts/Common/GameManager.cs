@@ -197,7 +197,7 @@ public class GameManager : MonoBehaviour
         currentWave += 1;
         if (currentWave + 1 > maxWave)
         {
-            maxWave = Mathf.Max(currentWave + 1, 15);
+            maxWave = Mathf.Min(currentWave + 1, 15);
         }
         if (currentWave > MonsterDogamManager.currentMaxWave)
         {
