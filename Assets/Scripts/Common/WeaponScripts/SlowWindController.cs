@@ -23,7 +23,6 @@ public class SlowWindController : MonoBehaviour
     {
         if (GameManager.Instance.timeFlowing)
         {
-            Fire();
             transform.position += direction * (speed * Time.deltaTime);
             if (Mathf.Abs(transform.position.x) > GameManager.Instance.playableMapSize.x ||
                 Mathf.Abs(transform.position.y) > GameManager.Instance.playableMapSize.y)
@@ -32,18 +31,7 @@ public class SlowWindController : MonoBehaviour
             }
         }
     }
-    public void Initialize(Vector3 direc, float newSpeed, Vector2 fireVelocity, float power, float slow, 
-        float affectDuration, int penetration)
-    {
-        direction = direc;
-        float bonusSpeed = Vector2.Dot(fireVelocity, direction);
-        speed = bonusSpeed > 0 ? newSpeed + bonusSpeed : newSpeed;
-        attackPower = power;
-        slowRatio = slow;
-        slowDuration = affectDuration;
-        penetrationCount = penetration + 1;
-    }
-    private void Fire()
+    private void CheckShield()
     {
         if (penetrationCount == 0) return;
 
@@ -52,10 +40,10 @@ public class SlowWindController : MonoBehaviour
         float moveDistance = speed * Time.deltaTime;
 
         // 투사체 크기 계산
-        Vector2 projectileSize = Vector2.one;
+        Vector2 projectileSize = Vector2.one * 0.1f;
         BoxCollider2D myCollider = GetComponent<BoxCollider2D>();
         if (myCollider != null)
-            projectileSize = myCollider.size * transform.lossyScale;
+            projectileSize.y = myCollider.size.y * transform.lossyScale.y;
 
         int targetLayer = LayerMask.GetMask("Enemy");
 
@@ -78,8 +66,7 @@ public class SlowWindController : MonoBehaviour
                 }
             }
         }
-
-        // 두꺼운 박스(BoxCast)로 충돌 판정
+        
         float angle = transform.eulerAngles.z;
         RaycastHit2D[] damageHits = Physics2D.BoxCastAll(startPos, projectileSize, angle, direc, moveDistance, targetLayer);
         
@@ -87,61 +74,71 @@ public class SlowWindController : MonoBehaviour
 
         foreach (RaycastHit2D hit in damageHits)
         {
-            if (penetrationCount == 0) break;
-
             Collider2D col = hit.collider;
 
             if (col.CompareTag("Enemy"))
             {
                 EnemyManager enemy = col.GetComponent<EnemyManager>();
-                
-                if (enemy != null)
-                {
-                    int id = enemy.GetInstanceID();
-
-                    // 이미 판정이 끝난 적(지난 프레임에 막혔거나 맞은 적)은 무시
-                    if (processedEnemyIDs.Contains(id))
-                    {
-                        continue;
-                    }
-
-                    // --- 방어막 판정 ---
-                    if (minShieldDistances.ContainsKey(id))
-                    {
-                        float shieldDist = minShieldDistances[id];
-                        // 방어막이 몸통보다 앞에 있음 -> 방어 성공
-                        if (shieldDist < hit.distance - 0.01f)
-                        {
-                            processedEnemyIDs.Add(id); 
-                            continue; 
-                        }
-                    }
+                int id = enemy.GetInstanceID();
                     
-                    // 판정 완료 기록 (중복 타격 방지)
-                    processedEnemyIDs.Add(id);
-
-                    if (penetrationCount > 0) penetrationCount--;
-
-                    if (enemy.TryGetComponent(out HpManager enemyHp))
+                // 이미 판정이 끝난 적(지난 프레임에 막혔거나 맞은 적)은 무시
+                if (processedEnemyIDs.Contains(id))
+                {
+                    continue;
+                }
+                    
+                // --- 방어막 판정 ---
+                if (minShieldDistances.ContainsKey(id))
+                {
+                    float shieldDist = minShieldDistances[id];
+                    // 방어막이 몸통보다 앞에 있음 -> 방어 성공
+                    if (shieldDist < hit.distance - 0.01f)
                     {
-                        enemyHp.TakeDamage(attackPower);
-                    }
-                    if (enemy.TryGetComponent(out EnemyMovement movement))
-                    {
-                        movement.Slow(slowRatio, slowDuration);
-                    }
-
-                    if (penetrationCount == 0)
-                    {
-                        gameObject.SetActive(false);
-                        break;
+                        processedEnemyIDs.Add(id); 
                     }
                 }
             }
         }
     }
+    public void Initialize(Vector3 direc, float newSpeed, Vector2 fireVelocity, float power, float slow, 
+        float affectDuration, int penetration)
+    {
+        direction = direc;
+        float bonusSpeed = Vector2.Dot(fireVelocity, direction);
+        speed = bonusSpeed > 0 ? newSpeed + bonusSpeed : newSpeed;
+        attackPower = power;
+        slowRatio = slow;
+        slowDuration = affectDuration;
+        penetrationCount = penetration + 1;
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        
+        if (other.CompareTag("Enemy"))
+        {
+            if(processedEnemyIDs.Contains(other.gameObject.GetInstanceID()))
+            {
+                return;
+            }
+            if (penetrationCount == -1 || penetrationCount > 0)
+            {
+                if (penetrationCount > 0)
+                {
+                    penetrationCount -= 1;
+                    if (penetrationCount == 0)
+                    {
+                        gameObject.SetActive(false);
+                    }
+                }
+                if (other.TryGetComponent(out HpManager enemyHp))
+                {
+                    enemyHp.TakeDamage(attackPower);
+                }
+                if (other.TryGetComponent(out EnemyMovement movement))
+                {
+                    movement.Slow(slowRatio, slowDuration);
+                }
+            }
+            other.gameObject.GetComponent<EnemyMovement>().Slow(slowRatio, slowDuration);
+        }
     }
 }
